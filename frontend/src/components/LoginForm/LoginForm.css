@@ -1,0 +1,114 @@
+/* LoginForm.css */
+
+.login-container {
+    max-width: 400px; /* Zwiększ maksymalną szerokość kontenera */
+    margin: 0 auto; /* Wyśrodkowanie kontenera poziomo */
+    border: 1px solid #ccc;
+    background-color: #f5f5f5; /* Jasnoszare tło */
+    padding: 200px 100px; /* Poszerzenie krawędzi z prawej i lewej strony */
+    text-align: center;
+    font-family: Verdana, sans-serif;
+    position: absolute; /* Ustawienie na pozycji absolutnej */
+    top: 50%; /* Przesunięcie o 50% od góry */
+    left: 50%; /* Przesunięcie o 50% od lewej */
+    transform: translate(-50%, -50%); /* Wyśrodkowanie w pionie i poziomie */
+    border-radius: 20px; /* Zaokrąglone rogi */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Cień */
+}
+
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px -10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: Verdana, sans-serif; /* Dodanie czcionki Verdana */
+}
+
+.emailtext,
+.haslotext {
+    margin-right: 500px; /* Przesunięcie etykiet w prawo odstępem 20px */
+    font-family: Verdana, sans-serif; /* Dodanie czcionki Verdana */
+    font-weight: bold; /* Pogrubienie tekstu */
+    position: relative;
+    z-index: 1;
+}
+
+.zalogujbutton {
+    background-color: #a3d7e3; /* Baby blue pastelowy */
+    color: #f0f0f0; /* Kolor tekstu jasnoszary */
+    border: 2.5px solid #000; /* Czarna ramka o grubości 2px */
+    padding: 13px 30px; /* Rozmiar przycisku */
+    margin: 10px 0 40px 0; /* Odstępy górny i dolny (10px od góry, 20px na dole) */
+    border-radius: 0; /* Brak zaokrągleń */
+    cursor: pointer;
+    position: relative;
+    font-family: Verdana, sans-serif;
+}
+
+.zalogujbutton:hover {
+    background-color: #78838f; /* Tło niebieskie po najechaniu myszką */
+}
+
+.zarejestrujbutton {
+    background-color: transparent; /* Przezroczyste tło */
+    color: #514f4f; /* Kolor tekstu niebieski */
+    border: none;
+    padding: 10px 20px; /* Rozmiar przycisku */
+    margin: 15px 0; /* Odstępy górny i dolny */
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: Verdana, sans-serif;
+    font-weight: bold; /* Pogrubienie tekstu */
+    font-size: 16px; /* Rozmiar tekstu */
+}
+
+.zarejestrujbutton:hover {
+    background-color: transparent; /* Przezroczyste tło po najechaniu myszką */
+    color: #a3d7e3; /* Kolor tekstu niebieski po najechaniu myszką */
+}
+.logowanie-button {
+    background-color: #a3d7e3; /* Baby blue pastelowy */
+    color: #f0f0f0; /* Kolor tekstu jasnoszary */
+    border: 2.5px solid #000; /* Czarna ramka o grubości 2px */
+    padding: 13px 30px; /* Rozmiar przycisku */
+    margin: 0 0 0 0; /* Brak marginesów (odstępów) na wszystkich stronach */
+    border-radius: 0; /* Brak zaokrągleń */
+    cursor: pointer;
+    font-family: Verdana, sans-serif;
+    display: inline-block; /* Ustawienie na inline-block */
+}
+
+.rejestracja-button {
+    background-color: transparent; /* Przezroczyste tło */
+    color: #514f4f; /* Kolor tekstu niebieski */
+    border: none;
+    padding: 10px 20px; /* Rozmiar przycisku */
+    margin: 0 0 0 10px; /* Odstęp od lewej strony (10px z lewej), brak marginesu na pozostałych stronach */
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: Verdana, sans-serif;
+    font-weight: bold; /* Pogrubienie tekstu */
+    font-size: 16px; /* Rozmiar tekstu */
+    display: inline-block; /* Ustawienie na inline-block */
+}
+
+
+
+.rejestracja-div {
+    position: relative;
+    top: 70px; /* Przesunięcie w górę o 30px */
+    content: "";
+    display: block;
+    width: 100%; /* Szerokość linii będzie taka sama jak szerokość kontenera */
+    height: 2px; /* Wysokość linii */
+    background-color: #ccc; /* Kolor linii */
+    margin-top: 20px; /* Odstęp górny od przycisku "Zarejestruj" */
+}
+
+.error-message {
+    color: red;
+    position: relative;
+    margin-top: -50px;
+}
