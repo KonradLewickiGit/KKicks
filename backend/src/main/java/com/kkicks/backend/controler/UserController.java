@@ -4,11 +4,9 @@ import com.kkicks.backend.entity.Product;
 import com.kkicks.backend.entity.User;
 import com.kkicks.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.quartz.QuartzTransactionManager;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.Set;
+
 
 @RestController
 @RequestMapping({"/user"})

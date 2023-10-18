@@ -1,6 +1,5 @@
 package com.kkicks.backend.service;
 
-import com.kkicks.backend.dao.ProductDao;
 import com.kkicks.backend.dao.UserDao;
 import com.kkicks.backend.entity.*;
 import jakarta.persistence.EntityNotFoundException;
@@ -8,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 
 
 @Service
@@ -49,11 +47,9 @@ public class UserService {
         userToUpdate.setLastName(user.getLastName());
         userToUpdate.setEmail(userToUpdate.getEmail());
         userToUpdate.setLogin(userToUpdate.getLogin());
-        userToUpdate.setPassword(userToUpdate.getPassword());
+        userToUpdate.setPasswd(userToUpdate.getPasswd());
         userToUpdate.setPhoneNumber(user.getPhoneNumber());
         userToUpdate.setAddress(user.getAddress());
         return userDao.save(userToUpdate);
     }
-
-
 }

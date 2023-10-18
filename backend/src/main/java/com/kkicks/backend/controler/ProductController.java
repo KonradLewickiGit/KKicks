@@ -1,17 +1,13 @@
 package com.kkicks.backend.controler;
 
-import com.kkicks.backend.entity.Category;
-import com.kkicks.backend.entity.Manufacturer;
 import com.kkicks.backend.entity.Product;
-import com.kkicks.backend.entity.User;
 import com.kkicks.backend.service.ProductService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+
 
 @RestController
 @RequestMapping({"/product"})

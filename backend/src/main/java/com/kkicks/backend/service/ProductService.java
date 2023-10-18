@@ -88,7 +88,7 @@ public class ProductService {
         adminUser.setFirstName("admin");
         adminUser.setLastName("admin");
         adminUser.setLogin("admin");
-        adminUser.setPassword("admin123!password");
+        adminUser.setPasswd("admin123!password");
         adminUser.setEmail("konrad.lewicki00@gmail.com");
         adminUser.setRole(Role.ADMIN);
         adminUser.setBrowserMode(BrowserMode.DARK);
@@ -99,7 +99,7 @@ public class ProductService {
         user1.setFirstName("User1");
         user1.setLastName("User1");
         user1.setLogin("user1");
-        user1.setPassword("user1password");
+        user1.setPasswd("user1password");
         user1.setEmail("user1@gmail.com");
         userDao.save(user1);
 
