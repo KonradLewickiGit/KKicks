@@ -1,0 +1,18 @@
+/* Zaktualizuj plik HeaderLogo.css z nowymi stylami */
+.custom-logged-in-header {
+    display: flex; /* Ustaw display na flex, aby użyć flexboxa */
+    justify-content: center; /* Wyśrodkuj zawartość w poziomie */
+    align-items: center; /* Wyśrodkuj zawartość w pionie */
+    height: 100px; /* Ustaw wysokość nagłówka */
+    border-bottom: 1px solid #ccc;
+    
+  }
+
+  .custom-logo {
+    color: #74b3e3;
+    font-size: 20px;
+    font-weight: 100;
+    font-family: DejaVu Sans Mono, sans-serif;
+    cursor: pointer;
+  }
+  
