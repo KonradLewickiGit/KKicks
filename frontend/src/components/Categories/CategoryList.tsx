@@ -26,7 +26,7 @@ const CategoryList: React.FC = () => {
             <div className="category-list">
                 {categories.map(category => (
                     <div key={category.id}>
-                        <Link to={`/manufacturers/${category.id}/products`}
+                        <Link to={`/${category.categoryName}`}
                          style={{ textDecoration: 'none' }}>
                             <span className="category-name">
                                 {category.categoryName}

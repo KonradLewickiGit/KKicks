@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaShoppingCart, FaQuestionCircle, FaCog, FaUserPlus, FaSignInAlt } from 'react-icons/fa'; // Importuj ikony z react-icons
+import {FaCog} from 'react-icons/fa'; // Importuj ikony z react-icons
 import SearchBar from '../SearchingBar/SearchingBar';
 import '../LoggedOutHeader/LoggedOutHeader.css';
 import { Link } from 'react-router-dom';
@@ -19,7 +19,9 @@ const LoggedOutHeader = () => {
         <button className="header-button">Koszyk</button>
         <button className="header-button">Pomoc</button>
         <button className="header-button"><FaCog /></button>
+        <Link to="/register">
         <button className="header-button">Rejestracja</button>
+        </Link>
         <Link to="/login">
         <button className="header-button">Logowanie</button>
         </Link>
