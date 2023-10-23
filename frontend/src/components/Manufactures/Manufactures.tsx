@@ -11,7 +11,7 @@ const Manufacturers: React.FC = () => {
 
   useEffect(() => {
     // Wyślij żądanie GET do serwera backendowego, aby pobrać wszystkie marki
-    fetch('http://localhost:8080/getAllManufacturers')
+    fetch('http://localhost:8080/manufacturer/findAll')
       .then(response => response.json())
       .then(data => {
         console.log('Odpowiedź z serwera:', data);

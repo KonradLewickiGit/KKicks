@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../LoginForm/LoginForm.css';
+//import '../LoginForm/LoginForm.css';
 
 interface LoginFormProps {
   onLoginSuccess: () => void;
@@ -83,6 +83,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
               placeholder="Wprowadź swój email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              className="login-input"
             />
           </div>
           <div>
@@ -92,6 +93,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
               placeholder="Wprowadź swoje hasło"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              className="login-input"
             />
           </div>
        

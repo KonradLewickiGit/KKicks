@@ -1,4 +1,4 @@
-/* LoginForm.css */
+LoginForm.css
 
 .login-container {
     max-width: 400px; /* Zwiększ maksymalną szerokość kontenera */
@@ -16,18 +16,8 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Cień */
 }
 
-input[type="email"],
-input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px -10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-family: Verdana, sans-serif; /* Dodanie czcionki Verdana */
-}
 
-.emailtext,
-.haslotext {
+.login-input{
     margin-right: 500px; /* Przesunięcie etykiet w prawo odstępem 20px */
     font-family: Verdana, sans-serif; /* Dodanie czcionki Verdana */
     font-weight: bold; /* Pogrubienie tekstu */
@@ -105,7 +95,8 @@ input[type="password"] {
     height: 2px; /* Wysokość linii */
     background-color: #ccc; /* Kolor linii */
     margin-top: 20px; /* Odstęp górny od przycisku "Zarejestruj" */
-}
+} 
+
 
 .error-message {
     color: red;

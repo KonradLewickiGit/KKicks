@@ -12,7 +12,7 @@ const CategoryList: React.FC = () => {
 
     useEffect(() => {
         // Wyślij żądanie GET do serwera backendowego
-        fetch('http://localhost:8080/category/getAll')
+        fetch('http://localhost:8080/category/findAll')
             .then(response => response.json())
             .then(data => {
                 console.log('Odpowiedź z serwera:', data);
