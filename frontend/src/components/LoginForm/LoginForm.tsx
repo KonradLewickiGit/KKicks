@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import '../LoginForm/LoginForm.css';
+import { Link } from 'react-router-dom';
+//import '../LoginForm/LoginForm.css';
 
 interface LoginFormProps {
   onLoginSuccess: () => void;
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isLoginComponent, setIsLoginComponent] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -27,16 +26,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
       setError('Hasło musi mieć co najmniej 6 znaków');
       return;
     }
-
-    // Tutaj możesz umieścić swoją logikę logowania
-    // Jeśli logowanie jest udane, ustaw isLoggedIn na true
-    setIsLoggedIn(true);
-
-    // Po zalogowaniu zmieniamy isLoginComponent na false
-    setIsLoginComponent(false);
-
-    // Wywołujemy funkcję onLoginSuccess, która może być przekazana z wyższego poziomu
-    onLoginSuccess();
   };
 
   const isValidEmail = (email: string) => {
@@ -47,7 +36,6 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
 
   return (
     <div>
-      {isLoginComponent ? (
         <>
           <div>
             <label className="emailtext">Email</label>
@@ -70,33 +58,11 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
           <button type="submit" className="zalogujbutton"  onClick={handleLogin}>Zaloguj</button>
           <div className="rejestracja-div">
             Nie masz jeszcze konta?{' '}
+            <Link to="/register">
             <button type="button" className="zarejestrujbutton" onClick={handleLogin} >Zarejestruj się</button>
+            </Link>
           </div>
         </>
-      ) : (
-        // Komponent rejestracji (możesz dodać odpowiednią logikę)
-        <>
-          <div>
-            <label>Email</label>
-            <input
-              type="email"
-              placeholder="Wprowadź swój email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>Hasło</label>
-            <input
-              type="password"
-              placeholder="Wprowadź swoje hasło"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-       
-        </>
-      )}
       {error && <div className="error-message">{error}</div>}
     </div>
   );
