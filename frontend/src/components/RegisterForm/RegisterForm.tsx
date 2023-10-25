@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
-const RegisterForm = () => {
+const RegisterForm: React.FC = () => {
+  // zmienic to sprobowac
   const [formData, setFormData] = useState({
     login: '',
     passwd: '',
@@ -41,7 +42,7 @@ const RegisterForm = () => {
         break;
   
       case 'passwd':
-        if (value.length < 8) {
+        if (value.length < 3) {
           setErrors({ ...errors, [name]: 'Hasło musi mieć co najmniej 8 znaków.' });
           return false;
         }
@@ -79,29 +80,25 @@ const RegisterForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const registrationData = {
-      login: formData.login,
-      passwd: formData.passwd,
-      email: formData.email,
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      phoneNumber: formData.phoneNumber,
-    };
-
+    // Wysłanie danych do serwera i otrzymanie tokenu
     try {
       const response = await fetch('http://localhost:8080/api/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(registrationData),
+        body: JSON.stringify(formData),
       });
 
       if (response.status === 200) {
-        // Rejestracja zakończona sukcesem, możesz wykonać jakieś akcje, np. przekierowanie na inną stronę
+        const data = await response.json();
+        // Zapisanie tokenu JWT (data.token) w lokalnym składzie, np. localStorage
+        localStorage.setItem('token', data.token);
         console.log('Rejestracja zakończona sukcesem');
       } else {
-        // Obsłuż błąd rejestracji, np. wyświetl komunikat użytkownikowi
+        const data = await response.json();
+        // Obsłuż błąd rejestracji i ustaw odpowiednie komunikaty błędów
+        setErrors(data.errors);
         console.error('Błąd rejestracji');
       }
     } catch (error) {

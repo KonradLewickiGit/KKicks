@@ -16,7 +16,7 @@ const Log = () => {
       <Link to="/register">
       <button className="rejestracja-button">Rejestracja</button>
       </Link>
-      <LoginForm onLoginSuccess={handleLoginSuccess} />
+      <LoginForm />
 
     </div>
   );
