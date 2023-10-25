@@ -11,6 +11,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
@@ -20,12 +22,19 @@ public class AuthenticationService {
     private final JWTService jwtService;
     private final AuthenticationManager authenticationManager;
     public AuthenticationResponse register(RegisterRequest request) {
+        if (!userDao.findByEmail(request.getEmail()).isEmpty()) {
+            throw new IllegalArgumentException("Adres email jest już w użyciu");
+        } else if (!userDao.findByLogin(request.getLogin()).isEmpty()){
+            throw new IllegalArgumentException("Login jest już w użyciu");
+        }
+
         var user = User.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .email(request.getEmail())
                 .login(request.getLogin())
                 .passwd(passwordEncoder.encode(request.getPasswd()))
+                .phoneNumber(request.getPhoneNumber())
                 .role(Role.USER)
                 .build();
         userDao.save(user);
