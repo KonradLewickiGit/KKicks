@@ -1,6 +1,7 @@
-package com.kkicks.backend.config;
+package com.kkicks.backend.config.security;
 
 
+import com.kkicks.backend.config.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

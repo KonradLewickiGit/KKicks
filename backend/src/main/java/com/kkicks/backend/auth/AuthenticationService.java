@@ -1,6 +1,6 @@
 package com.kkicks.backend.auth;
 
-import com.kkicks.backend.config.JWTService;
+import com.kkicks.backend.config.security.JWTService;
 import com.kkicks.backend.dao.UserDao;
 import com.kkicks.backend.entity.Role;
 import com.kkicks.backend.entity.User;
@@ -10,8 +10,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
