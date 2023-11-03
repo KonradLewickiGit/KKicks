@@ -6,13 +6,16 @@ import com.kkicks.backend.dao.ProductDao;
 import com.kkicks.backend.dao.UserDao;
 import com.kkicks.backend.entity.*;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.*;
 
 @Service
+@RequiredArgsConstructor
 public class ProductService {
     @Autowired
     ProductDao productDao;
@@ -22,6 +25,7 @@ public class ProductService {
     CategoryDao categoryDao;
     @Autowired
     ManufacturerDao manufacturerDao;
+    private final PasswordEncoder passwordEncoder;
 
     public Product saveProduct(Product product) {
         return productDao.save(product);
@@ -83,25 +87,28 @@ public class ProductService {
         adidas.setManufacturerName("ADIDAS");
         manufacturerDao.save(adidas);
 
-        // INIT ADMIN
-        User adminUser = new User();
-        adminUser.setFirstName("admin");
-        adminUser.setLastName("admin");
-        adminUser.setLogin("admin");
-        adminUser.setPasswd("admin123!password");
-        adminUser.setEmail("konrad.lewicki00@gmail.com");
-        adminUser.setRole(Role.ADMIN);
-        adminUser.setBrowserMode(BrowserMode.DARK);
-        userDao.save(adminUser);
-
         // INIT TEST USER
-        User user1 = new User();
-        user1.setFirstName("User1");
-        user1.setLastName("User1");
-        user1.setLogin("user1");
-        user1.setPasswd("user1password");
-        user1.setEmail("user1@gmail.com");
+        var user1 = User.builder()
+                .firstName("test")
+                .lastName("test")
+                .email("test")
+                .login("test")
+                .passwd(passwordEncoder.encode("test"))
+                .phoneNumber("test")
+                .role(Role.ADMIN)
+                .build();
         userDao.save(user1);
+
+        var user2 = User.builder()
+                .firstName("test2")
+                .lastName("test2")
+                .email("test2")
+                .login("test2")
+                .passwd(passwordEncoder.encode("test2"))
+                .phoneNumber("test2")
+                .role(Role.USER)
+                .build();
+        userDao.save(user2);
 
         // INIT SAMPLE PRODUCTS
         Product p1 = new Product();
