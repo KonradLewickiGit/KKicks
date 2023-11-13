@@ -1,8 +1,10 @@
 package com.kkicks.backend.service;
 
+import com.kkicks.backend.config.security.JWTService;
 import com.kkicks.backend.dao.UserDao;
 import com.kkicks.backend.entity.*;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,10 +48,16 @@ public class UserService {
         userToUpdate.setFirstName(user.getFirstName());
         userToUpdate.setLastName(user.getLastName());
         userToUpdate.setEmail(userToUpdate.getEmail());
-        userToUpdate.setLogin(userToUpdate.getLogin());
-        userToUpdate.setPasswd(userToUpdate.getPasswd());
+        userToUpdate.setUsername(userToUpdate.getUsername());
+        userToUpdate.setPassword(userToUpdate.getPassword());
         userToUpdate.setPhoneNumber(user.getPhoneNumber());
         userToUpdate.setAddress(user.getAddress());
         return userDao.save(userToUpdate);
+    }
+    public User findUserByToken(HttpServletRequest httpServletRequest){
+        String token = httpServletRequest.getHeader("Authorization").substring(7);
+        String login = new JWTService().extractLogin(token);
+        System.out.println(login);
+        return userDao.findByUsername(login).orElse(null);
     }
 }

@@ -22,7 +22,7 @@ public class AuthenticationService {
     public AuthenticationResponse register(RegisterRequest request) {
         if (!userDao.findByEmail(request.getEmail()).isEmpty()) {
             throw new IllegalArgumentException("Adres email jest już w użyciu");
-        } else if (!userDao.findByLogin(request.getLogin()).isEmpty()){
+        } else if (!userDao.findByUsername(request.getLogin()).isEmpty()){
             throw new IllegalArgumentException("Login jest już w użyciu");
         }
 
@@ -30,8 +30,8 @@ public class AuthenticationService {
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .email(request.getEmail())
-                .login(request.getLogin())
-                .passwd(passwordEncoder.encode(request.getPasswd()))
+                .username(request.getLogin())
+                .password(passwordEncoder.encode(request.getPasswd()))
                 .phoneNumber(request.getPhoneNumber())
                 .role(Role.USER)
                 .build();

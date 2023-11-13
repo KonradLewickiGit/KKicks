@@ -92,8 +92,8 @@ public class ProductService {
                 .firstName("test")
                 .lastName("test")
                 .email("test")
-                .login("test")
-                .passwd(passwordEncoder.encode("test"))
+                .username("test")
+                .password(passwordEncoder.encode("test"))
                 .phoneNumber("test")
                 .role(Role.ADMIN)
                 .build();
@@ -103,8 +103,8 @@ public class ProductService {
                 .firstName("test2")
                 .lastName("test2")
                 .email("test2")
-                .login("test2")
-                .passwd(passwordEncoder.encode("test2"))
+                .username("test2")
+                .password(passwordEncoder.encode("test2"))
                 .phoneNumber("test2")
                 .role(Role.USER)
                 .build();

@@ -3,9 +3,11 @@ package com.kkicks.backend.controler;
 import com.kkicks.backend.entity.Product;
 import com.kkicks.backend.entity.User;
 import com.kkicks.backend.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -13,6 +15,10 @@ import java.util.List;
 public class UserController {
     @Autowired
     UserService userService;
+    @GetMapping("/find")
+    public User findUser(HttpServletRequest httpServletRequest){
+        return userService.findUserByToken(httpServletRequest);
+    }
     @PostMapping({"/add"})
     private User createUser(@RequestBody User user){
         return userService.createUser(user);
