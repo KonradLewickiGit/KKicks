@@ -20,7 +20,7 @@ public class UserRatingService {
     public UserRating addRating(Long senderId, Long userId, int stars) {
         User sender = userDao.findById(senderId).orElseThrow(() -> new EntityNotFoundException("Provider not found"));
         User user = userDao.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found"));
-        UserRating userRating = userRatingDao.findBySender(sender).orElse(null);
+        UserRating userRating = userRatingDao.findBySenderAndUser(sender,user).orElse(null);
         if(userRating == null){
             userRating = new UserRating();
             userRating.setSender(sender);
