@@ -16,7 +16,12 @@ public class UserRating {
     private Long id;
 
     @Column(nullable = false)
-    private byte stars;
+    private int stars;
+
+    @OneToOne
+    @JsonIgnore
+    @JoinColumn(name = "provider_id")
+    private User sender;
 
     @ManyToOne
     @JsonIgnore

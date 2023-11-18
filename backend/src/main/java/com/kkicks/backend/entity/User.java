@@ -38,7 +38,6 @@ public class User implements UserDetails {
     private BrowserMode browserMode = BrowserMode.LIGHT;
     @Enumerated(EnumType.STRING)
     private Role role = Role.USER;
-
     @OneToOne
     @JoinColumn(name = "address_id")
     private Address address;
@@ -49,7 +48,6 @@ public class User implements UserDetails {
             @JoinColumn(name = "PRODUCT_ID")
     })
     private List<Product> observedProducts;
-
     public void addProductToObserved(Product product){
         this.observedProducts.add(product);
     }

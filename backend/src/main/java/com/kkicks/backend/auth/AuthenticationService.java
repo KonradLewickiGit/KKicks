@@ -42,7 +42,7 @@ public class AuthenticationService {
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getLogin(),request.getPasswd()));
-        var user = userDao.findByEmail(request.getLogin()).orElseThrow(() -> new EntityNotFoundException("user not found"));
+        var user = userDao.findByUsername(request.getLogin()).orElseThrow(() -> new EntityNotFoundException("user not found"));
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder().token(jwtToken).build();
     }
