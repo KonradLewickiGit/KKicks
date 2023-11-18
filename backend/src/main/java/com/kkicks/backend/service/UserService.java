@@ -51,7 +51,6 @@ public class UserService {
         userToUpdate.setUsername(userToUpdate.getUsername());
         userToUpdate.setPassword(userToUpdate.getPassword());
         userToUpdate.setPhoneNumber(user.getPhoneNumber());
-        userToUpdate.setAddress(user.getAddress());
         return userDao.save(userToUpdate);
     }
     public User findUserByToken(HttpServletRequest httpServletRequest){
@@ -60,4 +59,5 @@ public class UserService {
         System.out.println(login);
         return userDao.findByUsername(login).orElse(null);
     }
+
 }

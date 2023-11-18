@@ -14,10 +14,13 @@ import java.util.List;
 
 @Entity
 @Data
-@Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class User implements UserDetails {
+    public User() {
+        this.browserMode = BrowserMode.LIGHT;
+        this.fontSize = FontSize.SMALL;
+        this.role = Role.USER;
+    }
 
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
@@ -33,13 +36,12 @@ public class User implements UserDetails {
     private String lastName;
     private String phoneNumber;
     @Enumerated(EnumType.STRING)
-    private FontSize fontSize = FontSize.SMALL;
+    private FontSize fontSize;
     @Enumerated(EnumType.STRING)
-    private BrowserMode browserMode = BrowserMode.LIGHT;
+    private BrowserMode browserMode;
     @Enumerated(EnumType.STRING)
-    private Role role = Role.USER;
-    @OneToOne
-    @JoinColumn(name = "address_id")
+    private Role role;
+    @OneToOne(mappedBy = "user")
     private Address address;
     @ManyToMany
     @JoinTable(name = "USER_OBSERVED_PRODUCT",joinColumns = {

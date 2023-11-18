@@ -10,9 +10,13 @@ import java.math.BigDecimal;
 
 @Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class Product {
+    public Product() {
+        this.availability = Availability.AVAILABLE;
+        this.isVerified = Verification.UNVERIFIED;
+    }
+
     @Id @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
@@ -23,10 +27,12 @@ public class Product {
     private BigDecimal price;
     @Column(nullable = false)
     private String description;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Availability availability;
     @Column(name = "isVerified")
     @Enumerated(EnumType.STRING)
-    private Verification isVerified = Verification.UNVERIFIED;
-
+    private Verification isVerified;
     private String color;
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
@@ -40,4 +46,7 @@ public class Product {
     @JsonIgnore
     @JoinColumn(name = "category_id")
     private Category category;
+    @OneToOne(mappedBy = "product")
+    private Order order;
+
 }

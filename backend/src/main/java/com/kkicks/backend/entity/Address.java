@@ -1,5 +1,6 @@
 package com.kkicks.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,4 +23,8 @@ public class Address {
     @Column(nullable = false)
     private String buildingNumber;
     private int apartmentNumber;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private User user;
 }

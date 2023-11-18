@@ -2,7 +2,6 @@ package com.kkicks.backend.auth;
 
 import com.kkicks.backend.config.security.JWTService;
 import com.kkicks.backend.dao.UserDao;
-import com.kkicks.backend.entity.Role;
 import com.kkicks.backend.entity.User;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -26,23 +25,21 @@ public class AuthenticationService {
             throw new IllegalArgumentException("Login jest już w użyciu");
         }
 
-        var user = User.builder()
-                .firstName(request.getFirstName())
-                .lastName(request.getLastName())
-                .email(request.getEmail())
-                .username(request.getLogin())
-                .password(passwordEncoder.encode(request.getPasswd()))
-                .phoneNumber(request.getPhoneNumber())
-                .role(Role.USER)
-                .build();
+        User user = new User();
+        user.setFirstName(request.getFirstName());
+        user.setLastName(request.getLastName());
+        user.setEmail(request.getEmail());
+        user.setUsername(request.getLogin());
+        user.setPassword(passwordEncoder.encode(request.getPasswd()));
+        user.setPhoneNumber(request.getPhoneNumber());
         userDao.save(user);
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder().token(jwtToken).build();
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getLogin(),request.getPasswd()));
-        var user = userDao.findByUsername(request.getLogin()).orElseThrow(() -> new EntityNotFoundException("user not found"));
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPasswd()));
+        User user = userDao.findByEmail(request.getEmail()).orElseThrow(() -> new EntityNotFoundException("user not found in auth"));
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder().token(jwtToken).build();
     }

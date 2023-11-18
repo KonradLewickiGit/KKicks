@@ -87,28 +87,47 @@ public class ProductService {
         adidas.setManufacturerName("ADIDAS");
         manufacturerDao.save(adidas);
 
-        // INIT TEST USER
-        var user1 = User.builder()
-                .firstName("test")
-                .lastName("test")
-                .email("test")
-                .username("test")
-                .password(passwordEncoder.encode("test"))
-                .phoneNumber("test")
-                .role(Role.ADMIN)
-                .build();
+        User user = new User();
+        user.setFirstName("test");
+        user.setLastName("test");
+        user.setEmail("test");
+        user.setUsername("test");
+        user.setPassword(passwordEncoder.encode("test"));
+        user.setPhoneNumber("test");
+        user.setRole(Role.ADMIN);
+        userDao.save(user);
+
+        User user1 = new User();
+        user1.setFirstName("test1");
+        user1.setLastName("test1");
+        user1.setEmail("test1");
+        user1.setUsername("test1");
+        user1.setPassword(passwordEncoder.encode("test1"));
+        user1.setPhoneNumber("test1");
         userDao.save(user1);
 
-        var user2 = User.builder()
-                .firstName("test2")
-                .lastName("test2")
-                .email("test2")
-                .username("test2")
-                .password(passwordEncoder.encode("test2"))
-                .phoneNumber("test2")
-                .role(Role.USER)
-                .build();
-        userDao.save(user2);
+//        // INIT TEST USER
+//        var user1 = User.builder()
+//                .firstName("test")
+//                .lastName("test")
+//                .email("test")
+//                .username("test")
+//                .password(passwordEncoder.encode("test"))
+//                .phoneNumber("test")
+//                .role(Role.ADMIN)
+//                .build();
+//        userDao.save(user1);
+//
+//        var user2 = User.builder()
+//                .firstName("test2")
+//                .lastName("test2")
+//                .email("test2")
+//                .username("test2")
+//                .password(passwordEncoder.encode("test2"))
+//                .phoneNumber("test2")
+//                .role(Role.USER)
+//                .build();
+//        userDao.save(user2);
 
         // INIT SAMPLE PRODUCTS
         Product p1 = new Product();
