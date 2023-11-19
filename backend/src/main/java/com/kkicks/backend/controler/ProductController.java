@@ -18,6 +18,10 @@ public class ProductController {
     public List<Product> findAllByCategory(@PathVariable Integer id){
         return productService.findAllByCategory(id);
     }
+    @GetMapping({"/findById/{id}"})
+    public Product findById(@PathVariable Long id){
+        return productService.find(id);
+    }
     @GetMapping({"/findAllByManufacturer/{id}"})
     public List<Product> findAllByManufacturer(@PathVariable Integer id){
         return productService.findAllByManufacturer(id);

@@ -58,6 +58,10 @@ public class ProductService {
     public List<Product> findAll(){
         return productDao.findAll();
     }
+
+    public Product find(Long id){
+        return productDao.findById(id).orElseThrow(() -> new EntityNotFoundException("product not found"));
+    }
     public ArrayList<Product> addProducts(ArrayList<Product> products) {
         return (ArrayList<Product>) productDao.saveAll(products);
     }
