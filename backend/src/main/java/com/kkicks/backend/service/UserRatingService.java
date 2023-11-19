@@ -2,7 +2,7 @@ package com.kkicks.backend.service;
 
 import com.kkicks.backend.dao.UserDao;
 import com.kkicks.backend.dao.UserRatingDao;
-import com.kkicks.backend.entity.User;
+import com.kkicks.backend.entity.User.User;
 import com.kkicks.backend.entity.UserRating;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

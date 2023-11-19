@@ -3,7 +3,7 @@ package com.kkicks.backend.service;
 import com.kkicks.backend.dao.AddressDao;
 import com.kkicks.backend.dao.UserDao;
 import com.kkicks.backend.entity.Address;
-import com.kkicks.backend.entity.User;
+import com.kkicks.backend.entity.User.User;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

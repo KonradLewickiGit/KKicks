@@ -1,6 +1,6 @@
 package com.kkicks.backend.controler;
 
-import com.kkicks.backend.entity.Product;
+import com.kkicks.backend.entity.Product.Product;
 import com.kkicks.backend.service.ProductService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;

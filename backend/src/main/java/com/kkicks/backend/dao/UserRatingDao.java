@@ -1,6 +1,6 @@
 package com.kkicks.backend.dao;
 
-import com.kkicks.backend.entity.User;
+import com.kkicks.backend.entity.User.User;
 import com.kkicks.backend.entity.UserRating;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -1,6 +1,7 @@
-package com.kkicks.backend.entity;
+package com.kkicks.backend.entity.Chat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.kkicks.backend.entity.Product.Product;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

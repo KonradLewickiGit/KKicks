@@ -2,7 +2,7 @@ package com.kkicks.backend.auth;
 
 import com.kkicks.backend.config.security.JWTService;
 import com.kkicks.backend.dao.UserDao;
-import com.kkicks.backend.entity.User;
+import com.kkicks.backend.entity.User.User;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;

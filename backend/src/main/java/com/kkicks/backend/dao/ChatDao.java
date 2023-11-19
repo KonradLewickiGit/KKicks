@@ -1,6 +1,6 @@
 package com.kkicks.backend.dao;
 
-import com.kkicks.backend.entity.Chat;
+import com.kkicks.backend.entity.Chat.Chat;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

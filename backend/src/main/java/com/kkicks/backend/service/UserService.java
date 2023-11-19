@@ -2,7 +2,8 @@ package com.kkicks.backend.service;
 
 import com.kkicks.backend.config.security.JWTService;
 import com.kkicks.backend.dao.UserDao;
-import com.kkicks.backend.entity.*;
+import com.kkicks.backend.entity.Product.Product;
+import com.kkicks.backend.entity.User.User;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,7 +1,7 @@
 package com.kkicks.backend.controler;
 
-import com.kkicks.backend.entity.Chat;
-import com.kkicks.backend.entity.ChatMessage;
+import com.kkicks.backend.entity.Chat.Chat;
+import com.kkicks.backend.entity.Chat.ChatMessage;
 import com.kkicks.backend.service.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;

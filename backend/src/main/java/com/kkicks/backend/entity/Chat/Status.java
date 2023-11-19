@@ -1,4 +1,4 @@
-package com.kkicks.backend.entity;
+package com.kkicks.backend.entity.Chat;
 
 public enum Status {
     JOIN,

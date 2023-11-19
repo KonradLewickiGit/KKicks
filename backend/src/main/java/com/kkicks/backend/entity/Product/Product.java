@@ -1,12 +1,15 @@
-package com.kkicks.backend.entity;
+package com.kkicks.backend.entity.Product;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.kkicks.backend.entity.*;
+import com.kkicks.backend.entity.Order.Order;
+import com.kkicks.backend.entity.User.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Data
@@ -47,6 +50,10 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
     @OneToOne(mappedBy = "product")
+    @JsonIgnore
     private Order order;
+
+    @OneToMany(mappedBy = "product")
+    private List<ProductImage> productImage;
 
 }
