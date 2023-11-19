@@ -1,0 +1,39 @@
+import styled from 'styled-components'
+
+interface Props {
+  isUnauthorizedApp?: boolean
+}
+
+export const StyledHeader = styled.header.attrs<Props>((props) => ({
+  // Usuń prop 'isUnauthorizedApp' przed przekazaniem do elementu DOM
+  ...props,
+  isUnauthorizedApp: undefined,
+}))<Props>`
+  height: 70px;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${({ theme }) => theme.colors.lightGrey};
+  font-size: ${({ theme }) => theme.fontSize.xxl};
+  font-weight: bold;
+
+  & > div {
+    display: none;
+  }
+
+  @media (min-width: ${({ theme }) => theme.breakPoints.m}) {
+    justify-content: ${({ isUnauthorizedApp }) => (isUnauthorizedApp ? '' : 'space-between')};
+    padding: 0 2rem;
+
+    & > div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      & > svg {
+        margin: 0 1rem;
+      }
+    }
+  }
+`
