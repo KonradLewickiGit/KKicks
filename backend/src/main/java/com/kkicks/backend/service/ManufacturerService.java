@@ -14,7 +14,7 @@ public class ManufacturerService {
 
     public List<Manufacturer> getAllManufacturers(){
         return manufacturerDao.findAll();
-    };
+    }
     public Manufacturer getManufacturerById(Integer id){
         return manufacturerDao.findById(id).orElse(null);
     }

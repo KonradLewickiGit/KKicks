@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface ProductImageDao extends JpaRepository<ProductImage, Long> {
-    public List<ProductImage> findAllByProduct(Product product);
+    List<ProductImage> findAllByProduct(Product product);
 }

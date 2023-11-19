@@ -19,9 +19,9 @@ public class AuthenticationService {
     private final JWTService jwtService;
     private final AuthenticationManager authenticationManager;
     public AuthenticationResponse register(RegisterRequest request) {
-        if (!userDao.findByEmail(request.getEmail()).isEmpty()) {
+        if (userDao.findByEmail(request.getEmail()).isPresent()) {
             throw new IllegalArgumentException("Adres email jest już w użyciu");
-        } else if (!userDao.findByUsername(request.getLogin()).isEmpty()){
+        } else if (userDao.findByUsername(request.getLogin()).isPresent()){
             throw new IllegalArgumentException("Login jest już w użyciu");
         }
 

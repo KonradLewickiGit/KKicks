@@ -19,36 +19,36 @@ public class UserController {
         return userService.findUserByToken(httpServletRequest);
     }
     @PostMapping({"/add"})
-    private User createUser(@RequestBody User user){
+    public User createUser(@RequestBody User user){
         return userService.createUser(user);
     }
 
     @GetMapping({"/findAll"})
-    private List<User> findAll(){
+    public List<User> findAll(){
         return userService.findAll();
     }
     @GetMapping({"/find/{id}"})
-    private User findById(@PathVariable Long id){
+    public User findById(@PathVariable Long id){
         return userService.findUserById(id);
     }
     @GetMapping({"/findAllObservedProducts/{id}"})
-    private List<Product> findAllObservedProductsByUserId(@PathVariable(value = "id") Long id){
+    public List<Product> findAllObservedProductsByUserId(@PathVariable(value = "id") Long id){
         return userService.findAllObservedProductsByUserId(id);
     }
     @DeleteMapping({"/delete/{id}"})
-    private void deleteUserById(@PathVariable Long id){
+    public void deleteUserById(@PathVariable Long id){
         userService.deleteUserByID(id);
     }
     @PostMapping({"/addProductToObserved/{id}"})
-    private User addProductToObserved(@PathVariable Long id,@RequestBody Product product){
+    public User addProductToObserved(@PathVariable Long id,@RequestBody Product product){
         return userService.addProductToObserved(id,product);
     }
     @DeleteMapping({"/deleteProductFromObserved/{id}"})
-    private User deleteProductFromObserved(@PathVariable Long id,@RequestBody Product product){
+    public User deleteProductFromObserved(@PathVariable Long id,@RequestBody Product product){
         return userService.deleteProductFromObserved(id,product);
     }
     @PostMapping({"/update/{id}"})
-    private User updateUser(@PathVariable Long id,@RequestBody User updatedUserData){
+    public User updateUser(@PathVariable Long id,@RequestBody User updatedUserData){
         return userService.updateUserData(id,updatedUserData);
     }
 }

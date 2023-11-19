@@ -15,20 +15,20 @@ public class RatingController {
     @Autowired
     ProductRatingService productRatingService;
     @PostMapping("/addUserRating/{senderId}/{userId}")
-    private UserRating addUserRating(@PathVariable Long senderId, @PathVariable Long userId, @RequestBody Integer stars){
+    public UserRating addUserRating(@PathVariable Long senderId, @PathVariable Long userId, @RequestBody Integer stars){
         return userRatingService.addRating(senderId, userId, stars);
     }
     @GetMapping("/averageUserRating/{userId}")
-    private double countAverageUserRating(@PathVariable Long userId){
+    public double countAverageUserRating(@PathVariable Long userId){
         return userRatingService.calculateAverageRating(userId);
     }
 
     @PostMapping("/addProductRating/{senderId}/{productId}")
-    private ProductRating addProductRating(@PathVariable Long senderId, @PathVariable Long productId, @RequestBody Integer stars){
+    public ProductRating addProductRating(@PathVariable Long senderId, @PathVariable Long productId, @RequestBody Integer stars){
         return productRatingService.addRating(senderId, productId, stars);
     }
     @GetMapping("/averageProductRating/{productId}")
-    private double countAverageProductRating(@PathVariable Long productId){
+    public double countAverageProductRating(@PathVariable Long productId){
         return productRatingService.calculateAverageRating(productId);
     }
 }

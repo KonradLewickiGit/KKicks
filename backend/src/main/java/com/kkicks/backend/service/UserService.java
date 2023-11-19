@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class UserService {
     @Autowired
-    private UserDao userDao;
+    UserDao userDao;
     public User createUser(User user){
         return userDao.save(user);
     }
@@ -26,8 +26,7 @@ public class UserService {
         return userDao.findById(id).orElse(null);
     }
     public List<Product> findAllObservedProductsByUserId(Long id){
-        User user = userDao.findById(id).orElse(null);
-        return user.getObservedProducts();
+        return userDao.findAllObservedProductsById(id);
     }
     public void deleteUserByID(Long id){
         userDao.deleteById(id);
