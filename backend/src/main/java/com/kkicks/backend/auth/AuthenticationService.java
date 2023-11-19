@@ -30,7 +30,7 @@ public class AuthenticationService {
         user.setLastName(request.getLastName());
         user.setEmail(request.getEmail());
         user.setUsername(request.getLogin());
-        user.setPassword(passwordEncoder.encode(request.getPasswd()));
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setPhoneNumber(request.getPhoneNumber());
         userDao.save(user);
         var jwtToken = jwtService.generateToken(user);
@@ -38,7 +38,7 @@ public class AuthenticationService {
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPasswd()));
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword()));
         User user = userDao.findByEmail(request.getEmail()).orElseThrow(() -> new EntityNotFoundException("user not found in auth"));
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder().token(jwtToken).build();
