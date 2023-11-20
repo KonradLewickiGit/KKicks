@@ -38,6 +38,8 @@ public class ProductService {
     @Autowired
     OrderService orderService;
     @Autowired
+    ProductImageService productImageService;
+    @Autowired
     UserRatingService userRatingService;
     @Autowired
     ProductRatingService productRatingService;
@@ -45,7 +47,16 @@ public class ProductService {
         product.setManufacturer(manufacturerDao.findById(manufacturerId).orElseThrow(() -> new EntityNotFoundException("manufacturer not found")));
         product.setCategory(categoryDao.findById(categoryId).orElseThrow(() -> new EntityNotFoundException("category not found")));
         product.setUser(userDao.findById(userId).orElseThrow(() -> new EntityNotFoundException("user not found")));
-        return productDao.save(product);
+        List<ProductImage> images = new ArrayList<>();
+        for(ProductImage image : product.getProductImage()){
+            ProductImage image1 = new ProductImage();
+            image1.setProduct(product);
+            image1.setPath(image.getPath());
+            images.add(image1);
+        }
+        productDao.save(product);
+        productImageDao.saveAll(images);
+        return product;
     }
     public Product updateProduct(Long id,Product product){
         Product productToUpdate = productDao.findById(id).orElseThrow(() -> new EntityNotFoundException("Product not found"));
