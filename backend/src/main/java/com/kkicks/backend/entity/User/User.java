@@ -20,6 +20,7 @@ public class User implements UserDetails {
         this.browserMode = BrowserMode.LIGHT;
         this.fontSize = FontSize.SMALL;
         this.role = Role.USER;
+        this.isNonExpired = true;
     }
 
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -35,6 +36,7 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String lastName;
     private String phoneNumber;
+    private boolean isNonExpired;
     @Enumerated(EnumType.STRING)
     private FontSize fontSize;
     @Enumerated(EnumType.STRING)
@@ -73,7 +75,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return this.isNonExpired;
     }
 
     @Override

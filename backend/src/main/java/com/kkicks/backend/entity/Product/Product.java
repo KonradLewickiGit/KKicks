@@ -30,13 +30,13 @@ public class Product {
     private BigDecimal price;
     @Column(nullable = false)
     private String description;
+    private String color;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Availability availability;
     @Column(name = "isVerified")
     @Enumerated(EnumType.STRING)
     private Verification isVerified;
-    private String color;
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
     @JoinColumn(name = "manufacturer_id")

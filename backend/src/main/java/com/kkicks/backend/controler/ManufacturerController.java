@@ -22,7 +22,7 @@ public class ManufacturerController {
         manufacturerService.deleteManufacturerById(id);
         return "Successfully removed manufacturer(" + id + ")!";
     }
-    @GetMapping({"/findAll"})
+    @GetMapping({"/find/All"})
     public List<Manufacturer> getAllManufacturers(){
         return manufacturerService.getAllManufacturers();
     }

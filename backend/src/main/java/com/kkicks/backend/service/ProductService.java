@@ -7,6 +7,7 @@ import com.kkicks.backend.entity.Order.Provider;
 import com.kkicks.backend.entity.Order.Status;
 import com.kkicks.backend.entity.Payment.PaymentMethod;
 import com.kkicks.backend.entity.Product.Product;
+import com.kkicks.backend.entity.Product.Verification;
 import com.kkicks.backend.entity.User.Role;
 import com.kkicks.backend.entity.User.User;
 import jakarta.persistence.EntityNotFoundException;
@@ -83,7 +84,16 @@ public class ProductService {
         return productDao.findAllByCategoryAndManufacturer(category,manufacturer);
     }
     public void deleteProductById(Long id){
+        Product product = productDao.findById(id).orElseThrow(() -> new EntityNotFoundException("product not found"));
+        List<ProductImage> images = productImageDao.findAllByProduct(product);
+        product.setProductImage(null);
+        productImageDao.deleteAll(images);
         productDao.deleteById(id);
+    }
+    public Product setVerification(Long id){
+        Product product = productDao.findById(id).orElseThrow(() -> new EntityNotFoundException("product not found"));
+        product.setIsVerified(Verification.VERIFIED);
+        return productDao.save(product);
     }
 
 
@@ -212,14 +222,12 @@ public class ProductService {
 
         Order order = new Order(null,BigDecimal.valueOf(111.11), Provider.INPOST, Status.CREATED, new Date(), p1, user, null);
         Order order2 = new Order(null,BigDecimal.valueOf(222.22), Provider.DHL, Status.CREATED, new Date(), p2, user, null);
-        Order order3 = new Order(null,BigDecimal.valueOf(333.33), Provider.POCZTEX, Status.CREATED, new Date(), p3, user1, null);
 
-        orderService.createOrder(order.getUser().getId(),order.getProduct().getId(),order);
-        orderService.createOrder(order2.getUser().getId(),order2.getProduct().getId(),order2);
-        orderService.createOrder(order3.getUser().getId(),order3.getProduct().getId(),order3);
+        orderService.createOrder(order.getUser().getId(),order.getProduct().getId(),order.getProvider());
+        orderService.createOrder(order2.getUser().getId(),order2.getProduct().getId(),order2.getProvider());
 
-        orderService.processPayment(order.getId(), PaymentMethod.VISA);
-        orderService.processPayment(order2.getId(), PaymentMethod.BLIK);
+        orderService.processPayment(1L, PaymentMethod.VISA);
+        orderService.processPayment(2L, PaymentMethod.BLIK);
 
     }
 }

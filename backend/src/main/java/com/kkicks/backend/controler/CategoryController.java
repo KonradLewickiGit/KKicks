@@ -21,7 +21,7 @@ public class CategoryController {
         categoryService.deleteCategoryById(id);
         return "Successfully removed category(" + id + ")!";
     }
-    @GetMapping({"/findAll"})
+    @GetMapping({"/find/All"})
     public List<Category> getAllProducts(){
         return categoryService.getAllCategorys();
     }

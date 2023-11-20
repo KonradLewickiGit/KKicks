@@ -1,6 +1,7 @@
 package com.kkicks.backend.controler;
 
 import com.kkicks.backend.entity.Order.Order;
+import com.kkicks.backend.entity.Order.Provider;
 import com.kkicks.backend.entity.Payment.Payment;
 import com.kkicks.backend.entity.Payment.PaymentMethod;
 import com.kkicks.backend.service.OrderService;
@@ -16,23 +17,23 @@ public class OrderController {
     OrderService orderService;
 
     @PostMapping("/create/{userId}/{productId}")
-    public Order createOrder(@PathVariable Long userId, @PathVariable Long productId, @RequestBody Order order){
-        return orderService.createOrder(userId,productId,order);
+    public Order createOrder(@PathVariable Long userId, @PathVariable Long productId, @RequestBody Provider provider){
+        return orderService.createOrder(userId,productId,provider);
     }
     @PostMapping("/pay/{orderId}")
     public Payment pay(@PathVariable Long orderId, @RequestBody PaymentMethod payment){
         return orderService.processPayment(orderId,payment);
     }
 
-    @GetMapping("findAll")
+    @GetMapping("/findAll")
     public List<Order> findAll(){
         return orderService.findAll();
     }
-    @GetMapping("findAllByUserId/{userId}")
+    @GetMapping("/findAllByUserId/{userId}")
     public List<Order> findAllByUserId(@PathVariable Long userId){
         return orderService.findAllByUserId(userId);
     }
-    @GetMapping("findByUserIdAndProductId/{userId}/{productId}")
+    @GetMapping("/findByUserIdAndProductId/{userId}/{productId}")
     public Order findByUserIdAndProductId(@PathVariable Long userId, @PathVariable Long productId){
         return orderService.findByUserIdAndProductId(userId, productId);
     }

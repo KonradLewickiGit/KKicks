@@ -23,7 +23,7 @@ public class ProductImageController {
         return productImageService.addImages(productId,paths);
     }
 
-    @GetMapping("/findAllByProduct/{productId}")
+    @GetMapping("/find/AllByProduct/{productId}")
     public List<ProductImage> findAllByProduct(@PathVariable Long productId){
         return productImageService.getAllProductImages(productId);
     }

@@ -5,6 +5,7 @@ import com.kkicks.backend.dao.PaymentDao;
 import com.kkicks.backend.dao.ProductDao;
 import com.kkicks.backend.dao.UserDao;
 import com.kkicks.backend.entity.Order.Order;
+import com.kkicks.backend.entity.Order.Provider;
 import com.kkicks.backend.entity.Order.Status;
 import com.kkicks.backend.entity.Payment.Payment;
 import com.kkicks.backend.entity.Payment.PaymentMethod;
@@ -30,11 +31,14 @@ public class OrderService {
     ProductDao productDao;
     @Autowired
     PaymentDao paymentDao;
-    public Order createOrder(Long userId, Long productId, Order order){
+    public Order createOrder(Long userId, Long productId, Provider provider){
         User user = userDao.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found"));
         Product product = productDao.findById(productId).orElseThrow(() -> new EntityNotFoundException("Product not found"));
+        Order order = new Order();
         order.setProduct(product);
+        order.setProvider(provider);
         order.setUser(user);
+        order.setPrice(product.getPrice());
         return orderDao.save(order);
     }
     public List<Order> findAll(){

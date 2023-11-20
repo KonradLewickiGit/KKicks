@@ -11,5 +11,6 @@ import java.util.Optional;
 @Repository
 public interface UserRatingDao extends JpaRepository<UserRating, Long> {
     List<UserRating> findAllByUser(User user);
+    List<UserRating> findAllByUserOrSender(User user, User sender);
     Optional<UserRating> findBySenderAndUser(User sender,User user);
 }

@@ -14,27 +14,27 @@ import java.util.List;
 public class ProductController {
     @Autowired
     ProductService productService;
-    @GetMapping({"/findAllByCategory/{id}"})
+    @GetMapping({"/find/AllByCategory/{id}"})
     public List<Product> findAllByCategory(@PathVariable Integer id){
         return productService.findAllByCategory(id);
     }
-    @GetMapping({"/findById/{id}"})
+    @GetMapping({"/find/{id}"})
     public Product findById(@PathVariable Long id){
         return productService.find(id);
     }
-    @GetMapping({"/findAllByManufacturer/{id}"})
+    @GetMapping({"/find/AllByManufacturer/{id}"})
     public List<Product> findAllByManufacturer(@PathVariable Integer id){
         return productService.findAllByManufacturer(id);
     }
-    @GetMapping({"/findAllByUser/{id}"})
+    @GetMapping({"/find/AllByUser/{id}"})
     public List<Product> findAllByUser(@PathVariable Long id){
         return productService.findAllByUser(id);
     }
-    @GetMapping({"/findAllByCategoryAndManufacturer/{idCategory}/{idManufacturer}"})
+    @GetMapping({"/find/AllByCategoryAndManufacturer/{idCategory}/{idManufacturer}"})
     public List<Product> findAllByCategoryAndManufacturer(@PathVariable Integer idCategory,@PathVariable Integer idManufacturer){
         return productService.findAllByCategoryAndManufacturer(idCategory,idManufacturer);
     }
-    @GetMapping({"/findAll"})
+    @GetMapping({"/find/All"})
     public List<Product> findAll(){
         return productService.findAll();
     }
@@ -54,6 +54,10 @@ public class ProductController {
     public String deleteProductById(@PathVariable Long id){
         productService.deleteProductById(id);
         return "Successfully removed product(" + id + ")!";
+    }
+    @PostMapping({"/setVerification/{id}"})
+    public Product updateProduct(@PathVariable Long id){
+        return productService.setVerification(id);
     }
     @PostConstruct
     public void initData(){

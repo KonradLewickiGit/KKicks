@@ -18,12 +18,12 @@ public class UserController {
     public User findUser(HttpServletRequest httpServletRequest){
         return userService.findUserByToken(httpServletRequest);
     }
-    @PostMapping({"/add"})
-    public User createUser(@RequestBody User user){
-        return userService.createUser(user);
+    @PostMapping({"/giveAdminRole/{userId}"})
+    public User giveAdminRole(@PathVariable Long userId){
+        return userService.createAdministrator(userId);
     }
 
-    @GetMapping({"/findAll"})
+    @GetMapping({"/find/All"})
     public List<User> findAll(){
         return userService.findAll();
     }
@@ -31,21 +31,17 @@ public class UserController {
     public User findById(@PathVariable Long id){
         return userService.findUserById(id);
     }
-    @GetMapping({"/findAllObservedProducts/{id}"})
-    public List<Product> findAllObservedProductsByUserId(@PathVariable(value = "id") Long id){
-        return userService.findAllObservedProductsByUserId(id);
-    }
     @DeleteMapping({"/delete/{id}"})
     public void deleteUserById(@PathVariable Long id){
         userService.deleteUserByID(id);
     }
-    @PostMapping({"/addProductToObserved/{id}"})
-    public User addProductToObserved(@PathVariable Long id,@RequestBody Product product){
-        return userService.addProductToObserved(id,product);
+    @PostMapping({"/addProductToObserved/{id}/{productId}"})
+    public User addProductToObserved(@PathVariable Long id,@PathVariable Long productId){
+        return userService.addProductToObserved(id,productId);
     }
-    @DeleteMapping({"/deleteProductFromObserved/{id}"})
-    public User deleteProductFromObserved(@PathVariable Long id,@RequestBody Product product){
-        return userService.deleteProductFromObserved(id,product);
+    @DeleteMapping({"/deleteProductFromObserved/{id}/{productId}"})
+    public User deleteProductFromObserved(@PathVariable Long id,@PathVariable Long productId){
+        return userService.deleteProductFromObserved(id,productId);
     }
     @PostMapping({"/update/{id}"})
     public User updateUser(@PathVariable Long id,@RequestBody User updatedUserData){
