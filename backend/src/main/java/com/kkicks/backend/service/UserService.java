@@ -76,7 +76,7 @@ public class UserService {
         String token = httpServletRequest.getHeader("Authorization").substring(7);
         String login = new JWTService().extractLogin(token);
         System.out.println(login);
-        return userDao.findByUsername(login).orElse(null);
+        return userDao.findByEmail(login).orElse(null);
     }
 
 }
