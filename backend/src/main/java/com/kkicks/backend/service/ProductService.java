@@ -41,7 +41,10 @@ public class ProductService {
     UserRatingService userRatingService;
     @Autowired
     ProductRatingService productRatingService;
-    public Product saveProduct(Product product) {
+    public Product saveProduct(Long userId, Integer categoryId, Integer manufacturerId, Product product) {
+        product.setManufacturer(manufacturerDao.findById(manufacturerId).orElseThrow(() -> new EntityNotFoundException("manufacturer not found")));
+        product.setCategory(categoryDao.findById(categoryId).orElseThrow(() -> new EntityNotFoundException("category not found")));
+        product.setUser(userDao.findById(userId).orElseThrow(() -> new EntityNotFoundException("user not found")));
         return productDao.save(product);
     }
     public Product updateProduct(Long id,Product product){

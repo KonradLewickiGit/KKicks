@@ -4,6 +4,7 @@ import com.kkicks.backend.entity.Product.Product;
 import com.kkicks.backend.service.ProductService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +39,9 @@ public class ProductController {
     public List<Product> findAll(){
         return productService.findAll();
     }
-    @PostMapping({"/save"})
-    public Product saveProduct(@RequestBody Product product){
-        return productService.saveProduct(product);
+    @PostMapping({"/save/{userId}/{categoryId}/{manufacturerId}"})
+    public Product saveProduct(@PathVariable Long userId, @PathVariable Integer categoryId, @PathVariable Integer manufacturerId, @RequestBody Product product){
+        return productService.saveProduct(userId,categoryId,manufacturerId,product);
     }
     @PostMapping({"/saveMany"})
     public ArrayList<Product> addProducts(@RequestBody ArrayList<Product> products){
