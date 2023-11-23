@@ -1,21 +1,21 @@
 import styled from 'styled-components'
 
 export const Wrapper = styled.form`
+  position: relative;
+  width: 90%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: column;
-  margin: 40px auto;
+  margin: 20px auto 120px auto;
 
   & > button {
-    margin: 40px auto 20px;
+    margin: 20px auto 0 auto;
     max-width: 150px;
     padding: 16px 32px;
-  }
 
-  & > span {
-    color: ${({ theme }) => theme.colors.babyblue};
-    margin-top: 10px;
-    font-weight: 700;
+    &:first-of-type {
+      margin-top: 30px;
+    }
   }
 `

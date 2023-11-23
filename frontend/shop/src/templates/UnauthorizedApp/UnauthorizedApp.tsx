@@ -3,21 +3,25 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 
  import { GlobalStyle } from '../../assets/styles/GlobalStyle'
 import { theme } from '../../assets/styles/theme'
-import Header from '../../components/molecules/header/Header'
 import Login from '../../pages/login/Login'
 import Register from '../../pages/register/Register'
+import HomePage from '../../pages/home/Home'
 import { ThemeProvider } from 'styled-components'
+import ProductDetails from '../../components/molecules/ProductDetails/ProductDetails'
+import GuestHeader from '../../components/organism/Header/GuestHeader'
 
 const UnauthorizedApp: React.FC = () => {
   return (
     <>
        <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Header isUnauthorizedApp>K&Kicks</Header>
+        <GuestHeader/>
         <Routes>
+          <Route path="/" element={<HomePage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="*" element={<Navigate to="/login" replace />} />
+          <Route path="/productdetails/:id" element={<ProductDetails />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </ThemeProvider>
     </>

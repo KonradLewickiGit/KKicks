@@ -32,7 +32,7 @@ const Login: React.FC = () => {
         type={'email'}
         placeholder={'email'}
         {...register('email')}
-       // error={errors.email?.message}
+       error={errors.email?.message}
         required
       />
       <FormField
@@ -41,7 +41,7 @@ const Login: React.FC = () => {
         type={'password'}
         placeholder={'Password'}
          {...register('password')}
-       // error={errors.password?.message}
+        error={errors.password?.message}
         required
       />
       {error && <span>{error}</span>}

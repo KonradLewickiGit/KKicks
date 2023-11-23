@@ -42,7 +42,7 @@ const Register: React.FC = () => {
         labelText="Password"
         type={'password'}
         {...register('password')}
-        placeholder={'Password'}
+        placeholder={'Passwd'}
         error={errors.password?.message}
         required
       />

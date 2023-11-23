@@ -15,24 +15,39 @@ export const ApiProvider: React.FC<Props> = ({ children }) => {
   const [error, setError] = useState<string>('')
   const navigate = useNavigate()
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem('token')
-  //   if (token)
-  //     (async () => {
-  //       try {
-  //         const response = await AxiosApi.get('/user/find')
-  //         setUser(response.data)
-  //       } catch (e) {
-  //         console.log(e)
-  //       }
-  //     })()
-  // }, [])
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      (async () => {
+        try {
+          const response = await AxiosApi.get('/user/find', {
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+          console.log("Odpowiedź serwera:", response);
+          setUser(response.data);
+        } catch (e) {
+          console.log(e);
+        }
+      })();
+    }
+  }, []);
+  
 
   const signIn = async (formData: LoginData): Promise<void> => {
     try {
       const response = await AxiosApi.post('/api/auth/authenticate', formData)
-      setUser(response.data.user)
-      localStorage.setItem('token', response.data.data)
+      const token = response.data.token;
+      if (token) {
+        localStorage.setItem('token', token);
+        setUser(response.data.user);
+        console.log("zalogowano pomyslnie");
+        navigate('/');
+      } else {
+        // Obsługa sytuacji, gdy token jest undefined
+        setError("Logowanie powiodło się, ale nie otrzymano tokenu.");
+      }
     } catch (error: any) {
       if (error.response && error.response.status >= 400 && error.response.status <= 500) {
         setError(error.response.data.message)
@@ -47,8 +62,16 @@ export const ApiProvider: React.FC<Props> = ({ children }) => {
 
   const signUp = async (formData: LoginData): Promise<void> => {
     try {
-      await AxiosApi.post('/api/auth/register', formData)
-      navigate('/login')
+      const response = await AxiosApi.post('/api/auth/register', formData);
+      // Zakładając, że token jest zwracany w odpowiedzi
+      const token = response.data.token;
+      if (token) {
+      localStorage.setItem('token', token);
+      setUser(response.data.user); // Ustawienie stanu użytkownika
+    } else {
+      // Obsługa sytuacji, gdy token nie jest zwracany
+      setError("Rejestracja powiodła się, ale nie otrzymano tokenu.");
+    }
     } catch (error: any) {
       if (error.response) {
         // Obsługa błędów odpowiedzi HTTP

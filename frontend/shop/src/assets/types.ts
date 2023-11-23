@@ -1,5 +1,7 @@
 export interface User {
+    id: number
     email: string
+    login: string
     username: string
     firstName: string
     lastName: string
@@ -17,6 +19,48 @@ export interface User {
     lastName: string
     phoneNumber: string
   }  
+  export interface Category {
+    id: number
+    categoryName: string
+}
+export interface Product {
+  id: number;
+  category: {
+    id: number;
+    categoryName: string;
+  };
+  manufacturer: {
+    id: number;
+    manufacturerName: string;
+  };
+  price: number;
+  size: string;
+  posted_by_user_id: number;
+  color: string;
+  description: string;
+  is_verified: boolean;
+  model: string;
+}
+export interface Manufacturer {
+  id: number;
+  manufacturerName: string;
+}
+export interface Address {
+  city: string;
+  zipCode: string;
+  street: string;
+  buildingNumber: string;
+  apartmentNumber: number;
+}
+export interface Order {
+  price: number;
+  id: number;
+  order_date: string;
+  provider: string;
+  status: boolean;
+}
+
+
 
 export interface ApiContextType {
     user: User | null
