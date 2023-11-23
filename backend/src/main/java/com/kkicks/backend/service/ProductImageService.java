@@ -7,8 +7,12 @@ import com.kkicks.backend.entity.Product.Product;
 import com.kkicks.backend.entity.ProductImage;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 
+import java.net.MalformedURLException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +23,8 @@ public class ProductImageService {
     @Autowired
     ProductDao productDao;
 
+    @Value("${imagesPath}")
+    private String imagesPath;
     public ProductImage addImage(Long productId, String path){
         Product product = productDao.findById(productId).orElseThrow(() -> new EntityNotFoundException("Product not found"));
         return productImageDao.save(new ProductImage(null,path,product));
@@ -41,7 +47,11 @@ public class ProductImageService {
     public ProductImage getProductImageById(Long id) {
         return productImageDao.findById(id).orElseThrow(() -> new EntityNotFoundException("Image not found"));
     }
-
+    public UrlResource loadImage(String fileName) throws MalformedURLException {
+        Path filePath = Path.of(imagesPath + fileName).normalize();
+        UrlResource resource = new UrlResource(filePath.toUri());
+        return resource;
+    }
     public void deleteById(Long id){
         productImageDao.deleteById(id);
     }
