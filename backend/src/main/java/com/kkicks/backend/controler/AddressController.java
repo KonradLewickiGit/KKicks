@@ -15,6 +15,10 @@ public class AddressController {
     public Address addAddress(@PathVariable Long userId, @RequestBody Address address){
         return  addressService.addAddress(userId,address);
     }
+    @GetMapping("find/ByUserId/{userId}")
+    public Address findByUserId(@PathVariable Long userId){
+        return addressService.getAddressByUserId(userId);
+    }
 
 
 }
