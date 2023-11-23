@@ -13,10 +13,19 @@ import com.kkicks.backend.entity.User.User;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.UrlResource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.MalformedURLException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.*;
 
 @Service
@@ -43,21 +52,40 @@ public class ProductService {
     UserRatingService userRatingService;
     @Autowired
     ProductRatingService productRatingService;
-    public Product saveProduct(Long userId, Integer categoryId, Integer manufacturerId, Product product) {
+    @Value("${imagesPath}")
+    private String imagesPath;
+    public Product saveProduct(Long userId, Integer categoryId, Integer manufacturerId, String model, BigDecimal price, String desc, String color, BigDecimal size, List<MultipartFile> files) throws IOException {
+
+        File directory = new File(imagesPath);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+        Product product = new Product();
+        product.setModel(model);
+        product.setSize(size);
+        product.setColor(color);
+        product.setDescription(desc);
+        product.setPrice(price);
         product.setManufacturer(manufacturerDao.findById(manufacturerId).orElseThrow(() -> new EntityNotFoundException("manufacturer not found")));
         product.setCategory(categoryDao.findById(categoryId).orElseThrow(() -> new EntityNotFoundException("category not found")));
         product.setUser(userDao.findById(userId).orElseThrow(() -> new EntityNotFoundException("user not found")));
-        List<ProductImage> images = new ArrayList<>();
-        for(ProductImage image : product.getProductImage()){
-            ProductImage image1 = new ProductImage();
-            image1.setProduct(product);
-            image1.setPath(image.getPath());
-            images.add(image1);
-        }
         productDao.save(product);
-        productImageDao.saveAll(images);
+        for (MultipartFile file : files) {
+            String fileName = product.getId() + "_" + file.getOriginalFilename();
+            Path destPath = Path.of(imagesPath + fileName);
+            try {
+                ProductImage image = new ProductImage();
+                image.setProduct(product);
+                image.setPath(fileName);
+                Files.copy(file.getInputStream(), destPath, StandardCopyOption.REPLACE_EXISTING);
+                productImageDao.save(image);
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to save image " + fileName, e);
+            }
+        }
         return product;
     }
+
     public Product updateProduct(Long id,Product product){
         Product productToUpdate = productDao.findById(id).orElseThrow(() -> new EntityNotFoundException("Product not found"));
         productToUpdate.setModel(product.getModel());
@@ -193,20 +221,20 @@ public class ProductService {
         user1.setObservedProducts(observedProducts);
         userDao.save(user1);
 
-        List<ProductImage> productImages = new ArrayList<>();
-        ProductImage productImage1 = new ProductImage(null,"image1",p1);
-        ProductImage productImage2 = new ProductImage(null,"image2",p1);
-        ProductImage productImage3 = new ProductImage(null,"image3",p2);
-        ProductImage productImage4 = new ProductImage(null,"image4",p2);
-        ProductImage productImage5 = new ProductImage(null,"image5",p3);
-        ProductImage productImage6 = new ProductImage(null,"image6",p3);
-        productImages.add(productImage1);
-        productImages.add(productImage2);
-        productImages.add(productImage3);
-        productImages.add(productImage4);
-        productImages.add(productImage5);
-        productImages.add(productImage6);
-        productImageDao.saveAll(productImages);
+//        List<ProductImage> productImages = new ArrayList<>();
+//        ProductImage productImage1 = new ProductImage(null,"image1",p1);
+//        ProductImage productImage2 = new ProductImage(null,"image2",p1);
+//        ProductImage productImage3 = new ProductImage(null,"image3",p2);
+//        ProductImage productImage4 = new ProductImage(null,"image4",p2);
+//        ProductImage productImage5 = new ProductImage(null,"image5",p3);
+//        ProductImage productImage6 = new ProductImage(null,"image6",p3);
+//        productImages.add(productImage1);
+//        productImages.add(productImage2);
+//        productImages.add(productImage3);
+//        productImages.add(productImage4);
+//        productImages.add(productImage5);
+//        productImages.add(productImage6);
+//        productImageDao.saveAll(productImages);
 
         UserRating userRating = new UserRating(null,5,user,user1);
         UserRating userRating1 = new UserRating(null,1,user1,user1);
@@ -244,4 +272,5 @@ public class ProductService {
         orderService.processPayment(2L, PaymentMethod.BLIK);
 
     }
+
 }

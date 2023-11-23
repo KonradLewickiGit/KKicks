@@ -4,8 +4,15 @@ import com.kkicks.backend.entity.Product.Product;
 import com.kkicks.backend.service.ProductService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,8 +47,8 @@ public class ProductController {
         return productService.findAll();
     }
     @PostMapping({"/save/{userId}/{categoryId}/{manufacturerId}"})
-    public Product saveProduct(@PathVariable Long userId, @PathVariable Integer categoryId, @PathVariable Integer manufacturerId, @RequestBody Product product){
-        return productService.saveProduct(userId,categoryId,manufacturerId,product);
+    public Product saveProduct(@PathVariable Long userId, @PathVariable Integer categoryId, @PathVariable Integer manufacturerId, @RequestParam String model, @RequestParam BigDecimal price, @RequestParam String description, @RequestParam BigDecimal size, @RequestParam String color, @RequestParam List<MultipartFile> files) throws IOException {
+        return productService.saveProduct(userId,categoryId,manufacturerId,model,price,description,color,size,files);
     }
     @PostMapping({"/saveMany"})
     public ArrayList<Product> addProducts(@RequestBody ArrayList<Product> products){
