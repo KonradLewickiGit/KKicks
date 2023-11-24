@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -31,14 +32,14 @@ public class OrderService {
     ProductDao productDao;
     @Autowired
     PaymentDao paymentDao;
-    public Order createOrder(Long userId, Long productId, Provider provider){
+    public Order createOrder(Long userId, Long productId, Provider provider, BigDecimal shipPrice){
         User user = userDao.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found"));
         Product product = productDao.findById(productId).orElseThrow(() -> new EntityNotFoundException("Product not found"));
         Order order = new Order();
         order.setProduct(product);
         order.setProvider(provider);
         order.setUser(user);
-        order.setPrice(product.getPrice());
+        order.setPrice(product.getPrice().add(shipPrice));
         return orderDao.save(order);
     }
     public List<Order> findAll(){

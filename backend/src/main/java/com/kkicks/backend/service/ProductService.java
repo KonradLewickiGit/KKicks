@@ -261,16 +261,6 @@ public class ProductService {
         System.out.println("p1: " + productRatingService.calculateAverageRating(1L));
         System.out.println("p2: " + productRatingService.calculateAverageRating(2L));
         System.out.println("p3: " + productRatingService.calculateAverageRating(3L));
-
-        Order order = new Order(null,BigDecimal.valueOf(111.11), Provider.INPOST, Status.CREATED, new Date(), p1, user, null);
-        Order order2 = new Order(null,BigDecimal.valueOf(222.22), Provider.DHL, Status.CREATED, new Date(), p2, user, null);
-
-        orderService.createOrder(order.getUser().getId(),order.getProduct().getId(),order.getProvider());
-        orderService.createOrder(order2.getUser().getId(),order2.getProduct().getId(),order2.getProvider());
-
-        orderService.processPayment(1L, PaymentMethod.VISA);
-        orderService.processPayment(2L, PaymentMethod.BLIK);
-
     }
 
 }

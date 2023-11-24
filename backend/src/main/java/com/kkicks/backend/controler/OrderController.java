@@ -8,6 +8,7 @@ import com.kkicks.backend.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -16,9 +17,9 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
-    @PostMapping("/create/{userId}/{productId}")
-    public Order createOrder(@PathVariable Long userId, @PathVariable Long productId, @RequestBody Provider provider){
-        return orderService.createOrder(userId,productId,provider);
+    @PostMapping("/create/{userId}/{productId}/{provider}")
+    public Order createOrder(@PathVariable Long userId, @PathVariable Long productId, @PathVariable String provider, @RequestBody BigDecimal shipPrice){
+        return orderService.createOrder(userId,productId, Provider.valueOf(provider),shipPrice);
     }
     @PostMapping("/pay/{orderId}")
     public Payment pay(@PathVariable Long orderId, @RequestBody PaymentMethod payment){
