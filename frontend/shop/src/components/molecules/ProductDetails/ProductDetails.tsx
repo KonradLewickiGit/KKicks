@@ -26,9 +26,7 @@ const ProductDetails: React.FC = () => {
     loadProductDetails();
   }, [id]);
   const handleBuyNow = () => {
-    // Logika obsługująca proces zakupu
     console.log('Kupiono produkt:', product?.model);
-    // Możesz tutaj dodać przekierowanie do strony płatności lub koszyka
   };
   if (!product) {
     return <div>Loading...</div>;

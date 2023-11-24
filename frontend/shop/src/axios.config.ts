@@ -12,6 +12,7 @@ AxiosApi.interceptors.request.use(
 
     if (token) {
       config.headers.authorization = `Bearer ${token}`;
+      config.headers['Content-Type'] = `application/json`
     }
     console.log('Starting Request', JSON.stringify(config, null, 2));
 

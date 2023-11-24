@@ -12,11 +12,11 @@ const Profile = () => {
   const { signOut, user } = useAuth();
   const [editMode, setEditMode] = useState(false);
   const [address, setAddress] = useState<Address>({
-    city: 'Przyklad',
-    zipCode: 'Przyklad',
-    street: 'Przyklad',
-    buildingNumber: 'Pppp',
-    apartmentNumber: 2
+    city: '',
+    zipCode: '',
+    street: '',
+    buildingNumber: '',
+    apartmentNumber: 0
   });
   // useEffect(() => {
   //   if (user && !user.address) { // Pobieraj adres tylko, jeśli nie jest zdefiniowany
@@ -28,6 +28,7 @@ const Profile = () => {
   //   }
   // }, [user]);
   //[name]: name === "apartmentNumber" ? parseInt(value) || 0 : value 
+
   const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAddress({ ...address, [e.target.name]: e.target.value });
   };
@@ -66,7 +67,7 @@ const Profile = () => {
       </Field>
       </FieldsContainer>
       <form onSubmit={handleAddressSubmit}>
-        {/* <FormField
+       <FormField
           id="city"
           labelText="Miasto"
           type="text"
@@ -105,7 +106,7 @@ const Profile = () => {
           name="apartmentNumber"
           value={address.apartmentNumber}
           onChange={handleAddressChange}
-        /> */}
+        />
         <Button isbig type="submit">Zapisz Adres</Button>
       </form>
       <Button isbig onClick={signOut}>
