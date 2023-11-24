@@ -50,7 +50,7 @@ export interface Address {
   zipCode: string;
   street: string;
   buildingNumber: string;
-  apartmentNumber: number;
+  apartmentNumber: string;
 }
 export interface Order {
   price: number;
