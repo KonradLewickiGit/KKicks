@@ -49,7 +49,11 @@ export const fetchProductById = async (id: number) => {
 //address
 export const addAddressForUser = async (userId: number, addressData: any) => {
   try {
-    const response = await AxiosApi.post(`/address/add/${userId}`, addressData);
+    const response = await AxiosApi.post(`/address/add/${userId}`, addressData, {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
     return response.data;
   } catch (error) {
     console.error('Error adding address for user:', error);
