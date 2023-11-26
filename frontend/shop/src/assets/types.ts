@@ -45,7 +45,7 @@ export interface Manufacturer {
   id: number;
   manufacturerName: string;
 }
-export interface Address {
+export interface Adres {
   city: string;
   zipCode: string;
   street: string;
