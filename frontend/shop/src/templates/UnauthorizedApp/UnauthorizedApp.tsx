@@ -7,7 +7,7 @@ import Login from '../../pages/login/Login'
 import Register from '../../pages/register/Register'
 import HomePage from '../../pages/home/Home'
 import { ThemeProvider } from 'styled-components'
-import ProductDetails from '../../components/molecules/ProductDetails/ProductDetails'
+import ProductDetails from '../../pages/ProductDetails/ProductDetails'
 import GuestHeader from '../../components/organism/Header/GuestHeader'
 
 const UnauthorizedApp: React.FC = () => {

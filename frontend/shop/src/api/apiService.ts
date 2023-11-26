@@ -62,7 +62,7 @@ export const addAddressForUser = async (userId: number, addressData: any) => {
 };
 export const fetchAddressByUserId = async (userId: number) => {
   try {
-    const response = await AxiosApi.get(`address/find/ByUserId/${userId}`);
+    const response = await AxiosApi.get(`/address/find/ByUserId/${userId}`);
     return response.data;
   } catch (error) {
     console.error('Error fetching address by user ID:', error);
@@ -72,7 +72,7 @@ export const fetchAddressByUserId = async (userId: number) => {
 //order
 export const createOrder = async (userId: number, productId: number, provider: string, shipPrice: number) => {
   try {
-    const response = await AxiosApi.post(`/create/${userId}/${productId}/${provider}`, { shipPrice });
+    const response = await AxiosApi.post(`/order/create/${userId}/${productId}/${provider}`, shipPrice);
     return response.data;
   } catch (error) {
     console.error('Error creating order:', error);

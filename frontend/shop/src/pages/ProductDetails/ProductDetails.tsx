@@ -1,15 +1,16 @@
 // ProductDetails.tsx
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchProductById } from '../../../api/apiService';
-import { Product } from '../../../assets/types';
-import Button from '../../atoms/Button/Button';
-import { Field } from './ProductDetails.styles';
-import { Wrapper, DetailsContainer } from './ProductDetails.styles';
+import { fetchProductById } from '../../api/apiService';
+import { Product } from '../../assets/types';
+import Button from '../../components/atoms/Button/Button';
+import { useNavigate } from 'react-router-dom';
+import { Wrapper, DetailsContainer, Field} from './ProductDetails.styles';
 
 const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loadProductDetails = async () => {
@@ -27,6 +28,7 @@ const ProductDetails: React.FC = () => {
   }, [id]);
   const handleBuyNow = () => {
     console.log('Kupiono produkt:', product?.model);
+    navigate(`/order/${id}`);
   };
   if (!product) {
     return <div>Loading...</div>;

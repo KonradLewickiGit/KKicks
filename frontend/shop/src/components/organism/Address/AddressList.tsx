@@ -44,6 +44,7 @@ const Address = () => {
       const handleEdit = () => {
         setIsEditing(true);
       };
+
       const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setEditedAddress({ ...editedAddress, [e.target.name]: e.target.value });
     };
@@ -65,7 +66,6 @@ const Address = () => {
         <div>
           {address && !isEditing ? (
             <div>
-              <p>
               <span>Adres</span>
               <FieldsContainer> 
                 <Field>
@@ -84,7 +84,6 @@ const Address = () => {
                 <span>{address.zipCode} {address.city} </span>
                 </Field>
                  </FieldsContainer>
-              </p>
               <Button onClick={handleEdit}>Edytuj Adres</Button>
             </div>
           ) : isEditing ? (
@@ -137,9 +136,12 @@ const Address = () => {
             <Button onClick={handleSave}>Zapisz</Button>
           </div>
           ) : (
-            <span>Nie masz zapisanego adresu</span>
+            <div>
+              <span>Nie masz zapisanego adresu</span>
+              <Button onClick={handleEdit}>Dodaj Adres</Button>
+            </div>
           )}
-          </div>
+        </div>
       );
     };
     

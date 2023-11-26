@@ -5,6 +5,8 @@ import { fetchProductById, createOrder } from '../../api/apiService';
 import { Product } from '../../assets/types';
 import { useAuth } from '../../hooks/useApi';
 import Button from '../../components/atoms/Button/Button';
+import { Wrapper, Label, Price } from './Order.styles';
+import Address from '../../components/organism/Address/AddressList';
 
 const Order: React.FC = () => {
   const { id: productId } = useParams<{ id: string }>();
@@ -37,7 +39,6 @@ const Order: React.FC = () => {
       try {
         await createOrder(user.id, product.id, selectedProvider, 9.99);
         console.log('Order placed successfully');
-        navigate('/order-confirmation'); // Przekierowanie do strony potwierdzenia zamówienia
       } catch (error) {
         console.error('Error placing order:', error);
       }
@@ -48,12 +49,14 @@ const Order: React.FC = () => {
     return <div>Loading...</div>;
   }
 
+
   return (
-    <div>
-      <h1>Order for {product.model}</h1>
+    <Wrapper>
+      <h1>Zamawiasz {product.model}</h1>
       {/* Tutaj wyświetl szczegóły produktu */}
+      <Address />
       <div>
-        <label>
+        <Label>
           <input 
             type="radio" 
             name="provider" 
@@ -62,8 +65,8 @@ const Order: React.FC = () => {
             checked={selectedProvider === 'DHL'} 
           />
           DHL - 9.99 zł
-        </label>
-        <label>
+        </Label>
+        <Label>
           <input 
             type="radio" 
             name="provider" 
@@ -72,8 +75,8 @@ const Order: React.FC = () => {
             checked={selectedProvider === 'POCZTEX'} 
           />
           POCZTEX - 9.99 zł
-        </label>
-        <label>
+        </Label>
+        <Label>
           <input 
             type="radio" 
             name="provider" 
@@ -82,10 +85,10 @@ const Order: React.FC = () => {
             checked={selectedProvider === 'INPOST'} 
           />
           INPOST - 9.99 zł
-        </label>
+        </Label>
       </div>
       <Button onClick={handleSubmitOrder}>Przejdź dalej</Button>
-    </div>
+      </Wrapper>
   );
 };
 

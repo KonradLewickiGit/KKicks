@@ -5,7 +5,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { RootState } from '../../app/store'
 import Profile from '../../pages/profile/Profile'
 import HomePage from '../../pages/home/Home'
-import ProductDetails from '../../components/molecules/ProductDetails/ProductDetails'
+import ProductDetails from '../../pages/ProductDetails/ProductDetails'
 import LoggedHeader from '../../components/organism/Header/LoggedHeader'
 import Order from '../../pages/order/Order'
 
