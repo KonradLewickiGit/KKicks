@@ -1,5 +1,5 @@
 import AxiosApi from '../axios.config'; // Zaimportuj swoją instancję Axios
-
+import { ProductData } from '../assets/types';
 export const fetchCategories = async () => {
   try {
     const response = await AxiosApi.get('/category/find/All');
@@ -9,6 +9,17 @@ export const fetchCategories = async () => {
     throw error;
   }
 };
+//manufacturers
+export const fetchManufacturers = async () => {
+  try {
+    const response = await AxiosApi.get('/manufacturer/find/All');
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching manufacturers:', error);
+    throw error;
+  }
+};
+
 
 export const fetchProducts = async () => {
   try {
@@ -46,6 +57,7 @@ export const fetchProductById = async (id: number) => {
     throw error;
   }
 };
+
 //address
 export const addAddressForUser = async (userId: number, addressData: any) => {
   try {
@@ -72,7 +84,11 @@ export const fetchAddressByUserId = async (userId: number) => {
 //order
 export const createOrder = async (userId: number, productId: number, provider: string, shipPrice: number) => {
   try {
-    const response = await AxiosApi.post(`/order/create/${userId}/${productId}/${provider}`, shipPrice);
+    const response = await AxiosApi.post(`/order/create/${userId}/${productId}/${provider}`, shipPrice, {
+      headers: {
+        'Content-Type': `application/json`
+      }
+    });
     return response.data;
   } catch (error) {
     console.error('Error creating order:', error);
@@ -91,11 +107,71 @@ export const findOrderByUserIdAndProductId = async (userId: number, productId: n
 };
 //payment
 export const processPayment = async (orderId: number, paymentMethod: string) => {
-  try {
-    const response = await AxiosApi.post(`/order/pay/${orderId}`, paymentMethod);
+  try { 
+    const response = await AxiosApi.post(`/order/pay/${orderId}`, paymentMethod, {
+      headers: {
+        'Content-Type': `application/json`
+      }
+    });  
     return response.data;
   } catch (error) {
     console.error('Error processing payment:', error);
+    throw error;
+  }
+};
+
+//addProduct with images
+export const addProduct = async (
+  userId: number, 
+  categoryId: number, 
+  manufacturerId: number, 
+  productData: ProductData,
+  files: File[]
+): Promise<any> => {
+  try {
+    const formData = new FormData();
+    formData.append('model', productData.model);
+    formData.append('price', productData.price.toString()); 
+    formData.append('description', productData.description);
+    formData.append('size', productData.size);
+    formData.append('color', productData.color);
+
+    // Dodaj pliki
+    files.forEach((file) => {
+      formData.append('files', file);
+    });
+
+    const response = await AxiosApi.post(`product/save/${userId}/${categoryId}/${manufacturerId}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error('Error adding product:', error);
+    throw error;
+  }
+};
+//images
+export const fetchProductImages = async (productId: number) => {
+  try {
+    const response = await AxiosApi.get(`/find/AllByProduct/${productId}`);
+    return response.data; // Zakładam, że odpowiedź zawiera listę obrazów
+  } catch (error) {
+    console.error('Error fetching product images:', error);
+    throw error;
+  }
+};
+
+
+//observed product
+export const addProductToObserved = async (userId: number, productId: number) => {
+  try {
+    const response = await AxiosApi.post(`/user/addProductToObserved/${userId}/${productId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error adding product to observed:', error);
     throw error;
   }
 };

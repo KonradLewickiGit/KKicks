@@ -41,6 +41,13 @@ export interface Product {
   is_verified: boolean;
   model: string;
 }
+export interface ProductData {
+  model: string;
+  price: number;
+  description: string;
+  size: string;
+  color: string;
+}
 export interface Manufacturer {
   id: number;
   manufacturerName: string;

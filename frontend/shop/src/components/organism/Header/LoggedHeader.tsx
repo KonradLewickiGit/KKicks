@@ -39,9 +39,10 @@ const LoggedHeader: React.FC = () => {
       <Link to="/" style={{ textDecoration: 'none' }}>
         <Logo>K&Kicks</Logo>
       </Link>
-      <nav>
+      <NavContainer>
         <StyledLink to="/profile">Profil</StyledLink>
-      </nav>
+        <StyledLink to="/addproduct">Sprzedaj</StyledLink>
+      </NavContainer>
     </HeaderContainer>
   );
 };

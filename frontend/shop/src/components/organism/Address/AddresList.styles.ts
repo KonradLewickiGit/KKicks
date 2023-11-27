@@ -4,6 +4,7 @@ export const FieldsContainer = styled.div`
   flex-wrap: wrap;
   gap: 20px;
   margin-bottom: 20px;
+  font-family: 'Veranda', sans-serif;
   width: 100%; // Pełna szerokość kontenera
 
   @media (max-width: 768px) {
@@ -14,6 +15,7 @@ export const FieldsContainer = styled.div`
 export const Field = styled.div`
   display: flex;
   flex-direction: column;
+  font-family: 'Veranda', sans-serif;
   font-size: ${({ theme }) => theme.fontSize.xl};
   gap: 8px;
   width: calc(50% - 10px); // Odejmujemy 10px, aby uwzględnić gap
