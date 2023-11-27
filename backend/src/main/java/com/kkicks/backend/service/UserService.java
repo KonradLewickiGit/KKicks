@@ -44,6 +44,10 @@ public class UserService {
         user.setNonExpired(false);
         userDao.save(user);
     }
+    public List<Product> findAllObservedProductsByUserId(Long userId){
+        User user = userDao.findById(userId).orElseThrow(() -> new EntityNotFoundException("user not found"));
+        return user.getObservedProducts();
+    }
 
     public User addProductToObserved(Long id, Long productId){
         User userToUpdate = userDao.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found"));

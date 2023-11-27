@@ -43,6 +43,10 @@ public class UserController {
     public User deleteProductFromObserved(@PathVariable Long id,@PathVariable Long productId){
         return userService.deleteProductFromObserved(id,productId);
     }
+    @GetMapping({"/find/AllObservedProducts/{userId}"})
+    public List<Product> findAllObservedProducts(@PathVariable Long userId){
+        return userService.findAllObservedProductsByUserId(userId);
+    }
     @PostMapping({"/update/{id}"})
     public User updateUser(@PathVariable Long id,@RequestBody User updatedUserData){
         return userService.updateUserData(id,updatedUserData);
