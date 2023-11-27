@@ -32,13 +32,16 @@ public class OrderService {
     ProductDao productDao;
     @Autowired
     PaymentDao paymentDao;
-    public Order createOrder(Long userId, Long productId, Provider provider, BigDecimal shipPrice){
-        User user = userDao.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found"));
+    public Order createOrder(Long userId,Long productId, Provider provider, BigDecimal shipPrice){
+        User buyer = userDao.findById(userId).orElseThrow(() -> new EntityNotFoundException("Buyer not found"));
         Product product = productDao.findById(productId).orElseThrow(() -> new EntityNotFoundException("Product not found"));
+        User seller = userDao.findById(product.getUser().getId()).orElseThrow(() -> new EntityNotFoundException("Seller not found"));
+
         Order order = new Order();
         order.setProduct(product);
         order.setProvider(provider);
-        order.setUser(user);
+        order.setBuyer(buyer);
+        order.setSeller(seller);
         order.setPrice(product.getPrice().add(shipPrice));
         return orderDao.save(order);
     }
@@ -46,16 +49,27 @@ public class OrderService {
         return orderDao.findAll();
     }
 
-    public List<Order> findAllByUserId(Long userId){
+    public List<Order> findAllBySellerId(Long userId){
         User user = userDao.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found"));
-        return orderDao.findAllByUser(user);
+        return orderDao.findAllBySeller(user);
     }
 
-    public Order findByUserIdAndProductId(Long userId, Long productId){
+    public List<Order> findAllByBuyer(Long userId){
+        User user = userDao.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        return orderDao.findAllByBuyer(user);
+    }
+
+    public Order findByBuyerAndProduct(Long userId, Long productId){
         User user = userDao.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found"));
         Product product = productDao.findById(productId).orElseThrow(() -> new EntityNotFoundException("Product not found"));
-        return orderDao.findByUserAndProduct(user,product);
+        return orderDao.findByBuyerAndProduct(user,product);
     }
+    public Order findBySellerAndProduct(Long userId, Long productId){
+        User user = userDao.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        Product product = productDao.findById(productId).orElseThrow(() -> new EntityNotFoundException("Product not found"));
+        return orderDao.findBySellerAndProduct(user,product);
+    }
+
 
 
     public Payment processPayment(Long orderId, PaymentMethod paymentMethod){
@@ -77,5 +91,9 @@ public class OrderService {
         productDao.save(product);
         orderPayment.setOrder(order);
         return paymentDao.save(orderPayment);
+    }
+
+    public Order findById(Long orderId) {
+        return orderDao.findById(orderId).orElseThrow(() -> new EntityNotFoundException("Order not found!"));
     }
 }

@@ -1,5 +1,6 @@
 package com.kkicks.backend.entity.Order;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kkicks.backend.entity.Payment.Payment;
 import com.kkicks.backend.entity.Product.Product;
 import com.kkicks.backend.entity.User.User;
@@ -44,8 +45,13 @@ public class Order {
     private Product product;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @JsonIgnore
+    @JoinColumn(name = "seller_id")
+    private User seller;
+
+    @ManyToOne
+    @JoinColumn(name = "buyer_id")
+    private User buyer;
 
     @OneToOne(mappedBy = "order")
     private  Payment payment;
