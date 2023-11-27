@@ -65,26 +65,27 @@ const Address = () => {
       return (
         <div>
           {address && !isEditing ? (
-            <div>
-              <span>Adres</span>
+            <div>             
               <FieldsContainer> 
                 <Field>
-                <span>{address.city}</span>
+                Miasto: <span> {address.city}</span>
                 </Field>
                 <Field>
-                <span>Ulica: {address.street}</span>
+                Ulica: <span> {address.street}</span>
                 </Field> 
                 <Field>
-                <span>{address.buildingNumber} </span>
+                 Nr budynku:<span> {address.buildingNumber} </span>
+                </Field>
+                </FieldsContainer>
+                <FieldsContainer>
+                <Field>
+                Nr mieszkania: <span>{address.apartmentNumber ? ` m. ${address.apartmentNumber},` : ''} </span>
                 </Field>
                 <Field>
-                <span>{address.apartmentNumber ? ` m. ${address.apartmentNumber},` : ''} </span>
+                Kod pocztowy: <span>{address.zipCode} {address.city} </span>
                 </Field>
-                <Field>
-                <span>{address.zipCode} {address.city} </span>
-                </Field>
-                 </FieldsContainer>
-              <Button onClick={handleEdit}>Edytuj Adres</Button>
+                </FieldsContainer>
+              <Button type="button" onClick={handleEdit}>Edytuj Adres</Button>
             </div>
           ) : isEditing ? (
             <div>
@@ -133,12 +134,12 @@ const Address = () => {
               onChange={handleChange}
               name="apartmentNumber"
             />
-            <Button onClick={handleSave}>Zapisz</Button>
+            <Button type="button" onClick={handleSave}>Zapisz</Button>
           </div>
           ) : (
             <div>
               <span>Nie masz zapisanego adresu</span>
-              <Button onClick={handleEdit}>Dodaj Adres</Button>
+              <Button type="button" onClick={handleEdit}>Dodaj Adres</Button>
             </div>
           )}
         </div>

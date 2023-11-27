@@ -35,13 +35,20 @@ const Order: React.FC = () => {
   };
 
   const handleSubmitOrder = async () => {
+    console.log("handleSubmitOrder started"); // Log na początku funkcji
     if (user && product) {
+      console.log("User and product are available"); // Log, gdy użytkownik i produkt są dostępne
       try {
         await createOrder(user.id, product.id, selectedProvider, 9.99);
         console.log('Order placed successfully');
+        console.log(`Navigating to /orderfinal/${productId}`); // Log przed wykonaniem przekierowania
+        navigate(`/orderfinal/${productId}`);
       } catch (error) {
         console.error('Error placing order:', error);
+        console.log("Error occurred during order creation"); // Log, gdy wystąpi błąd
       }
+    } else {
+      console.log("User or product is not available"); // Log, gdy użytkownik lub produkt nie są dostępne
     }
   };
 
@@ -54,7 +61,7 @@ const Order: React.FC = () => {
     <Wrapper>
       <h1>Zamawiasz {product.model}</h1>
       {/* Tutaj wyświetl szczegóły produktu */}
-      <Address />
+      {user && <Address />}
       <div>
         <Label>
           <input 
@@ -87,7 +94,8 @@ const Order: React.FC = () => {
           INPOST - 9.99 zł
         </Label>
       </div>
-      <Button onClick={handleSubmitOrder}>Przejdź dalej</Button>
+      <Button type="button" onClick={handleSubmitOrder}>Przejdź dalej</Button>
+      
       </Wrapper>
   );
 };

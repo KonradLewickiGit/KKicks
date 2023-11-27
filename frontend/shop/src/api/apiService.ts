@@ -79,3 +79,23 @@ export const createOrder = async (userId: number, productId: number, provider: s
     throw error;
   }
 };
+
+export const findOrderByUserIdAndProductId = async (userId: number, productId: number) => {
+  try {
+    const response = await AxiosApi.get(`/order/findByUserIdAndProductId/${userId}/${productId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error finding order by user ID and product ID:', error);
+    throw error;
+  }
+};
+//payment
+export const processPayment = async (orderId: number, paymentMethod: string) => {
+  try {
+    const response = await AxiosApi.post(`/order/pay/${orderId}`, paymentMethod);
+    return response.data;
+  } catch (error) {
+    console.error('Error processing payment:', error);
+    throw error;
+  }
+};

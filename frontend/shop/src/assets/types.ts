@@ -60,7 +60,14 @@ export interface Order {
   status: boolean;
 }
 
-
+export interface PaymentResponse {
+  id: number;
+  isApproved: boolean;
+  paymentDate: string;
+  paymentMethod: string;
+  price: number;
+  status: string;
+}
 
 export interface ApiContextType {
     user: User | null
