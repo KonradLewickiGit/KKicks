@@ -37,15 +37,15 @@ public class Product {
     @Column(name = "isVerified")
     @Enumerated(EnumType.STRING)
     private Verification isVerified;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "posted_by_user_id")
     private User user;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "category_id")
     private Category category;

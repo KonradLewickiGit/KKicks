@@ -1,6 +1,7 @@
 package com.kkicks.backend.controler;
 
 import com.kkicks.backend.entity.Product.Product;
+import com.kkicks.backend.entity.User.User;
 import com.kkicks.backend.service.ProductService;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,10 @@ public class ProductController {
     public List<Product> findAllByUser(@PathVariable Long id){
         return productService.findAllByUser(id);
     }
+    @GetMapping({"/findUserByPostedProductId/{productId}"})
+    public User findUserByPostedProductId(@PathVariable Long productId){
+        return productService.findUserByPostedProductId(productId);
+    }
     @GetMapping({"/find/AllByCategoryAndManufacturer/{idCategory}/{idManufacturer}"})
     public List<Product> findAllByCategoryAndManufacturer(@PathVariable Integer idCategory,@PathVariable Integer idManufacturer){
         return productService.findAllByCategoryAndManufacturer(idCategory,idManufacturer);
@@ -66,9 +71,5 @@ public class ProductController {
     @PostMapping({"/setVerification/{id}"})
     public Product updateProduct(@PathVariable Long id){
         return productService.setVerification(id);
-    }
-    @PostConstruct
-    public void initData(){
-        productService.initTestData();
     }
 }
