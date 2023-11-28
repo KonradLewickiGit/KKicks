@@ -71,7 +71,7 @@ const OrderFinal = () => {
           VISA
         </Label>
       </RadioGroup>
-      <TotalPrice>Razem: {order ? order.price : '...'}</TotalPrice>
+      <TotalPrice>Razem: {order ? order.price : '459.98 zł'}</TotalPrice>
       <Button onClick={handleSubmitPayment}>Zapłać</Button>
       {paymentStatus && (
         <div>

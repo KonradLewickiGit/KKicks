@@ -24,6 +24,22 @@ export const Wrapper = styled.form`
     }
   }
 `;
+export const DeliveryContainer = styled.div`
+  background-color: ${({ theme }) => theme.colors.lightGrey}; // Jasne tło dla sekcji
+  border: 1px solid ${({ theme }) => theme.colors.grey}; // Subtelna ramka
+  border-radius: 10px;
+  padding: 20px;
+  align-items: center;
+  width: 100%;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); // Lekki cień
+  margin-bottom: 30px;
+`;
+
+export const DeliveryHeader = styled.h2`
+  font-size: ${({ theme }) => theme.fontSize.l};
+  margin-bottom: 20px;
+  align-items: center;
+`;
 
 export const Label = styled.label`
   font-family: 'Verdana', sans-serif; // Ustawienie czcionki Verdana

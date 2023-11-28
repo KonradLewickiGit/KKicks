@@ -1,34 +1,43 @@
 // ProductDetails.tsx
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { fetchProductById, addProductToObserved } from '../../api/apiService';
+import { useParams, useNavigate } from 'react-router-dom';
+import { fetchProductById, addProductToObserved, fetchProductImagesNames, loadProductImage } from '../../api/apiService';
 import { Product } from '../../assets/types';
 import Button from '../../components/atoms/Button/Button';
-import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useApi';
-import { Wrapper, DetailsContainer, Field} from './ProductDetails.styles';
+import { Wrapper, DetailsContainer, Field, ImageContainer, StyledImage, ButtonContainer} from './ProductDetails.styles';
 
 const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product | null>(null);
+  const [productImages, setProductImages] = useState<string[]>([]);
   const navigate = useNavigate();
   const { user } = useAuth();
   const [isObserved, setIsObserved] = useState(false);
-
+  type ImageName = {
+    path: string;
+    // inne właściwości, jeśli istnieją
+  };
   useEffect(() => {
     const loadProductDetails = async () => {
       if (id) {
         try {
           const productDetails = await fetchProductById(parseInt(id));
           setProduct(productDetails);
+          const imageNames = await fetchProductImagesNames(parseInt(id));
+          const imageUrls = await Promise.all(
+            imageNames.map((image: ImageName) => loadProductImage(image.path))
+          );
+          setProductImages(imageUrls);
         } catch (error) {
-          console.error('Error fetching product details:', error);
+          console.error('Error:', error);
         }
       }
     };
 
     loadProductDetails();
   }, [id]);
+
   const handleBuyNow = () => {
     console.log('Kupiono produkt:', product?.model);
     navigate(`/order/${id}`);
@@ -51,6 +60,11 @@ const ProductDetails: React.FC = () => {
   return (
     <Wrapper>
       <Field as="h1"><span>Model:</span> {product.model}</Field>
+      <ImageContainer>
+        {productImages.map((imageUrl, index) => (
+          <StyledImage key={index} src={imageUrl} alt={`Product ${index}`} />
+        ))}
+      </ImageContainer>
       <DetailsContainer>
         <Field><span>Cena:</span> {product.price} zł</Field>
         <Field><span>Rozmiar:</span> {product.size}</Field>
@@ -58,10 +72,12 @@ const ProductDetails: React.FC = () => {
         <Field><span>Opis:</span> {product.description}</Field>
         <Field><span>Status:</span> {product.is_verified ? 'Produkt zweryfikowany' : 'Produkt niezweryfikowany'}</Field>
       </DetailsContainer>
-      <Button onClick={handleAddToObserved}>
-        {isObserved ? 'Zaobserwowano' : 'Obserwuj produkt'}
-      </Button>
-      <Button onClick={handleBuyNow}>Kup teraz</Button>
+      <ButtonContainer>
+        <Button onClick={handleAddToObserved}>
+          {isObserved ? 'Zaobserwowano' : 'Obserwuj produkt'}
+        </Button>
+        <Button onClick={handleBuyNow}>Kup teraz</Button>
+        </ButtonContainer>
     </Wrapper>
   );
 };

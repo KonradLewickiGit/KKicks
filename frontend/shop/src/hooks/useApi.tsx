@@ -43,9 +43,7 @@ export const ApiProvider: React.FC<Props> = ({ children }) => {
         localStorage.setItem('token', token);
         setUser(response.data.user);
         console.log("zalogowano pomyslnie");
-        navigate('/');
       } else {
-        // Obsługa sytuacji, gdy token jest undefined
         setError("Logowanie powiodło się, ale nie otrzymano tokenu.");
       }
     } catch (error: any) {

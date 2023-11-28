@@ -20,7 +20,7 @@ export const fetchManufacturers = async () => {
   }
 };
 
-
+//products
 export const fetchProducts = async () => {
   try {
     const response = await AxiosApi.get('/product/find/All');
@@ -54,6 +54,15 @@ export const fetchProductById = async (id: number) => {
     return response.data;
   } catch (error) {
     console.error('Error fetching product by ID:', error);
+    throw error;
+  }
+};
+export const fetchUserByPostedProductId = async (productId: number) => {
+  try {
+    const response = await AxiosApi.get(`/findUserByPostedProductId/${productId}`);
+    return response.data; // Zakładam, że odpowiedź zawiera dane użytkownika
+  } catch (error) {
+    console.error('Error fetching user by posted product ID:', error);
     throw error;
   }
 };
@@ -108,11 +117,7 @@ export const findOrderByUserIdAndProductId = async (userId: number, productId: n
 //payment
 export const processPayment = async (orderId: number, paymentMethod: string) => {
   try { 
-    const response = await AxiosApi.post(`/order/pay/${orderId}`, paymentMethod, {
-      headers: {
-        'Content-Type': `application/json`
-      }
-    });  
+    const response = await AxiosApi.post(`/order/pay/${orderId}`, paymentMethod);  
     return response.data;
   } catch (error) {
     console.error('Error processing payment:', error);
@@ -154,16 +159,26 @@ export const addProduct = async (
   }
 };
 //images
-export const fetchProductImages = async (productId: number) => {
+export const fetchProductImagesNames = async (productId: number) => {
   try {
-    const response = await AxiosApi.get(`/find/AllByProduct/${productId}`);
+    const response = await AxiosApi.get(`/productImage/find/AllByProduct/${productId}`);
     return response.data; // Zakładam, że odpowiedź zawiera listę obrazów
   } catch (error) {
     console.error('Error fetching product images:', error);
     throw error;
   }
 };
-
+export const loadProductImage = async (fileName: string): Promise<string> => {
+  try {
+    const response = await AxiosApi.get(`/productImage/find/Image/${fileName}`, {
+      responseType: 'blob' // Jeśli obraz jest zwracany jako blob
+    });
+    return URL.createObjectURL(response.data); // Tworzy URL do obrazu
+  } catch (error) {
+    console.error('Error loading image:', error);
+    throw error;
+  }
+};
 
 //observed product
 export const addProductToObserved = async (userId: number, productId: number) => {

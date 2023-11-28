@@ -16,8 +16,7 @@ const Profile = () => {
       </Field>
       <FieldsContainer>
       <Field>
-        <label>Imie</label>
-        <span>{user?.firstName}</span>
+        Imie<span>{user?.firstName}</span>
       </Field>
       <Field>
         Nazwisko<span>{user?.lastName}</span>

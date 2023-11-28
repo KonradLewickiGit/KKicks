@@ -5,7 +5,7 @@ import { fetchProductById, createOrder } from '../../api/apiService';
 import { Product } from '../../assets/types';
 import { useAuth } from '../../hooks/useApi';
 import Button from '../../components/atoms/Button/Button';
-import { Wrapper, Label, Price } from './Order.styles';
+import { Wrapper, Label, DeliveryContainer, DeliveryHeader } from './Order.styles';
 import Address from '../../components/organism/Address/AddressList';
 
 const Order: React.FC = () => {
@@ -62,7 +62,8 @@ const Order: React.FC = () => {
       <h1>Zamawiasz {product.model}</h1>
       {/* Tutaj wyświetl szczegóły produktu */}
       {user && <Address />}
-      <div>
+      <DeliveryContainer>
+      <DeliveryHeader>Wybierz dostawę</DeliveryHeader>
         <Label>
           <input 
             type="radio" 
@@ -93,7 +94,7 @@ const Order: React.FC = () => {
           />
           INPOST - 9.99 zł
         </Label>
-      </div>
+        </DeliveryContainer>
       <Button type="button" onClick={handleSubmitOrder}>Przejdź dalej</Button>
       
       </Wrapper>

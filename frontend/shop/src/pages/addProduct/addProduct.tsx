@@ -4,9 +4,7 @@ import { addProduct, fetchCategories, fetchManufacturers } from '../../api/apiSe
 import { Category, Manufacturer } from '../../assets/types';
 import { useAuth } from '../../hooks/useApi';
 import Button from '../../components/atoms/Button/Button';
-import { Label } from '../../components/atoms/Label/Label.styles';
-import { Input } from '../../components/atoms/Input/Input.styles';
-import { FormWrapper, StyledFileInput, StyledSelect } from './addProduct.styles';
+import {StyledFileInput, StyledSelect, Wrapper} from './addProduct.styles';
 import FormField from '../../components/molecules/formField/FormField';
 const AddProduct = () => {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -74,7 +72,7 @@ const AddProduct = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-        <FormWrapper>
+        <Wrapper>
         <StyledSelect onChange={handleCategoryChange} value={selectedCategory}>
         <option value="0">Wybierz kategorię</option>
         {categories.map(category => (
@@ -134,7 +132,7 @@ const AddProduct = () => {
           name="color"
         />
 
-      </FormWrapper>
+      </Wrapper>
       <Button type="submit">Dodaj produkt </Button>
       
     </form>

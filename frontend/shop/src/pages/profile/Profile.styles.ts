@@ -33,20 +33,29 @@ export const Wrapper = styled.div`
 `;
 
 export const FieldsContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%; // Pełna szerokość kontenera
+display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-around; // Równomierne rozmieszczenie elementów
+  margin-bottom: 20px;
+  width: 100%;
+  
+@media (max-width: 768px) {
+  flex-direction: column;
+}
 `;
-
 export const Field = styled.div`
   display: flex;
-  text-align: center;
+ 
+  flex: 1 1 calc(50% - 10px);
   flex-direction: column;
   font-size: ${({ theme }) => theme.fontSize.xl};
   gap: 8px;
   margin-bottom: 10px;
   width: 48%; // Szerokość każdego pola
-
+  @media (max-width: 768px) {
+    flex: 1 1 100%;
+  }
   & > span {
     font-weight: 700;
   }

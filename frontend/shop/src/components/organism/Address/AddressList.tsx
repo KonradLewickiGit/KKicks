@@ -4,7 +4,8 @@ import { fetchAddressByUserId, addAddressForUser } from '../../../api/apiService
 import { Adres } from '../../../assets/types';
 import FormField from '../../molecules/formField/FormField';
 import Button from '../../atoms/Button/Button';
-import { Field, FieldsContainer } from './AddresList.styles';
+import { Field, FieldsContainer } from '../../../pages/profile/Profile.styles';
+
 
 const Address = () => {
     const { user } = useAuth();
