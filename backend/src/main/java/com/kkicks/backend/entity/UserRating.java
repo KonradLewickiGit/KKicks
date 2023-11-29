@@ -20,12 +20,10 @@ public class UserRating {
     private int stars;
 
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "sender_id")
     private User sender;
 
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "user_id")
     private User user;
 }
