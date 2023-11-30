@@ -42,10 +42,8 @@ public class ProductService {
     @Autowired
     ProductImageDao productImageDao;
 
-    @Value("${imagesPath}")
-    private String imagesPath;
+    private  String imagesPath = "src/main/resources/images/";
     public Product saveProduct(Long userId, Integer categoryId, Integer manufacturerId, String model, BigDecimal price, String desc, String color, BigDecimal size, List<MultipartFile> files) throws IOException {
-
         File directory = new File(imagesPath);
         if (!directory.exists()) {
             directory.mkdirs();
@@ -168,4 +166,4 @@ public class ProductService {
         product.setIsVerified(Verification.VERIFIED);
         return productDao.save(product);
     }
-    }
+}

@@ -1,5 +1,6 @@
 package com.kkicks.backend.service;
 
+import com.kkicks.backend.config.security.JWTService;
 import com.kkicks.backend.dao.AddressDao;
 import com.kkicks.backend.dao.ProductDao;
 import com.kkicks.backend.dao.UserDao;
@@ -35,6 +36,9 @@ class UserServiceTest {
 
     @InjectMocks
     private UserService userService;
+
+    @InjectMocks
+    private JWTService jwtService;
 
     @BeforeEach
     public void setUp() {
@@ -348,23 +352,29 @@ class UserServiceTest {
 
     @Test
     public void testFindUserByToken() {
+        User user = new User();
+        user.setEmail("test");
+        var token = jwtService.generateToken(user);
         HttpServletRequest request = mock(HttpServletRequest.class);
-        when(request.getHeader("Authorization")).thenReturn("Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjpbeyJhdXRob3JpdHkiOiJBRE1JTiJ9XSwic3ViIjoidGVzdCIsImlhdCI6MTcwMTI5NzY3MywiZXhwIjoxNzAxMzA0ODczfQ.QeYOzjSacaHtLhnC3P2IpfpTfLLhPYS6Oi6mlj9nbWY");
-        String mockEmail = "test";
+        when(request.getHeader("Authorization")).thenReturn("Bearer " + token);
 
-        when(userDao.findByEmail(mockEmail)).thenReturn(Optional.of(new User()));
+
+        when(userDao.findByEmail(user.getEmail())).thenReturn(Optional.of(new User()));
 
         User result = userService.findUserByToken(request);
 
         assertNotNull(result);
-        verify(userDao, times(1)).findByEmail(mockEmail);
+        verify(userDao, times(1)).findByEmail(user.getEmail());
     }
 
     @Test
     public void testFindUserByTokenInvalidToken() {
+        User user = new User();
+        user.setEmail("test");
+        var token = jwtService.generateToken(user);
         HttpServletRequest request = mock(HttpServletRequest.class);
-        when(request.getHeader("Authorization")).thenReturn("Bearer eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjpbeyJhdXRob3JpdHkiOiJBRE1JTiJ9XSwic3ViIjoidGVzdCIsImlhdCI6MTcwMTI5NzY3MywiZXhwIjoxNzAxMzA0ODczfQ.QeYOzjSacaHtLhnC3P2IpfpTfLLhPYS6Oi6mlj9nbWY");
-        String mockEmail = "test2";
+        when(request.getHeader("Authorization")).thenReturn("Bearer " + token);
+       String mockEmail = "test2";
 
         when(userDao.findByEmail(mockEmail)).thenReturn(Optional.of(new User()));
 
