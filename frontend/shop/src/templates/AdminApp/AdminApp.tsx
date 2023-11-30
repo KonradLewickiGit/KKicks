@@ -15,7 +15,6 @@ const AdminApp: React.FC = () => {
   return (
     <>
       <AdminHeader />
-      <h1>Panel Admina</h1>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/profile" element={<Profile />} />

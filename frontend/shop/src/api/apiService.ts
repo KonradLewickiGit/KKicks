@@ -32,6 +32,17 @@ export const giveAdminRole = async (userId: number) => {
   }
 };
 
+//user expired
+export const deleteUserById = async (userId: number) => {
+  try {
+    const response = await AxiosApi.post(`/user/delete/${userId}` );
+    return response.data; // Zakładając, że odpowiedź zawiera aktualny status `nonExpired`
+  } catch (error) {
+    console.error('Error updating user status:', error);
+    throw error;
+  }
+};
+
 //manufacturers
 export const fetchManufacturers = async () => {
   try {

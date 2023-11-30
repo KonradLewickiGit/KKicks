@@ -1,18 +1,9 @@
 // W pliku ManageUsers.tsx
 
 import React, { useState, useEffect } from 'react';
-import { fetchAllUsers, giveAdminRole } from '../../../api/apiService';
+import { fetchAllUsers, giveAdminRole, deleteUserById } from '../../../api/apiService';
 import { User } from '../../../assets/types';
-import styled from 'styled-components';
-
-// Stylowanie...
-const UsersWrapper = styled.div`
-  // Stylowanie...
-`;
-
-const UserItem = styled.div`
-  // Stylowanie...
-`;
+import { ManagementWrapper, UserRow, StyledButton } from '../../molecules/ManageAdmin/ManageAdmin.styles';
 
 const ManageUsers: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]); // Użycie typu User[]
@@ -43,22 +34,37 @@ const ManageUsers: React.FC = () => {
       console.error('Error updating user role:', error);
     }
   };
+  
+  const handleDeactivateUser = async (userId: number) => {
+    try {
+      await deleteUserById(userId);
+      // Aktualizuj stan użytkowników, ustawiając nonExpired na false
+      setUsers(users.map(user => 
+        user.id === userId ? { ...user, nonExpired: false } : user
+      ));
+    } catch (error) {
+      console.error('Error deactivating user:', error);
+    }
+  };
+
 
   return (
-    <UsersWrapper>
-      <h1>Zarządzanie użytkownikami</h1>
-      {users.map((user: User) => ( 
-        <UserItem key={user.id}>
-          <p>Imię: {user.firstName}</p>
-          <p>Nazwisko: {user.lastName}</p>
-          <p>Email: {user.email}</p>
-          <p>Telefon: {user.phoneNumber}</p>
-          <p>Rola: {user.authorities.map(authority => authority.authority).join(', ')}</p>
-          <button onClick={() => handleGiveAdminRole(user.id)}>Nadaj rolę admina</button>
-        </UserItem>
-      ))}
-    </UsersWrapper>
-  );
+    <ManagementWrapper>
+    <h1>Zarządzanie użytkownikami</h1>
+    {users.map(user => (
+      <UserRow key={user.id}>
+        <div>Imię: {user.firstName}</div>
+        <div>Nazwisko: {user.lastName}</div>
+        <p>Email: {user.email}</p>
+        <p>Telefon: {user.phoneNumber}</p>
+        <p>Rola: {user.authorities.map(authority => authority.authority).join(', ')}</p>
+        <p>Status: {user.nonExpired ? 'Konto aktywne' : 'Konto nieaktywne'}</p>
+        <StyledButton onClick={() => handleGiveAdminRole(user.id)}>Zmień rolę</StyledButton>
+        <StyledButton onClick={() => handleDeactivateUser(user.id)}>{user.nonExpired ? 'Dezaktywuj konto' : 'Aktywuj konto'}</StyledButton>
+      </UserRow>
+    ))}
+  </ManagementWrapper>
+);
 };
 
 export default ManageUsers;

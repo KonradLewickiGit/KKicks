@@ -10,6 +10,7 @@ export interface User {
     lastName: string
     phoneNumber: string
     authorities: Authority[];
+    nonExpired: boolean;
   }
  
   export interface LoginData {
