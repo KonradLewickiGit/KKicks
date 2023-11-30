@@ -14,17 +14,6 @@ import java.util.List;
 public class ProductImageController {
     @Autowired
     ProductImageService productImageService;
-
-    @PostMapping("/add/{productId}")
-    public ProductImage addImage(@PathVariable Long productId, @RequestBody String path){
-        return productImageService.addImage(productId,path);
-    }
-
-    @PostMapping("/addMany/{productId}")
-    public List<ProductImage> addImages(@PathVariable Long productId, @RequestBody List<String> paths){
-        return productImageService.addImages(productId,paths);
-    }
-
     @GetMapping("/find/AllByProduct/{productId}")
     public List<ProductImage> findAllByProduct(@PathVariable Long productId){
         return productImageService.getAllProductImages(productId);

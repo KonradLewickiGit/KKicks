@@ -27,6 +27,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
@@ -75,17 +76,53 @@ public class ProductService {
         return product;
     }
 
-    public Product updateProduct(Long id,Product product){
-        Product productToUpdate = productDao.findById(id).orElseThrow(() -> new EntityNotFoundException("Product not found"));
-        productToUpdate.setModel(product.getModel());
-        productToUpdate.setUser(product.getUser());
-        productToUpdate.setManufacturer(product.getManufacturer());
-        productToUpdate.setCategory(product.getCategory());
-        productToUpdate.setDescription(product.getDescription());
-        productToUpdate.setColor(product.getColor());
-        productToUpdate.setPrice(product.getPrice());
-        productToUpdate.setIsVerified(product.getIsVerified());
-        return productDao.save(productToUpdate);
+    public Product updateProduct(Long productId, Integer categoryId, Integer manufacturerId, String model, BigDecimal price, String desc, String color, BigDecimal size, List<MultipartFile> files) throws IOException {
+        Product existingProduct = productDao.findById(productId).orElseThrow(() -> new EntityNotFoundException("Product not found"));
+
+        existingProduct.setModel(model);
+        existingProduct.setSize(size);
+        existingProduct.setColor(color);
+        existingProduct.setDescription(desc);
+        existingProduct.setPrice(price);
+        existingProduct.setManufacturer(manufacturerDao.findById(manufacturerId).orElseThrow(() -> new EntityNotFoundException("Manufacturer not found")));
+        existingProduct.setCategory(categoryDao.findById(categoryId).orElseThrow(() -> new EntityNotFoundException("Category not found")));
+
+        Product updatedProduct = productDao.save(existingProduct);
+
+        List<String> newFileNames = files.stream()
+                .map(file -> updatedProduct.getId() + "_" + file.getOriginalFilename())
+                .collect(Collectors.toList());
+
+        List<ProductImage> oldImages = productImageDao.findAllByProduct(updatedProduct);
+        List<String> oldFileNames = oldImages.stream()
+                .map(ProductImage::getPath)
+                .filter(path -> !newFileNames.contains(path))
+                .collect(Collectors.toList());
+
+        for (String oldFileName : oldFileNames) {
+            Path oldFilePath = Path.of(imagesPath + oldFileName);
+            try {
+                Files.deleteIfExists(oldFilePath);
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to delete old image " + oldFileName, e);
+            }
+        }
+
+        for (MultipartFile file : files) {
+            String fileName = updatedProduct.getId() + "_" + file.getOriginalFilename();
+            Path destPath = Path.of(imagesPath + fileName);
+            try {
+                ProductImage image = new ProductImage();
+                image.setProduct(updatedProduct);
+                image.setPath(fileName);
+                Files.copy(file.getInputStream(), destPath, StandardCopyOption.REPLACE_EXISTING);
+                productImageDao.save(image);
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to save image " + fileName, e);
+            }
+        }
+
+        return updatedProduct;
     }
     public List<Product> findAll(){
         return productDao.findAll();

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.net.MalformedURLException;
 import java.nio.file.Path;
@@ -25,20 +26,6 @@ public class ProductImageService {
 
     @Value("${imagesPath}")
     private String imagesPath;
-    public ProductImage addImage(Long productId, String path){
-        Product product = productDao.findById(productId).orElseThrow(() -> new EntityNotFoundException("Product not found"));
-        return productImageDao.save(new ProductImage(null,path,product));
-    }
-
-    public List<ProductImage> addImages(Long productId, List<String> paths){
-        Product product = productDao.findById(productId).orElseThrow(() -> new EntityNotFoundException("Product not found"));
-        List<ProductImage> images = new ArrayList<>();
-        for (String path : paths){
-            images.add(new ProductImage(null,path,product));
-        }
-        return productImageDao.saveAll(images);
-    }
-
     public List<ProductImage> getAllProductImages(Long productId) {
         Product product = productDao.findById(productId).orElseThrow(() -> new EntityNotFoundException("Product not found"));
         return productImageDao.findAllByProduct(product);

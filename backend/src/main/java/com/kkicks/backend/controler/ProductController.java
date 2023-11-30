@@ -59,9 +59,9 @@ public class ProductController {
     public ArrayList<Product> addProducts(@RequestBody ArrayList<Product> products){
         return productService.addProducts(products);
     }
-    @PostMapping({"/update/{id}"})
-    public Product updateProduct(@PathVariable Long id,@RequestBody Product updatedProductData){
-        return productService.updateProduct(id,updatedProductData);
+    @PostMapping({"/update/{productId}/{categoryId}/{manufacturerId}"})
+    public Product updateProduct(@PathVariable Long productId,@PathVariable Integer categoryId, @PathVariable Integer manufacturerId, @RequestParam String model, @RequestParam BigDecimal price, @RequestParam String description, @RequestParam BigDecimal size, @RequestParam String color, @RequestParam List<MultipartFile> files) throws IOException{
+        return productService.updateProduct(productId,categoryId,manufacturerId,model,price,description,color,size,files);
     }
     @DeleteMapping({"/delete/{id}"})
     public String deleteProductById(@PathVariable Long id){
