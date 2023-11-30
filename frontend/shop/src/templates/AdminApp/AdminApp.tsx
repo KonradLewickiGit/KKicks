@@ -10,6 +10,7 @@ import OrderFinal from '../../pages/orderFinal/orderFinal';
 import AddProduct from '../../pages/addProduct/addProduct';
 import Admin from '../../pages/adminPanel/Admin';
 import ManageUsers from '../../components/organism/ManageUsers/ManageUsers';
+import ManageProducts from '../../components/organism/ManageProducts/ManageProducts';
 
 const AdminApp: React.FC = () => {
   return (
@@ -24,7 +25,7 @@ const AdminApp: React.FC = () => {
         <Route path="/addproduct" element={<AddProduct />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/admin/users" element={<ManageUsers />} />
-        {/* Możesz dodać tutaj dodatkowe ścieżki specyficzne dla administratora */}
+        <Route path="/admin/products" element={<ManageProducts />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>

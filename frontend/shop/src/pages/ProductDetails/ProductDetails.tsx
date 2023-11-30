@@ -70,7 +70,7 @@ const ProductDetails: React.FC = () => {
         <Field><span>Rozmiar:</span> {product.size}</Field>
         <Field><span>Kolor:</span> {product.color}</Field>
         <Field><span>Opis:</span> {product.description}</Field>
-        <Field><span>Status:</span> {product.is_verified ? 'Produkt zweryfikowany' : 'Produkt niezweryfikowany'}</Field>
+        <Field><span>Status:</span> {product.isVerified ? 'Produkt zweryfikowany' : 'Produkt niezweryfikowany'}</Field>
       </DetailsContainer>
       <ButtonContainer>
         <Button onClick={handleAddToObserved}>

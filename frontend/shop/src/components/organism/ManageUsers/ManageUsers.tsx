@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { fetchAllUsers, giveAdminRole, deleteUserById } from '../../../api/apiService';
 import { User } from '../../../assets/types';
-import { ManagementWrapper, UserRow, StyledButton } from '../../molecules/ManageAdmin/ManageAdmin.styles';
+import { ManagementWrapper, Row, StyledButton } from '../../molecules/ManageAdmin/ManageAdmin.styles';
 
 const ManageUsers: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]); // Użycie typu User[]
@@ -52,7 +52,7 @@ const ManageUsers: React.FC = () => {
     <ManagementWrapper>
     <h1>Zarządzanie użytkownikami</h1>
     {users.map(user => (
-      <UserRow key={user.id}>
+      <Row key={user.id}>
         <div>Imię: {user.firstName}</div>
         <div>Nazwisko: {user.lastName}</div>
         <p>Email: {user.email}</p>
@@ -61,7 +61,7 @@ const ManageUsers: React.FC = () => {
         <p>Status: {user.nonExpired ? 'Konto aktywne' : 'Konto nieaktywne'}</p>
         <StyledButton onClick={() => handleGiveAdminRole(user.id)}>Zmień rolę</StyledButton>
         <StyledButton onClick={() => handleDeactivateUser(user.id)}>{user.nonExpired ? 'Dezaktywuj konto' : 'Aktywuj konto'}</StyledButton>
-      </UserRow>
+      </Row>
     ))}
   </ManagementWrapper>
 );

@@ -9,7 +9,7 @@ export const ManagementWrapper = styled.div`
 `;
 
 // Stylowanie dla każdego wiersza użytkownika
-export const UserRow = styled.div`
+export const Row = styled.div`
   display: grid;
   align-items: center;
   justify-content: space-between;

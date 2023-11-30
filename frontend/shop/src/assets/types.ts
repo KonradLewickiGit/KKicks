@@ -12,6 +12,7 @@ export interface User {
     authorities: Authority[];
     nonExpired: boolean;
   }
+  
  
   export interface LoginData {
     email: string
@@ -44,7 +45,7 @@ export interface Product {
   posted_by_user_id: number;
   color: string;
   description: string;
-  is_verified: boolean;
+  isVerified: string;
   model: string;
 }
 export interface ProductData {

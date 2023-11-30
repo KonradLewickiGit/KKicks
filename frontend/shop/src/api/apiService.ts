@@ -64,6 +64,25 @@ export const fetchProducts = async () => {
     throw error;
   }
 };
+export const deleteProductById = async (productId: number) => {
+  try {
+    const response = await AxiosApi.delete(`product/delete/${productId}`);
+    return response.data; // Zakładając, że odpowiedź potwierdza usunięcie
+  } catch (error) {
+    console.error('Error deleting product:', error);
+    throw error;
+  }
+};
+
+export const setProductVerification = async (productId: number) => {
+  try {
+    const response = await AxiosApi.post(`product/setVerification/${productId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error setting product verification:', error);
+    throw error;
+  }
+};
 export const fetchProductsByManufacturer = async (manufacturerId: number) => {
   try {
     const response = await AxiosApi.get(`/find/AllByManufacturer/${manufacturerId}`);
