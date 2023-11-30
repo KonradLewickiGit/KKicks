@@ -36,6 +36,14 @@ const ManageProducts: React.FC = () => {
     console.error('Error setting product verification:', error);
   }
 };
+const handleDeleteProduct = async (productId: number) => {
+    try {
+      await deleteProductById(productId);
+      setProducts(products.filter(product => product.id !== productId)); // Usuwa produkt ze stanu
+    } catch (error) {
+      console.error('Error deleting product:', error);
+    }
+  };
 const handleProductClick = (productId: number) => {
     navigate(`/productdetails/${productId}`);
   };
@@ -55,6 +63,10 @@ const handleProductClick = (productId: number) => {
             <StyledButton onClick={() => handleSetProductVerification(product.id)}>
                 Zweryfikuj
             </StyledButton>
+            <StyledButton onClick={() => handleDeleteProduct(product.id)}>
+            Usuń
+          </StyledButton>
+        
         </Row>
       ))}
     </ManagementWrapper>
