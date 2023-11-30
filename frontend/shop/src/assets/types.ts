@@ -1,3 +1,6 @@
+export interface Authority {
+  authority: string;
+}
 export interface User {
     id: number
     email: string
@@ -6,7 +9,9 @@ export interface User {
     firstName: string
     lastName: string
     phoneNumber: string
+    authorities: Authority[];
   }
+ 
   export interface LoginData {
     email: string
     password: string

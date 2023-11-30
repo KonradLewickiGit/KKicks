@@ -9,6 +9,29 @@ export const fetchCategories = async () => {
     throw error;
   }
 };
+
+// Funkcja do pobierania wszystkich użytkowników
+export const fetchAllUsers = async () => {
+  try {
+    const response = await AxiosApi.get('/user/find/All');
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching all users:', error);
+    throw error;
+  }
+};
+
+//uprawnienia
+export const giveAdminRole = async (userId: number) => {
+  try {
+    const response = await AxiosApi.post(`/user/giveAdminRole/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error giving admin role:', error);
+    throw error;
+  }
+};
+
 //manufacturers
 export const fetchManufacturers = async () => {
   try {
