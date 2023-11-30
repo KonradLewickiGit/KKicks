@@ -28,7 +28,6 @@ public class WebSecurityConfig{
                 .cors(cors -> cors.configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues()))
                 .headers(header -> header.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .authorizeHttpRequests(auth -> auth
-                        //.requestMatchers("/api/suicide/**", "/api/alcohol/**").authenticated()
                         .requestMatchers("/api/auth/**","/product/find/**","/manufacturer/find/**","/category/find/**","/rating/**","/user/find/**", "/productImage/find/**").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session

@@ -31,7 +31,7 @@ public class UserController {
     public User findById(@PathVariable Long id){
         return userService.findUserById(id);
     }
-    @DeleteMapping({"/delete/{id}"})
+    @PostMapping({"/delete/{id}"})
     public void deleteUserById(@PathVariable Long id){
         userService.deleteUserByID(id);
     }
