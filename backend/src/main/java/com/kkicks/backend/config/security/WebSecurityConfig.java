@@ -34,7 +34,7 @@ public class WebSecurityConfig{
                 }))
                 .headers(header -> header.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**","/product/find/**","/manufacturer/find/**","/category/find/**","/rating/**","/user/find/**", "/productImage/find/**").permitAll()
+                        .requestMatchers("/api/auth/**","/product/find/**","/manufacturer/find/**","/category/find/**","/rating/**","/user/find/**", "/productImage/find/**","/question/add").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
