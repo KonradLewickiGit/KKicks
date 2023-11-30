@@ -29,7 +29,6 @@ import java.nio.file.StandardCopyOption;
 import java.util.*;
 
 @Service
-@RequiredArgsConstructor
 public class ProductService {
     @Autowired
     ProductDao productDao;
@@ -39,19 +38,9 @@ public class ProductService {
     CategoryDao categoryDao;
     @Autowired
     ManufacturerDao manufacturerDao;
-    private final PasswordEncoder passwordEncoder;
-    @Autowired
-    AddressDao addressDao;
     @Autowired
     ProductImageDao productImageDao;
-    @Autowired
-    OrderService orderService;
-    @Autowired
-    ProductImageService productImageService;
-    @Autowired
-    UserRatingService userRatingService;
-    @Autowired
-    ProductRatingService productRatingService;
+
     @Value("${imagesPath}")
     private String imagesPath;
     public Product saveProduct(Long userId, Integer categoryId, Integer manufacturerId, String model, BigDecimal price, String desc, String color, BigDecimal size, List<MultipartFile> files) throws IOException {

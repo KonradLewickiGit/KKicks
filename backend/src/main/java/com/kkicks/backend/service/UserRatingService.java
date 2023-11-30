@@ -25,11 +25,8 @@ public class UserRatingService {
             userRating = new UserRating();
             userRating.setSender(sender);
             userRating.setUser(user);
-            userRating.setStars(stars);
-        } else {
-            userRating.setStars(stars);
         }
-
+        userRating.setStars(stars);
         return userRatingDao.save(userRating);
     }
     public double calculateAverageRating(Long userId) {

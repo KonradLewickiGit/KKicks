@@ -46,7 +46,7 @@ public class QuestionService {
         Answer answer1 = new Answer();
         answer1.setQuestion(question);
         answer1.setBody(answer.getBody());
-        answer1.setSubject("answet to: " + question.getSubject());
+        answer1.setSubject("answer to: " + question.getSubject());
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(question.getEmail());
         message.setSubject(answer1.getSubject());
