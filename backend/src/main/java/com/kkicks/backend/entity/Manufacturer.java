@@ -13,6 +13,6 @@ public class Manufacturer {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(nullable = false)
-    private String manufacturerName;
+    private String name;
 
 }

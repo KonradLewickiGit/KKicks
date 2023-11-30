@@ -23,7 +23,7 @@ public class CategoryController {
     }
     @GetMapping({"/find/All"})
     public List<Category> getAllProducts(){
-        return categoryService.getAllCategorys();
+        return categoryService.getAllCategories();
     }
     @GetMapping({"/find/{id}"})
     public Category getProductById(@PathVariable(value = "id") Integer id){
