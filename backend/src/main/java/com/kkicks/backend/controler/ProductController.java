@@ -55,10 +55,6 @@ public class ProductController {
     public Product saveProduct(@PathVariable Long userId, @PathVariable Integer categoryId, @PathVariable Integer manufacturerId, @RequestParam String model, @RequestParam BigDecimal price, @RequestParam String description, @RequestParam BigDecimal size, @RequestParam String color, @RequestParam List<MultipartFile> files) throws IOException {
         return productService.saveProduct(userId,categoryId,manufacturerId,model,price,description,color,size,files);
     }
-    @PostMapping({"/saveMany"})
-    public ArrayList<Product> addProducts(@RequestBody ArrayList<Product> products){
-        return productService.addProducts(products);
-    }
     @PostMapping({"/update/{productId}/{categoryId}/{manufacturerId}"})
     public Product updateProduct(@PathVariable Long productId,@PathVariable Integer categoryId, @PathVariable Integer manufacturerId, @RequestParam String model, @RequestParam BigDecimal price, @RequestParam String description, @RequestParam BigDecimal size, @RequestParam String color, @RequestParam List<MultipartFile> files) throws IOException{
         return productService.updateProduct(productId,categoryId,manufacturerId,model,price,description,color,size,files);

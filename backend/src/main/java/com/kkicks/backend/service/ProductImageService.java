@@ -24,8 +24,7 @@ public class ProductImageService {
     @Autowired
     ProductDao productDao;
 
-    @Value("${imagesPath}")
-    private String imagesPath;
+    private final String imagesPath = "src/main/resources/images/";
     public List<ProductImage> getAllProductImages(Long productId) {
         Product product = productDao.findById(productId).orElseThrow(() -> new EntityNotFoundException("Product not found"));
         return productImageDao.findAllByProduct(product);

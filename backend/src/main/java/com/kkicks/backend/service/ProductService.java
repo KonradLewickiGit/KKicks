@@ -129,9 +129,6 @@ public class ProductService {
     public Product find(Long id){
         return productDao.findById(id).orElseThrow(() -> new EntityNotFoundException("product not found"));
     }
-    public ArrayList<Product> addProducts(ArrayList<Product> products) {
-        return (ArrayList<Product>) productDao.saveAll(products);
-    }
     public List<Product> findAllByCategory(Integer id){
         Category category = categoryDao.findById(id).orElseThrow(() -> new EntityNotFoundException("Category not found"));
         return productDao.findAllByCategory(category);
@@ -166,4 +163,5 @@ public class ProductService {
         product.setIsVerified(Verification.VERIFIED);
         return productDao.save(product);
     }
+
 }

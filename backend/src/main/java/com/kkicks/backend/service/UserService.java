@@ -24,7 +24,11 @@ public class UserService {
     AddressDao addressDao;
     public User createAdministrator(Long userId){
         User user = userDao.findById(userId).orElseThrow(() -> new EntityNotFoundException("user not found"));
-        user.setRole(Role.ADMIN);
+        if (user.getRole().equals(Role.USER)){
+            user.setRole(Role.ADMIN);
+        } else {
+            user.setRole(Role.USER);
+        }
         return userDao.save(user);
     }
     public List<User> findAll(){
