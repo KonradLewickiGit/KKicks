@@ -9,6 +9,7 @@ import HomePage from '../../pages/home/Home'
 import { ThemeProvider } from 'styled-components'
 import ProductDetails from '../../pages/ProductDetails/ProductDetails'
 import GuestHeader from '../../components/organism/Header/GuestHeader'
+import QuestionForm from '../../pages/QuestionForm/QuestionForm'
 
 const UnauthorizedApp: React.FC = () => {
   return (
@@ -21,6 +22,7 @@ const UnauthorizedApp: React.FC = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/productdetails/:id" element={<ProductDetails />} />
+          <Route path="/questions" element={<QuestionForm />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </ThemeProvider>

@@ -10,6 +10,7 @@ import LoggedHeader from '../../components/organism/Header/LoggedHeader'
 import Order from '../../pages/order/Order'
 import OrderFinal from '../../pages/orderFinal/orderFinal'
 import AddProduct from '../../pages/addProduct/addProduct'
+import QuestionForm from '../../pages/QuestionForm/QuestionForm'
 
 const AuthorizedApp: React.FC = () => {
   // const { isShowingSearchBar } = useSelector((state: RootState) => state.searchBar)
@@ -25,6 +26,7 @@ const AuthorizedApp: React.FC = () => {
       <Route path="/order/:id" element={<Order />} />
       <Route path="/orderfinal/:id" element={<OrderFinal />} />
       <Route path="/addproduct" element={<AddProduct />} />
+      <Route path="/questions" element={<QuestionForm />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       {/* <Footer /> */}

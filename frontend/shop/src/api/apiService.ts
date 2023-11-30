@@ -167,6 +167,24 @@ export const findOrderByUserIdAndProductId = async (userId: number, productId: n
     throw error;
   }
 };
+export const addQuestion = async (email: string, subject: string, body: string) => {
+  try {
+    const response = await AxiosApi.post('/question/add', { email, subject, body });
+    return response.data;
+  } catch (error) {
+    console.error('Error adding question:', error);
+    throw error;
+  }
+};
+export const fetchAllOrders = async () => {
+  try {
+    const response = await AxiosApi.get('/order/findAll');
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching orders:', error);
+    throw error;
+  }
+};
 //payment
 export const processPayment = async (orderId: number, paymentMethod: string) => {
   try { 

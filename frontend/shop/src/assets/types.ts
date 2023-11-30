@@ -12,7 +12,11 @@ export interface User {
     authorities: Authority[];
     nonExpired: boolean;
   }
-  
+  export interface Question {
+    email: string;
+    subject: string;
+    body: string;
+  }
  
   export interface LoginData {
     email: string
@@ -69,7 +73,7 @@ export interface Adres {
 export interface Order {
   price: number;
   id: number;
-  order_date: string;
+  orderDate: string;
   provider: string;
   status: boolean;
 }

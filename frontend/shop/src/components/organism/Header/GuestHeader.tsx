@@ -42,6 +42,7 @@ const GuestHeader: React.FC = () => {
       <NavContainer>
         <StyledLink to="/login">Logowanie</StyledLink>
         <StyledLink to="/register">Rejestracja</StyledLink>
+        <StyledLink to="/questions">Kontakt</StyledLink>
       </NavContainer>
     </HeaderContainer>
   );
