@@ -11,7 +11,8 @@ import Order from '../../pages/order/Order'
 import OrderFinal from '../../pages/orderFinal/orderFinal'
 import AddProduct from '../../pages/addProduct/addProduct'
 import QuestionForm from '../../pages/QuestionForm/QuestionForm'
-import UserProfile from '../../pages/UsersProfiles/UserProfile'
+import UserProfile from '../../pages/UserProfiles/UserProfile'
+import ObservedProducts from '../../pages/observedProducts/ObservedProducts'
 
 const AuthorizedApp: React.FC = () => {
   // const { isShowingSearchBar } = useSelector((state: RootState) => state.searchBar)
@@ -23,6 +24,7 @@ const AuthorizedApp: React.FC = () => {
       <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/profile" element={<Profile />} />
+      <Route path="/observedproducts" element={<ObservedProducts />} />
       <Route path="/productdetails/:id" element={<ProductDetails />} />
       <Route path="/order/:id" element={<Order />} />
       <Route path="/orderfinal/:id" element={<OrderFinal />} />

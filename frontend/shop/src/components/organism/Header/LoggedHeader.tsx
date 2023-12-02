@@ -43,6 +43,7 @@ const LoggedHeader: React.FC = () => {
         <StyledLink to="/profile">Profil</StyledLink>
         <StyledLink to="/addproduct">Sprzedaj</StyledLink>
         <StyledLink to="/questions">Kontakt</StyledLink>
+        <StyledLink to="/observedproducts">Obserwowane</StyledLink>
       </NavContainer>
     </HeaderContainer>
   );

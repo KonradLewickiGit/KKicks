@@ -13,7 +13,7 @@ import ManageUsers from '../../components/organism/ManageUsers/ManageUsers';
 import ManageProducts from '../../components/organism/ManageProducts/ManageProducts';
 import OrdersPanel from '../../components/organism/OrdersPanel/OrdersPanel';
 import ManageQuestions from '../../components/organism/ManageQuestions/ManageQuestions';
-import UserProfile from '../../pages/UsersProfiles/UserProfile';
+import UserProfile from '../../pages/UserProfiles/UserProfile';
 
 const AdminApp: React.FC = () => {
   return (

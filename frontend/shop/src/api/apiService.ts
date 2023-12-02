@@ -169,7 +169,7 @@ export const createOrder = async (userId: number, productId: number, provider: s
 
 export const findOrderByUserIdAndProductId = async (userId: number, productId: number) => {
   try {
-    const response = await AxiosApi.get(`/order/findByBuyerIdAndProductId/${userId}/${productId}`);
+    const response = await AxiosApi.get(`/order/findByIdAndProductId/${userId}/${productId}`);
     return response.data;
   } catch (error) {
     console.error('Error finding order by user ID and product ID:', error);
@@ -278,6 +278,26 @@ export const addProductToObserved = async (userId: number, productId: number) =>
     return response.data;
   } catch (error) {
     console.error('Error adding product to observed:', error);
+    throw error;
+  }
+};
+
+export const fetchAllObservedProducts = async (userId: number) => {
+  try {
+    const response = await AxiosApi.get(`/user/find/AllObservedProducts/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching all observed products:', error);
+    throw error;
+  }
+};
+
+export const deleteProductFromObserved = async (userId: number, productId: number) => {
+  try {
+    const response = await AxiosApi.delete(`user/deleteProductFromObserved/${userId}/${productId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting product from observed:', error);
     throw error;
   }
 };

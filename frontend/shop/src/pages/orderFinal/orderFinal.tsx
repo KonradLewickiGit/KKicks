@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Order, PaymentResponse } from '../../assets/types';
+import { Order, PaymentResponse, Product } from '../../assets/types';
 import { processPayment, findOrderByUserIdAndProductId } from '../../api/apiService';
 import Button from '../../components/atoms/Button/Button';
 import { useAuth } from '../../hooks/useApi';
@@ -13,6 +13,8 @@ const OrderFinal = () => {
     const [paymentMethod, setPaymentMethod] = useState('');
     const [order, setOrder] = useState<Order | null>(null); // Użyj typu Order
     const [paymentStatus, setPaymentStatus] = useState<PaymentResponse | null>(null);
+    const [product, setProduct] = useState<Product | null>(null);
+  const [productImages, setProductImages] = useState<string[]>([]);
 
     useEffect(() => {
         console.log("OrderFinal component is mounted. Order ID:", orderId);
