@@ -1,5 +1,5 @@
 package com.kkicks.backend.entity.Order;
 
 public enum Status {
-    CREATED,COMPLETED,CANCELED
+    CREATED,PAID,ON_DELIVERY,DELIVERED,CANCELED
 }

@@ -14,6 +14,7 @@ import com.kkicks.backend.entity.Product.Availability;
 import com.kkicks.backend.entity.Product.Product;
 import com.kkicks.backend.entity.User.User;
 import jakarta.persistence.EntityNotFoundException;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -70,6 +71,20 @@ public class OrderService {
         return orderDao.findBySellerAndProduct(user,product);
     }
 
+    public Order setStatusToSent(Long orderId){
+        Order order = orderDao.findById(orderId).orElseThrow(() -> new EntityNotFoundException("Order not found"));
+        if(order.getStatus().equals(Status.PAID)){
+            order.setStatus(Status.ON_DELIVERY);
+        }
+        return orderDao.save(order);
+    }
+    public Order setStatusToDelivered(Long orderId){
+        Order order = orderDao.findById(orderId).orElseThrow(() -> new EntityNotFoundException("Order not found"));
+        if(order.getStatus().equals(Status.ON_DELIVERY)){
+            order.setStatus(Status.DELIVERED);
+        }
+        return orderDao.save(order);
+    }
 
 
     public Payment processPayment(Long orderId, PaymentMethod paymentMethod){
@@ -82,7 +97,7 @@ public class OrderService {
             order.setStatus(Status.CANCELED);
             orderPayment.setStatus(PaymentStatus.CANCELED);
         } else {
-            order.setStatus(Status.COMPLETED);
+            order.setStatus(Status.PAID);
             orderPayment.setStatus(PaymentStatus.COMPLETE);
             product.setOrder(order);
             product.setAvailability(Availability.SOLD);

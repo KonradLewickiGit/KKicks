@@ -26,6 +26,14 @@ public class OrderController {
     public Payment pay(@PathVariable Long orderId, @RequestBody PaymentMethod payment){
         return orderService.processPayment(orderId,payment);
     }
+    @PostMapping("/changeStatusToOnDelivery/{orderId}")
+    public Order changeStatusToOnDelivery(@PathVariable Long orderId){
+        return orderService.setStatusToSent(orderId);
+    }
+    @PostMapping("/changeStatusToDelivered/{orderId}")
+    public Order changeStatusToDelivered(@PathVariable Long orderId){
+        return orderService.setStatusToDelivered(orderId);
+    }
 
     @GetMapping("/findAll")
     public List<Order> findAll(){
