@@ -4,7 +4,18 @@ import { StyledImage as BaseStyledImage} from '../../components/atoms/Image/Imag
 import Button from '../../components/atoms/Button/Button';
 
 
+export const ClickableField = styled.div`
+  font-size: ${({ theme }) => theme.fontSize.l};
+  font-family: Verdana, sans-serif;
+  font-weight: bold;
+  color: ${({ theme }) => theme.colors.black};
+  margin-bottom: 10px;
+  cursor: pointer; // Kursor zmienia się na wskaźnik
 
+  &:hover {
+    color: ${({ theme }) => theme.colors.babyBlue}; // Kolor tekstu zmienia się na baby blue po najechaniu
+  }
+`;
 export const ButtonContainer = styled.div`
   display: flex;
   gap: 10px;

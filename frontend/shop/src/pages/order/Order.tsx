@@ -33,19 +33,28 @@ const Order: React.FC = () => {
   const handleProviderChange = (provider: string) => {
     setSelectedProvider(provider);
   };
+  const getShippingCost = (provider: string) => {
+    switch (provider) {
+      case 'DHL':
+        return 12.99;
+      case 'POCZTEX':
+        return 9.99;
+      case 'INPOST':
+        return 9.99;
+      default:
+        return 0; // Możesz zdecydować, co zrobić w przypadku, gdy dostawca nie jest wybrany
+    }
+  };
 
   const handleSubmitOrder = async () => {
-    console.log("handleSubmitOrder started"); // Log na początku funkcji
-    if (user && product) {
-      console.log("User and product are available"); // Log, gdy użytkownik i produkt są dostępne
+      if (user && product && selectedProvider) {
+        const shipPrice = getShippingCost(selectedProvider);
       try {
-        await createOrder(user.id, product.id, selectedProvider, 9.99);
+        await createOrder(user.id, product.id, selectedProvider, shipPrice);
         console.log('Order placed successfully');
-        console.log(`Navigating to /orderfinal/${productId}`); // Log przed wykonaniem przekierowania
         navigate(`/orderfinal/${productId}`);
       } catch (error) {
         console.error('Error placing order:', error);
-        console.log("Error occurred during order creation"); // Log, gdy wystąpi błąd
       }
     } else {
       console.log("User or product is not available"); // Log, gdy użytkownik lub produkt nie są dostępne
@@ -64,16 +73,16 @@ const Order: React.FC = () => {
       {user && <Address />}
       <DeliveryContainer>
       <DeliveryHeader>Wybierz dostawę</DeliveryHeader>
-        <Label>
-          <input 
-            type="radio" 
-            name="provider" 
-            value="DHL" 
-            onChange={() => handleProviderChange('DHL')}
-            checked={selectedProvider === 'DHL'} 
-          />
-          DHL - 9.99 zł
-        </Label>
+      <Label>
+        <input 
+          type="radio" 
+          name="provider" 
+          value="DHL" 
+          onChange={() => handleProviderChange('DHL')}
+          checked={selectedProvider === 'DHL'} 
+        />
+        DHL - 12.99 zł
+      </Label>
         <Label>
           <input 
             type="radio" 

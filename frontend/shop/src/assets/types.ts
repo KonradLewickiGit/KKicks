@@ -12,12 +12,28 @@ export interface User {
     authorities: Authority[];
     nonExpired: boolean;
   }
+  export interface UserProfile {
+    id: number
+    username: string
+    email: string
+    firstName: string
+    lastName: string
+    phoneNumber: string
+    // inne właściwości, które są zwracane przez API i są istotne w tym kontekście
+  }
   export interface Question {
     email: string;
     subject: string;
     body: string;
   }
- 
+
+export interface QuestionWithId {
+    id: number;
+    email: string;
+    subject: string;
+    body: string;
+}
+
   export interface LoginData {
     email: string
     password: string

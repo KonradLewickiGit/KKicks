@@ -11,6 +11,7 @@ import Order from '../../pages/order/Order'
 import OrderFinal from '../../pages/orderFinal/orderFinal'
 import AddProduct from '../../pages/addProduct/addProduct'
 import QuestionForm from '../../pages/QuestionForm/QuestionForm'
+import UserProfile from '../../pages/UsersProfiles/UserProfile'
 
 const AuthorizedApp: React.FC = () => {
   // const { isShowingSearchBar } = useSelector((state: RootState) => state.searchBar)
@@ -27,6 +28,7 @@ const AuthorizedApp: React.FC = () => {
       <Route path="/orderfinal/:id" element={<OrderFinal />} />
       <Route path="/addproduct" element={<AddProduct />} />
       <Route path="/questions" element={<QuestionForm />} />
+      <Route path="/userprofile/:userId" element={<UserProfile />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       {/* <Footer /> */}

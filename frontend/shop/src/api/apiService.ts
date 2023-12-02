@@ -21,6 +21,7 @@ export const fetchAllUsers = async () => {
   }
 };
 
+
 //uprawnienia
 export const giveAdminRole = async (userId: number) => {
   try {
@@ -112,14 +113,22 @@ export const fetchProductById = async (id: number) => {
 };
 export const fetchUserByPostedProductId = async (productId: number) => {
   try {
-    const response = await AxiosApi.get(`/findUserByPostedProductId/${productId}`);
-    return response.data; // Zakładam, że odpowiedź zawiera dane użytkownika
+    const response = await AxiosApi.get(`/product/findUserByPostedProductId/${productId}`);
+    return response.data;
   } catch (error) {
     console.error('Error fetching user by posted product ID:', error);
     throw error;
   }
 };
-
+export const fetchUserById = async (userId: number) => {
+  try {
+    const response = await AxiosApi.get(`/user/find/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching user by ID:', error);
+    throw error;
+  }
+};
 //address
 export const addAddressForUser = async (userId: number, addressData: any) => {
   try {
@@ -160,13 +169,14 @@ export const createOrder = async (userId: number, productId: number, provider: s
 
 export const findOrderByUserIdAndProductId = async (userId: number, productId: number) => {
   try {
-    const response = await AxiosApi.get(`/order/findByUserIdAndProductId/${userId}/${productId}`);
+    const response = await AxiosApi.get(`/order/findByBuyerIdAndProductId/${userId}/${productId}`);
     return response.data;
   } catch (error) {
     console.error('Error finding order by user ID and product ID:', error);
     throw error;
   }
 };
+//questions
 export const addQuestion = async (email: string, subject: string, body: string) => {
   try {
     const response = await AxiosApi.post('/question/add', { email, subject, body });
@@ -176,6 +186,16 @@ export const addQuestion = async (email: string, subject: string, body: string) 
     throw error;
   }
 };
+export const fetchAllQuestions = async () => {
+  try {
+    const response = await AxiosApi.get('/questions/find/All');
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching questions:', error);
+    throw error;
+  }
+};
+//order
 export const fetchAllOrders = async () => {
   try {
     const response = await AxiosApi.get('/order/findAll');
