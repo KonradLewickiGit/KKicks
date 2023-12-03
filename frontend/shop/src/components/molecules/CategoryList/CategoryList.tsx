@@ -18,7 +18,7 @@ const CategoryList: React.FC = () => {
     <Wrapper>
       <CategoryListContainer>
         {categories.map(category => (
-          <CategoryItem key={category.id}>{category.categoryName}</CategoryItem>
+          <CategoryItem key={category.id}>{category.name}</CategoryItem>
         ))}
       </CategoryListContainer>
     </Wrapper>

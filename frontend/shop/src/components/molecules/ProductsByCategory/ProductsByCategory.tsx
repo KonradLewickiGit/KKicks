@@ -23,7 +23,7 @@ const ProductsByCategory: React.FC = () => {
           <div>
             {categories.map(category => (
               <button key={category.id} onClick={() => setSelectedCategoryId(category.id)}>
-                {category.categoryName}
+                {category.name}
               </button>
             ))}
           </div>

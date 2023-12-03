@@ -48,7 +48,7 @@ export interface QuestionWithId {
   }  
   export interface Category {
     id: number
-    categoryName: string
+    name: string
 }
 export interface Product {
   id: number;
@@ -77,7 +77,7 @@ export interface ProductData {
 }
 export interface Manufacturer {
   id: number;
-  manufacturerName: string;
+  name: string;
 }
 export interface Adres {
   city: string;
@@ -91,7 +91,8 @@ export interface Order {
   id: number;
   orderDate: string;
   provider: string;
-  status: boolean;
+  status: string;
+  product: Product;
 }
 
 export interface PaymentResponse {

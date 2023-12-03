@@ -76,14 +76,14 @@ const AddProduct = () => {
         <StyledSelect onChange={handleCategoryChange} value={selectedCategory}>
         <option value="0">Wybierz kategorię</option>
         {categories.map(category => (
-          <option key={category.id} value={category.id}>{category.categoryName}</option>
+          <option key={category.id} value={category.id}>{category.name}</option>
         ))}
       </StyledSelect>
 
       <StyledSelect onChange={handleManufacturerChange} value={selectedManufacturer}>
         <option value="0">Wybierz markę</option>
         {manufacturers.map(manufacturer => (
-          <option key={manufacturer.id} value={manufacturer.id}>{manufacturer.manufacturerName}</option>
+          <option key={manufacturer.id} value={manufacturer.id}>{manufacturer.name}</option>
         ))}
       </StyledSelect>
       <StyledFileInput type="file" accept="image/jpeg" multiple onChange={handleFileChange} />

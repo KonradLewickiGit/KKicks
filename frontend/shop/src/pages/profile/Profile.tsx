@@ -5,6 +5,8 @@ import { useAuth } from '../../hooks/useApi'
 import Address from '../../components/organism/Address/AddressList';
 
 import { Field, Wrapper, FieldsContainer } from './Profile.styles'
+import OrderHistory from '../../components/organism/OrderHistory/OrderHistory';
+import SellHistory from '../../components/organism/SellHistory/SellHistory';
 
 const Profile = () => {
   const { signOut, user } = useAuth();
@@ -34,6 +36,8 @@ const Profile = () => {
       <span>Adres</span>
       </Field>
       {user && <Address />}
+      {user && <OrderHistory />}
+      {user && <SellHistory />}
       <Button isbig onClick={signOut}>
         Log out
       </Button>

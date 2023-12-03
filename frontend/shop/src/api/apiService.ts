@@ -169,7 +169,7 @@ export const createOrder = async (userId: number, productId: number, provider: s
 
 export const findOrderByUserIdAndProductId = async (userId: number, productId: number) => {
   try {
-    const response = await AxiosApi.get(`/order/findByIdAndProductId/${userId}/${productId}`);
+    const response = await AxiosApi.get(`/order/findByBuyerIdAndProductId/${userId}/${productId}`);
     return response.data;
   } catch (error) {
     console.error('Error finding order by user ID and product ID:', error);
@@ -179,7 +179,11 @@ export const findOrderByUserIdAndProductId = async (userId: number, productId: n
 //questions
 export const addQuestion = async (email: string, subject: string, body: string) => {
   try {
-    const response = await AxiosApi.post('/question/add', { email, subject, body });
+    const response = await AxiosApi.post('/question/add', { email, subject, body }, {
+      headers: {
+        'Content-Type': `application/json`
+      }
+    });
     return response.data;
   } catch (error) {
     console.error('Error adding question:', error);
@@ -205,10 +209,59 @@ export const fetchAllOrders = async () => {
     throw error;
   }
 };
+export const fetchOrdersByBuyerId = async (buyerId: number) => {
+  try {
+    const response = await AxiosApi.get(`/order/findAllByBuyerId/${buyerId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching orders by buyer ID:', error);
+    throw error;
+  }
+};
+export const fetchSalesBySellerId = async (sellerId: number) => {
+  try {
+    const response = await AxiosApi.get(`/order/findAllBySellerId/${sellerId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching sales by seller ID:', error);
+    throw error;
+  }
+};
+export const changeOrderStatusToOnDelivery = async (orderId: number) => {
+  try {
+    const response = await AxiosApi.post(`/order/changeStatusToOnDelivery/${orderId}`, {
+      headers: {
+        'Content-Type': `application/json`
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error changing order status to on delivery:', error);
+    throw error;
+  }
+};
+export const changeOrderStatusToDelivered = async (orderId: number) => {
+  try {
+    const response = await AxiosApi.post(`/order/changeStatusToDelivered/${orderId}`, {
+      headers: {
+        'Content-Type': `application/json`
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error changing order status to delivered:', error);
+    throw error;
+  }
+};
+
 //payment
 export const processPayment = async (orderId: number, paymentMethod: string) => {
   try { 
-    const response = await AxiosApi.post(`/order/pay/${orderId}`, paymentMethod);  
+    const response = await AxiosApi.post(`/order/pay/${orderId}`, paymentMethod, {
+      headers: {
+        'Content-Type': `application/json`
+      }
+    });  
     return response.data;
   } catch (error) {
     console.error('Error processing payment:', error);
