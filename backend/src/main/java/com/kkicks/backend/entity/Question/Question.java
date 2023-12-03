@@ -22,6 +22,7 @@ public class Question {
     @Column(nullable = false)
     private String body;
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Status status;
     @Column(nullable = false)
     private String email;

@@ -18,6 +18,10 @@ public class RatingController {
     public UserRating addUserRating(@PathVariable Long senderId, @PathVariable Long userId, @RequestBody Integer stars){
         return userRatingService.addRating(senderId, userId, stars);
     }
+    @PostMapping("/addUserRatingByOrderId/{senderId}/{orderId}")
+    public UserRating addUserRatingByOrder(@PathVariable Long senderId, @PathVariable Long orderId, @RequestBody Integer stars){
+        return userRatingService.addRatingByOrder(senderId, orderId, stars);
+    }
     @GetMapping("/averageUserRating/{userId}")
     public double countAverageUserRating(@PathVariable Long userId){
         return userRatingService.calculateAverageRating(userId);
