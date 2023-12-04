@@ -2,6 +2,7 @@ package com.kkicks.backend.service;
 
 import com.kkicks.backend.dao.*;
 import com.kkicks.backend.entity.*;
+import com.kkicks.backend.entity.Chat.Chat;
 import com.kkicks.backend.entity.Order.Order;
 import com.kkicks.backend.entity.Order.Provider;
 import com.kkicks.backend.entity.Order.Status;
@@ -41,6 +42,8 @@ public class ProductService {
     ManufacturerDao manufacturerDao;
     @Autowired
     ProductImageDao productImageDao;
+    @Autowired
+    ChatDao chatDao;
 
     private  String imagesPath = "src/main/resources/images/";
     public Product saveProduct(Long userId, Integer categoryId, Integer manufacturerId, String model, BigDecimal price, String desc, String color, BigDecimal size, List<MultipartFile> files) throws IOException {
@@ -71,6 +74,9 @@ public class ProductService {
                 throw new RuntimeException("Failed to save image " + fileName, e);
             }
         }
+        Chat chat = new Chat(null,product);
+        chatDao.save(chat);
+
         return product;
     }
 
@@ -153,9 +159,11 @@ public class ProductService {
     }
     public void deleteProductById(Long id){
         Product product = productDao.findById(id).orElseThrow(() -> new EntityNotFoundException("product not found"));
+        Chat chat = chatDao.findByProductId(id).orElseThrow(() -> new EntityNotFoundException("chat not found"));
         List<ProductImage> images = productImageDao.findAllByProduct(product);
         product.setProductImage(null);
         productImageDao.deleteAll(images);
+        chatDao.delete(chat);
         productDao.deleteById(id);
     }
     public Product setVerification(Long id){
