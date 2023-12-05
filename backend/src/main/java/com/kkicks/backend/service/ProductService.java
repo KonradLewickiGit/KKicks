@@ -159,7 +159,7 @@ public class ProductService {
     }
     public void deleteProductById(Long id){
         Product product = productDao.findById(id).orElseThrow(() -> new EntityNotFoundException("product not found"));
-        Chat chat = chatDao.findByProduct(product);
+        Chat chat = chatDao.findByProduct(product).orElseThrow(() -> new EntityNotFoundException("chat not found"));;
         List<ProductImage> images = productImageDao.findAllByProduct(product);
         product.setProductImage(null);
         productImageDao.deleteAll(images);
