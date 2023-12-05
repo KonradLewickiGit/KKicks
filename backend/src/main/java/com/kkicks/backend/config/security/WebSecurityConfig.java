@@ -30,16 +30,15 @@ public class WebSecurityConfig{
                 .csrf(csrf -> csrf.disable())
                 .cors(qwe -> qwe.configurationSource(request -> {
                     CorsConfiguration corsConfiguration = new CorsConfiguration();
-                    corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT","DELETE", "OPTIONS"));
+                    corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                     corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000"));
                     corsConfiguration.addAllowedHeader("*");
-                    corsConfiguration.addAllowedMethod(HttpMethod.DELETE);
                     corsConfiguration.setAllowCredentials(true);
                     return corsConfiguration;
                 }))
                 .headers(header -> header.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/**","/getChatByProductId/**","/api/auth/**","/product/find/**","/manufacturer/find/**","/category/find/**","/rating/**","/user/find/**", "/productImage/find/**","/question/add").permitAll()
+                        .requestMatchers("/ws/**","/api/auth/**","/product/find/**","/manufacturer/find/**","/category/find/**","/rating/**","/user/find/**", "/productImage/find/**","/question/add").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
