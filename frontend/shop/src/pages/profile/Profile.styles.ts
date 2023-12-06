@@ -1,62 +1,70 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
-  margin: 40px auto 100px auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 30px;
-  background-color: #f5f5f5; // Jasnoszare tło
-  border-radius: 10px; // Zaokrąglone rogi
-  padding: 20px; // Dodatkowy padding
-  width: 80%; // Szerokość jako procent szerokości ekranu
-  max-width: 1000px; // Maksymalna szerokość
-  min-width: 300px; // Minimalna szerokość
-
-  & > button {
-    width: 200px;
-    font-size: ${({ theme }) => theme.fontSize.xl};
-    align-self: flex-end; // Przycisk w prawym dolnym rogu
-  }
-
-  & > ul {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    & > li {
-      list-style: none;
-      margin-top: 3px;
-      font-size: ${({ theme }) => theme.fontSize.l};
-    }
-  }
-`;
-
-export const FieldsContainer = styled.div`
-display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: space-around; // Równomierne rozmieszczenie elementów
+export const ProfileSection = styled.section`
+  background-color: ${({ theme }) => theme.colors.lightGrey};
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
   margin-bottom: 20px;
-  width: 100%;
-  
-@media (max-width: 768px) {
-  flex-direction: column;
-}
-`;
-export const Field = styled.div`
   display: flex;
- 
-  flex: 1 1 calc(50% - 10px);
   flex-direction: column;
-  font-size: ${({ theme }) => theme.fontSize.xl};
-  gap: 8px;
+  width: 50%; // Kontener zajmuje 80% szerokości dostępnej przestrzeni
+  margin-left: auto; // Wyśrodkowanie kontenera
+  margin-right: auto; // Wyśrodkowanie kontenera
+`;
+export const BigFontText = styled.span`
+  font-size: ${({ theme }) => theme.fontSize.xl}; /* Użyj rozmiaru czcionki z motywu */
+  text-align: center; /* Wyśrodkuj tekst na środku */
+  margin: 20px 0;
+`;
+
+export const ProfileField = styled.div`
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Verdana', sans-serif;
   margin-bottom: 10px;
-  width: 48%; // Szerokość każdego pola
-  @media (max-width: 768px) {
-    flex: 1 1 100%;
-  }
+
   & > span {
-    font-weight: 700;
+    font-size: ${({ theme }) => theme.fontSize.l};
+    font-weight: bold;
   }
+`;
+const RatingStar = styled.button`
+  font-size: ${({ theme }) => theme.fontSize.s}; // Ustawienie mniejszej czcionki
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.blue}; // Zmiana koloru przy najechaniu
+  }
+`;
+const RatingStarsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+`;
+
+export const Label = styled.label`
+  text-align: right;
+  padding-right: 10px;
+  display: flex;
+  width: 50%;
+  justify-content: flex-end; // Wyrównanie tekstu do prawej w swojej połowie
+`;
+
+export const ProfileValue = styled.span`
+  text-align: left;
+  padding-left: 10px;
+  display: flex;
+  width: 50%;
+  justify-content: flex-start; // Wyrównanie tekstu do lewej w swojej połowie
+`;
+
+
+export const ButtonContainer = styled.div`
+  text-align: right;
+  width: 100%;
 `;

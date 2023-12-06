@@ -192,10 +192,23 @@ export const addQuestion = async (email: string, subject: string, body: string) 
 };
 export const fetchAllQuestions = async () => {
   try {
-    const response = await AxiosApi.get('/questions/find/All');
+    const response = await AxiosApi.get('/question/find/All');
     return response.data;
   } catch (error) {
     console.error('Error fetching questions:', error);
+    throw error;
+  }
+};
+export const sendAnswer = async (questionId: number, body: { body: string }) => {
+  try {
+    const response = await AxiosApi.post(`question/sendAnswer/${questionId}`, body, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error sending answer:', error);
     throw error;
   }
 };

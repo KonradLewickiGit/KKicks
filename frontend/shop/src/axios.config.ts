@@ -13,7 +13,6 @@ AxiosApi.interceptors.request.use(
     if (token) {
       config.headers.authorization = `Bearer ${token}`;
     }
-    console.log('Starting Request', JSON.stringify(config, null, 2));
 
     return config;
   },
@@ -27,7 +26,6 @@ AxiosApi.interceptors.request.use(
 AxiosApi.interceptors.response.use(
   (response) => {
     // Logowanie szczegółów odpowiedzi
-    console.log('Response:', JSON.stringify(response, null, 2));
     return response;
   },
   (error) => {

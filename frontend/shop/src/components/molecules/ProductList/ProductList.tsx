@@ -38,14 +38,16 @@ const ProductList: React.FC = () => {
 
   return (
     <ProductListWrapper>
-    {products.map(product => (
-      <ProductItem key={product.id} onClick={() => navigate(`/productdetails/${product.id}`)}>
-      {productImages[product.id] && (
-            <StyledImage src={productImages[product.id]} alt="Product" />
-          )}
-      <strong>{product.model}</strong>  <strong>{product.price} zł </strong>
-    </ProductItem>
-    ))}
+   {products
+        .filter(product => product.availability !== "SOLD") // Filtrowanie produktów, które nie są sprzedane
+        .map(product => (
+          <ProductItem key={product.id} onClick={() => handleProductClick(product.id)}>
+            {productImages[product.id] && (
+              <StyledImage src={productImages[product.id]} alt="Product" />
+            )}
+            <strong>{product.model}</strong> <strong>{product.price} zł</strong>
+          </ProductItem>
+        ))}
   </ProductListWrapper>
   );
 };

@@ -52,14 +52,8 @@ export interface QuestionWithId {
 }
 export interface Product {
   id: number;
-  category: {
-    id: number;
-    categoryName: string;
-  };
-  manufacturer: {
-    id: number;
-    manufacturerName: string;
-  };
+  category: Category[];
+  manufacturer: Manufacturer[];
   price: number;
   size: string;
   posted_by_user_id: number;
@@ -67,6 +61,7 @@ export interface Product {
   description: string;
   isVerified: string;
   model: string;
+  availability: string;
 }
 export interface ProductData {
   model: string;

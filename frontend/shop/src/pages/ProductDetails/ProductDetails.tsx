@@ -6,6 +6,7 @@ import { Product, User } from '../../assets/types';
 import Button from '../../components/atoms/Button/Button';
 import { useAuth } from '../../hooks/useApi';
 import { Wrapper, DetailsContainer, Field, ImageContainer, StyledImage, ButtonContainer, ClickableField} from './ProductDetails.styles';
+import ProductChatRoom from '../../components/organism/ProductChatRoom/ProductChatRoom';
 
 const ProductDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -91,6 +92,7 @@ const ProductDetails: React.FC = () => {
         </Button>
         <Button onClick={handleBuyNow}>Kup teraz</Button>
         </ButtonContainer>
+        <ProductChatRoom/>
     </Wrapper>
   );
 };
