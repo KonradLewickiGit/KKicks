@@ -9,5 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface ChatDao  extends JpaRepository<Chat,Long> {
-    Optional<Chat> findByProduct(Product product);
+    Optional<Chat> findChatByProduct(Product product);
 }

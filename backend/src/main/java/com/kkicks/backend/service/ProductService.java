@@ -3,27 +3,17 @@ package com.kkicks.backend.service;
 import com.kkicks.backend.dao.*;
 import com.kkicks.backend.entity.*;
 import com.kkicks.backend.entity.Chat.Chat;
-import com.kkicks.backend.entity.Order.Order;
-import com.kkicks.backend.entity.Order.Provider;
-import com.kkicks.backend.entity.Order.Status;
-import com.kkicks.backend.entity.Payment.PaymentMethod;
 import com.kkicks.backend.entity.Product.Product;
 import com.kkicks.backend.entity.Product.Verification;
-import com.kkicks.backend.entity.User.Role;
 import com.kkicks.backend.entity.User.User;
 import jakarta.persistence.EntityNotFoundException;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.UrlResource;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
@@ -159,7 +149,7 @@ public class ProductService {
     }
     public void deleteProductById(Long id){
         Product product = productDao.findById(id).orElseThrow(() -> new EntityNotFoundException("product not found"));
-        Chat chat = chatDao.findByProduct(product).orElseThrow(() -> new EntityNotFoundException("chat not found"));;
+        Chat chat = chatDao.findChatByProduct(product).orElseThrow(() -> new EntityNotFoundException("chat not found"));;
         List<ProductImage> images = productImageDao.findAllByProduct(product);
         product.setProductImage(null);
         productImageDao.deleteAll(images);
