@@ -5,6 +5,7 @@ import com.kkicks.backend.entity.Payment.Payment;
 import com.kkicks.backend.entity.Product.Product;
 import com.kkicks.backend.entity.User.User;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -26,6 +27,7 @@ public class Order {
     private Long id;
 
     @Column(name = "price",precision = 8,scale = 2,nullable = false)
+    @Positive
     private BigDecimal price;
 
     @Column(nullable = false)

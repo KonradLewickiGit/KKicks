@@ -6,7 +6,9 @@ import com.kkicks.backend.entity.Chat.Chat;
 import com.kkicks.backend.entity.Product.Product;
 import com.kkicks.backend.entity.Product.Verification;
 import com.kkicks.backend.entity.User.User;
+import com.kkicks.backend.validation.ProductImageValidation;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -52,6 +54,9 @@ public class ProductService {
         product.setUser(userDao.findById(userId).orElseThrow(() -> new EntityNotFoundException("user not found")));
         productDao.save(product);
         for (MultipartFile file : files) {
+            if (!ProductImageValidation.isFileValid(file)){
+                throw new ValidationException("file: " + file.getOriginalFilename() + " is not jpg/jpeg/png");
+            }
             String fileName = product.getId() + "_" + file.getOriginalFilename();
             Path destPath = Path.of(imagesPath + fileName);
             try {

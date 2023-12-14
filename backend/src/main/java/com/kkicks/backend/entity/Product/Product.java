@@ -5,6 +5,9 @@ import com.kkicks.backend.entity.*;
 import com.kkicks.backend.entity.Order.Order;
 import com.kkicks.backend.entity.User.User;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -25,8 +28,10 @@ public class Product {
     @Column(nullable = false)
     private String model;
     @Column(name = "size", precision = 3,scale = 1,nullable = false)
+    @Min(20) @Max(60)
     private BigDecimal size;
     @Column(name = "price",precision = 8,scale = 2,nullable = false)
+    @Positive
     private BigDecimal price;
     @Column(nullable = false)
     private String description;

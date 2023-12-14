@@ -3,6 +3,7 @@ package com.kkicks.backend.entity.Payment;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kkicks.backend.entity.Order.Order;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -23,6 +24,7 @@ public class Payment {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     @Column(name = "price",precision = 8,scale = 2,nullable = false)
+    @Positive
     private BigDecimal price;
     @Enumerated(EnumType.STRING)
     private PaymentStatus status;
