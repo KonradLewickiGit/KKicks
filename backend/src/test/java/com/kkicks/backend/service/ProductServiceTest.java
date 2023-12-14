@@ -67,20 +67,12 @@ class ProductServiceTest {
         String color = "Red";
         BigDecimal size = BigDecimal.valueOf(10.0);
         List<MultipartFile> files = new ArrayList<>();
-        MockMultipartFile file1 = new MockMultipartFile(
-                "file1",           // parameter name
-                "test-file1.txt",  // original file name
-                "text/plain",      // content type
-                "Hello, World!".getBytes(StandardCharsets.UTF_8) // file content
-        );
+        MockMultipartFile file1 = new MockMultipartFile("file1", "test-file1.txt",
+                "text/plain","Hello, World!".getBytes(StandardCharsets.UTF_8));
 
-        MockMultipartFile file2 = new MockMultipartFile(
-                "file2",
-                "test-file2.txt",
-                "text/plain",
-                "Mock file content".getBytes(StandardCharsets.UTF_8)
+        MockMultipartFile file2 = new MockMultipartFile("file2","test-file2.txt",
+                "text/plain","Mock file content".getBytes(StandardCharsets.UTF_8)
         );
-
         files.add(file1);
         files.add(file2);
 
@@ -89,7 +81,6 @@ class ProductServiceTest {
         when(userDao.findById(userId)).thenReturn(Optional.of(new User()));
         when(productDao.save(any())).thenAnswer(invocation -> invocation.getArgument(0));
         when(productImageDao.save(any())).thenAnswer(invocation -> invocation.getArgument(0));
-
 
         Product result = productService.saveProduct(userId, categoryId, manufacturerId, model, price, desc, color, size, files);
 
@@ -120,20 +111,12 @@ class ProductServiceTest {
         String color = "Blue";
         BigDecimal size = BigDecimal.valueOf(15.0);
         List<MultipartFile> files = new ArrayList<>();
-        MockMultipartFile file1 = new MockMultipartFile(
-                "file1",           // parameter name
-                "test-file1.txt",  // original file name
-                "text/plain",      // content type
-                "Hello, World!".getBytes(StandardCharsets.UTF_8) // file content
-        );
+        MockMultipartFile file1 = new MockMultipartFile("file1", "test-file1.txt",
+                "text/plain","Hello, World!".getBytes(StandardCharsets.UTF_8));
 
-        MockMultipartFile file2 = new MockMultipartFile(
-                "file2",
-                "test-file2.txt",
-                "text/plain",
-                "Mock file content".getBytes(StandardCharsets.UTF_8)
+        MockMultipartFile file2 = new MockMultipartFile("file2","test-file2.txt",
+                "text/plain","Mock file content".getBytes(StandardCharsets.UTF_8)
         );
-
         files.add(file1);
         files.add(file2);
 
