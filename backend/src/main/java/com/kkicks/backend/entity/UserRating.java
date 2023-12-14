@@ -3,6 +3,8 @@ package com.kkicks.backend.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kkicks.backend.entity.User.User;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +19,7 @@ public class UserRating {
     private Long id;
 
     @Column(nullable = false)
+    @Min(1) @Max(5)
     private int stars;
 
     @ManyToOne
