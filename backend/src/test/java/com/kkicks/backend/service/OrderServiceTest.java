@@ -209,7 +209,7 @@ class OrderServiceTest {
         assertEquals(order, result.getOrder());
         assertEquals(paymentMethod, result.getPaymentMethod());
 
-        assertTrue(order.getStatus().equals(Status.COMPLETED) || order.getStatus().equals(Status.CANCELED));
+        assertTrue(order.getStatus().equals(Status.PAID) || order.getStatus().equals(Status.CANCELED));
         assertTrue(result.getStatus().equals(PaymentStatus.COMPLETE) || result.getStatus().equals(PaymentStatus.CANCELED));
         assertTrue(product.getAvailability().equals(Availability.AVAILABLE) || product.getAvailability().equals(Availability.SOLD));
     }

@@ -33,6 +33,7 @@ public class WebSecurityConfig{
                     corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                     corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000"));
                     corsConfiguration.addAllowedHeader("*");
+                    corsConfiguration.addAllowedMethod(HttpMethod.DELETE);
                     corsConfiguration.setAllowCredentials(true);
                     return corsConfiguration;
                 }))

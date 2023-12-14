@@ -17,6 +17,6 @@ public class ChatService {
 
     public Chat getChatByProductId(Long productId){
         Product product = productDao.findById(productId).orElseThrow(() -> new EntityNotFoundException("product not found"));
-        return chatDao.findByProduct(product);
+        return chatDao.findChatByProduct(product).orElseThrow(() -> new EntityNotFoundException("chat not found"));
     }
 }

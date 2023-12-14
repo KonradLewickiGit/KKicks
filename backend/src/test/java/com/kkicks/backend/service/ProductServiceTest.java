@@ -5,6 +5,7 @@ import static org.mockito.Mockito.*;
 
 import com.kkicks.backend.dao.*;
 import com.kkicks.backend.entity.Category;
+import com.kkicks.backend.entity.Chat.Chat;
 import com.kkicks.backend.entity.Manufacturer;
 import com.kkicks.backend.entity.Product.Product;
 import com.kkicks.backend.entity.Product.Verification;
@@ -38,6 +39,8 @@ class ProductServiceTest {
 
     @Mock
     private UserDao userDao;
+    @Mock
+    private ChatDao chatDao;
 
     @Mock
     private ProductDao productDao;
@@ -280,7 +283,9 @@ class ProductServiceTest {
         // Arrange
         Long productId = 1L;
         Product expectedProduct = new Product();
+        Chat chat = new Chat(null,expectedProduct);
         when(productDao.findById(eq(productId))).thenReturn(Optional.of(expectedProduct));
+        when(chatDao.findChatByProduct(eq(expectedProduct))).thenReturn(Optional.of(chat));
         when(productImageDao.findAllByProduct(eq(expectedProduct))).thenReturn(new ArrayList<>());
 
         // Act
