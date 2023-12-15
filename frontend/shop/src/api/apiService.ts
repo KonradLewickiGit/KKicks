@@ -122,6 +122,15 @@ export const fetchProductById = async (id: number) => {
     throw error;
   }
 };
+export const fetchAllProductsByUser = async (userId: number) => {
+  try {
+    const response = await AxiosApi.get(`/product/find/AllByUser/${userId}`);
+    return response.data; // Zakładając, że odpowiedź zawiera listę produktów
+  } catch (error) {
+    console.error('Error fetching products by user:', error);
+    throw error;
+  }
+};
 export const fetchUserByPostedProductId = async (productId: number) => {
   try {
     const response = await AxiosApi.get(`/product/findUserByPostedProductId/${productId}`);
@@ -381,7 +390,7 @@ export const deleteProductFromObserved = async (userId: number, productId: numbe
 
 export const addUserRatingByOrderId = async (senderId: number, orderId: number, stars: number) => {
   try {
-    const response = await AxiosApi.post(`/addUserRatingByOrderId/${senderId}/${orderId}`, stars, {
+    const response = await AxiosApi.post(`/rating/addUserRatingByOrderId/${senderId}/${orderId}`, stars, {
       headers: {
         'Content-Type': 'application/json'
       }
@@ -389,6 +398,16 @@ export const addUserRatingByOrderId = async (senderId: number, orderId: number, 
     return response.data;
   } catch (error) {
     console.error('Error adding user rating:', error);
+    throw error;
+  }
+};
+
+export const fetchAverageUserRating = async (userId: number) => {
+  try {
+    const response = await AxiosApi.get(`/rating/averageUserRating/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching average user rating:', error);
     throw error;
   }
 };
