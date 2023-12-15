@@ -14,6 +14,7 @@ import ManageProducts from '../../components/organism/ManageProducts/ManageProdu
 import OrdersPanel from '../../components/organism/OrdersPanel/OrdersPanel';
 import ManageQuestions from '../../components/organism/ManageQuestions/ManageQuestions';
 import UserProfile from '../../pages/UserProfiles/UserProfile';
+import ProductsByCategory from '../../components/molecules/ProductsByCategory/ProductsByCategory';
 
 const AdminApp: React.FC = () => {
   return (
@@ -33,6 +34,7 @@ const AdminApp: React.FC = () => {
         <Route path="/admin/questions" element={<ManageQuestions />} />
         <Route path="/userprofile/:userId" element={<UserProfile />} />
         <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="/categories/:categoryId" element={<ProductsByCategory />} />
       </Routes>
     </>
   );

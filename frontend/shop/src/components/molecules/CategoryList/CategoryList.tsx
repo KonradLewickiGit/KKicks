@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchCategories } from '../../../api/apiService';
+import { Link } from 'react-router-dom';
 import { Category } from '../../../assets/types';
 import { Wrapper, CategoryItem, CategoryListContainer } from './CategoryList.styles';
 const CategoryList: React.FC = () => {
@@ -18,7 +19,9 @@ const CategoryList: React.FC = () => {
     <Wrapper>
       <CategoryListContainer>
         {categories.map(category => (
-          <CategoryItem key={category.id}>{category.name}</CategoryItem>
+          <Link key={category.id} to={`/categories/${category.id}`}>
+          <CategoryItem>{category.name}</CategoryItem>
+        </Link>
         ))}
       </CategoryListContainer>
     </Wrapper>

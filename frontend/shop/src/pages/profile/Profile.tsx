@@ -7,6 +7,18 @@ import { ProfileField, ProfileSection, ProfileValue, ButtonContainer, Label} fro
 import OrderHistory from '../../components/organism/OrderHistory/OrderHistory';
 import SellHistory from '../../components/organism/SellHistory/SellHistory';
 import styled from 'styled-components';
+export const QuarterWidthContainer = styled.div`
+  width: 50%;
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+export const ContentContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 const StyledButton = styled(Button)`
   width: auto; /* Ustaw szerokość przycisku na dostosowaną do zawartości */
   padding: 10px 20px; /* Dodaj odstępy wewnątrz przycisku */
@@ -44,8 +56,18 @@ const Profile = () => {
           <BigFontText>Adres</BigFontText>
           {user && <Address />}
         </div>
-      {user && <OrderHistory />}
-      {user && <SellHistory />}
+        <ContentContainer>
+        {/* Komponent sprzedaży na 1/4 szerokości */}
+        <QuarterWidthContainer>
+          <BigFontText>Sprzedaż</BigFontText>
+          {user && <SellHistory />}
+        </QuarterWidthContainer>
+        {/* Komponent zamówień na 1/4 szerokości */}
+        <QuarterWidthContainer>
+          <BigFontText>Zamówienia</BigFontText>
+          {user && <OrderHistory />}
+        </QuarterWidthContainer>
+      </ContentContainer>
       <ButtonContainer>
         <StyledButton isbig onClick={signOut}>Wyloguj</StyledButton>
       </ButtonContainer>

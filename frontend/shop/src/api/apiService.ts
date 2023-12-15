@@ -95,13 +95,24 @@ export const fetchProductsByManufacturer = async (manufacturerId: number) => {
 };
 export const fetchProductsByCategory = async (categoryId: number) => {
   try {
-    const response = await AxiosApi.get(`/find/AllByCategory/${categoryId}`);
+    const response = await AxiosApi.get(`/product/find/AllByCategory/${categoryId}`);
     return response.data;
   } catch (error) {
     console.error('Error fetching products by category:', error);
     throw error;
   }
 };
+
+export const fetchAllByCategoryAndManufacturer = async (categoryId: number, manufacturerId: number) => {
+  try {
+    const response = await AxiosApi.get(`/product/find/AllByCategoryAndManufacturer/${categoryId}/${manufacturerId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching products by category and manufacturer:', error);
+    throw error;
+  }
+};
+
 export const fetchProductById = async (id: number) => {
   try {
     const response = await AxiosApi.get(`/product/find/${id}`);
@@ -364,6 +375,20 @@ export const deleteProductFromObserved = async (userId: number, productId: numbe
     return response.data;
   } catch (error) {
     console.error('Error deleting product from observed:', error);
+    throw error;
+  }
+};
+
+export const addUserRatingByOrderId = async (senderId: number, orderId: number, stars: number) => {
+  try {
+    const response = await AxiosApi.post(`/addUserRatingByOrderId/${senderId}/${orderId}`, stars, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error adding user rating:', error);
     throw error;
   }
 };

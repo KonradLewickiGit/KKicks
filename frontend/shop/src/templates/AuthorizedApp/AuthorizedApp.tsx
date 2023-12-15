@@ -13,6 +13,7 @@ import AddProduct from '../../pages/addProduct/addProduct'
 import QuestionForm from '../../pages/QuestionForm/QuestionForm'
 import UserProfile from '../../pages/UserProfiles/UserProfile'
 import ObservedProducts from '../../pages/observedProducts/ObservedProducts'
+import ProductsByCategory from '../../components/molecules/ProductsByCategory/ProductsByCategory'
 
 const AuthorizedApp: React.FC = () => {
   // const { isShowingSearchBar } = useSelector((state: RootState) => state.searchBar)
@@ -31,6 +32,7 @@ const AuthorizedApp: React.FC = () => {
       <Route path="/addproduct" element={<AddProduct />} />
       <Route path="/questions" element={<QuestionForm />} />
       <Route path="/userprofile/:userId" element={<UserProfile />} />
+      <Route path="/categories/:categoryId" element={<ProductsByCategory />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       {/* <Footer /> */}

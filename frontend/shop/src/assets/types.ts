@@ -74,6 +74,9 @@ export interface Manufacturer {
   id: number;
   name: string;
 }
+export interface ManufacturerListProps {
+  onManufacturerSelect: (manufacturerId: number) => void;
+}
 export interface Adres {
   city: string;
   zipCode: string;

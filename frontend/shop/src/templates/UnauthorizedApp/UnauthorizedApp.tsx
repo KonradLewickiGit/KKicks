@@ -10,7 +10,7 @@ import { ThemeProvider } from 'styled-components'
 import ProductDetails from '../../pages/ProductDetails/ProductDetails'
 import GuestHeader from '../../components/organism/Header/GuestHeader'
 import QuestionForm from '../../pages/QuestionForm/QuestionForm'
-
+import ProductsByCategory from '../../components/molecules/ProductsByCategory/ProductsByCategory'
 const UnauthorizedApp: React.FC = () => {
   return (
     <>
@@ -23,6 +23,7 @@ const UnauthorizedApp: React.FC = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/productdetails/:id" element={<ProductDetails />} />
           <Route path="/questions" element={<QuestionForm />} />
+          <Route path="/categories/:categoryId" element={<ProductsByCategory />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </ThemeProvider>

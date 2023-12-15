@@ -25,7 +25,7 @@ AxiosApi.interceptors.request.use(
 
 AxiosApi.interceptors.response.use(
   (response) => {
-    // Logowanie szczegółów odpowiedzi
+    console.log('Response:', response);
     return response;
   },
   (error) => {
