@@ -4,6 +4,8 @@ import com.kkicks.backend.config.security.JWTService;
 import com.kkicks.backend.dao.*;
 import com.kkicks.backend.entity.Address;
 import com.kkicks.backend.entity.Product.Product;
+import com.kkicks.backend.entity.User.BrowserMode;
+import com.kkicks.backend.entity.User.FontSize;
 import com.kkicks.backend.entity.User.Role;
 import com.kkicks.backend.entity.User.User;
 import jakarta.persistence.EntityNotFoundException;
@@ -86,4 +88,23 @@ public class UserService {
         return userDao.findByEmail(login).orElse(null);
     }
 
+    public User changeFontSize(Long id){
+        User userToUpdate = userDao.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        if (userToUpdate.getFontSize().equals(FontSize.SMALL)){
+            userToUpdate.setFontSize(FontSize.BIG);
+        } else {
+            userToUpdate.setFontSize(FontSize.SMALL);
+        }
+        return userDao.save(userToUpdate);
+    }
+
+    public User changeBrowserMode(Long id){
+        User userToUpdate = userDao.findById(id).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        if (userToUpdate.getBrowserMode().equals(BrowserMode.DARK)){
+            userToUpdate.setBrowserMode(BrowserMode.LIGHT);
+        } else {
+            userToUpdate.setBrowserMode(BrowserMode.DARK);
+        }
+        return userDao.save(userToUpdate);
+    }
 }

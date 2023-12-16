@@ -5,6 +5,7 @@ import com.kkicks.backend.entity.User.User;
 import com.kkicks.backend.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.method.P;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -50,5 +51,15 @@ public class UserController {
     @PostMapping({"/update/{id}"})
     public User updateUser(@PathVariable Long id,@RequestBody User updatedUserData){
         return userService.updateUserData(id,updatedUserData);
+    }
+
+    @PostMapping({"/changeFontSize/{id}"})
+    public User changeFontSize(@PathVariable Long id){
+        return userService.changeFontSize(id);
+    }
+
+    @PostMapping({"/changeBrowserMode/{id}"})
+    public User changeBrowserMode(@PathVariable Long id){
+        return userService.changeBrowserMode(id);
     }
 }
