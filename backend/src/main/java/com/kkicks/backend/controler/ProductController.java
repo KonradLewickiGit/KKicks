@@ -39,7 +39,7 @@ public class ProductController {
     public List<Product> findAllByUser(@PathVariable Long id){
         return productService.findAllByUser(id);
     }
-    @GetMapping({"/findUserByPostedProductId/{productId}"})
+    @GetMapping({"/find/UserByPostedProductId/{productId}"})
     public User findUserByPostedProductId(@PathVariable Long productId){
         return productService.findUserByPostedProductId(productId);
     }
