@@ -12,6 +12,7 @@ export interface User {
     authorities: Authority[];
     nonExpired: boolean;
     browserMode: 'LIGHT' | 'DARK';
+    fontSize: 'SMALL' | 'BIG';
   }
   export interface UserProfile {
     id: number
@@ -108,6 +109,7 @@ export interface ApiContextType {
     signIn: (formData: LoginData) => Promise<void>
     signOut: () => void
     signUp: (formData: LoginData) => Promise<void>
+    updateUser: (updatedUser: User) => void;
     error: string | null
   }
   export interface ErrorObject {

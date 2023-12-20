@@ -36,7 +36,19 @@ export const changeBrowserMode = async (userId: number) => {
   }
 };
 
-
+export const changeFontSize = async (userId: number) => {
+  try {
+    const response = await AxiosApi.post(`/user/changeFontSize/${userId}`, {
+      headers: {
+        'Content-Type': `application/json`
+      }
+    });
+    return response.data; // Zwraca zaktualizowane dane użytkownika
+  } catch (error) {
+    console.error('Error changing font size:', error);
+    throw error;
+  }
+};
 //uprawnienia
 export const giveAdminRole = async (userId: number) => {
   try {

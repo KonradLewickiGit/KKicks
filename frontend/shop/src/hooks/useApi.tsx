@@ -14,6 +14,9 @@ export const ApiProvider: React.FC<Props> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null)
   const [error, setError] = useState<string>('')
   const navigate = useNavigate()
+  const updateUser = (updatedUser: User): void => {
+    setUser(updatedUser);
+  }
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -85,7 +88,7 @@ export const ApiProvider: React.FC<Props> = ({ children }) => {
   }
 
   return (
-    <ApiContext.Provider value={{ user, signIn, signOut, signUp, error}}>
+    <ApiContext.Provider value={{ user, signIn, signOut, signUp, updateUser, error, }}>
       {children}
     </ApiContext.Provider>
   )

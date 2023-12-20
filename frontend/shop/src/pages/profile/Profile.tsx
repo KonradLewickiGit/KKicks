@@ -31,12 +31,12 @@ const BigFontText = styled.span`
 `;
 const Profile = () => {
   const { signOut, user } = useAuth();
+  
 
   return (
     <ProfileSection>
         <BigFontText>Dane użytkownika</BigFontText>
-        <div>
-          <ProfileField>
+            <ProfileField>
             <Label>Imię:</Label>
             <ProfileValue>{user?.firstName}</ProfileValue>
           </ProfileField>
@@ -52,11 +52,9 @@ const Profile = () => {
             <Label>Numer telefonu:</Label>
             <ProfileValue>{user?.phoneNumber}</ProfileValue>
           </ProfileField>
-        </div>
-        <div>
           <BigFontText>Adres</BigFontText>
           {user && <Address />}
-        </div>
+
         <BigFontText>Preferencje</BigFontText>
         <Preferency />
         <ContentContainer>

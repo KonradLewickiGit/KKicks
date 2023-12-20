@@ -1,21 +1,22 @@
 import React from 'react';
 import { useAuth } from '../../../hooks/useApi';
-import { changeBrowserMode } from '../../../api/apiService';
+import { changeBrowserMode, changeFontSize } from '../../../api/apiService';
+import Button from '../../atoms/Button/Button';
 import styled from 'styled-components';
-
-
-const StyledButton = styled.button`
-  // ... (Stylizacja przycisku)
+const ButtonContainer = styled.div`
+  display: flex;
+  gap: 10px;
+  justify-content: center;
 `;
 
 const Preferency = () => {
-  const { user } = useAuth();
+  const { user, updateUser } = useAuth();
 
   const toggleBrowserMode = async () => {
     if (user) {
       try {
-        await changeBrowserMode(user.id);
-        // Tutaj zakładamy, że dane użytkownika są automatycznie aktualizowane
+        const updatedUser = await changeBrowserMode(user.id);
+        updateUser(updatedUser);
       } catch (error) {
         console.error('Error while changing browser mode:', error);
       }
@@ -24,10 +25,11 @@ const Preferency = () => {
 
   const buttonText = user?.browserMode === 'LIGHT' ? 'Zmień tryb na ciemny' : 'Zmień tryb na jasny';
 
+
   return (
-    <div>
-      <StyledButton onClick={toggleBrowserMode}>{buttonText}</StyledButton>
-    </div>
+    <ButtonContainer>
+    <Button onClick={toggleBrowserMode}>{buttonText}</Button>
+  </ButtonContainer>
   );
 };
 
