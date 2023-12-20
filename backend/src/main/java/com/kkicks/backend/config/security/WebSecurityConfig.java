@@ -30,7 +30,7 @@ public class WebSecurityConfig{
                 .csrf(csrf -> csrf.disable())
                 .cors(qwe -> qwe.configurationSource(request -> {
                     CorsConfiguration corsConfiguration = new CorsConfiguration();
-                    corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+                    corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "OPTIONS"));
                     corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000"));
                     corsConfiguration.addAllowedHeader("*");
                     corsConfiguration.addAllowedMethod(HttpMethod.DELETE);
@@ -39,7 +39,12 @@ public class WebSecurityConfig{
                 }))
                 .headers(header -> header.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/ws/**","/api/auth/**","/product/find/**","/manufacturer/find/**","/category/find/**","/rating/**","/user/find/**", "/productImage/find/**","/question/add").permitAll()
+                        .requestMatchers("/product/setVerification/*","/manufacturer/save","/manufacturer/delete/*",
+                                "/category/save","/category/delete/*","/question/find/**","/question/sendAnswer/*","/user/giveAdminRole/*")
+                        .hasAnyAuthority("ADMIN")
+                        .requestMatchers("/ws/**","/api/auth/**","/product/find/**","/manufacturer/find/**",
+                                "/category/find/**","/rating/**","/user/find/**", "/productImage/find/**","/question/add")
+                        .permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
