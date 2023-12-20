@@ -1,11 +1,10 @@
-package com.kkicks.backend.controler;
+package com.kkicks.backend.controller;
 
 import com.kkicks.backend.entity.Order.Order;
 import com.kkicks.backend.entity.Order.Provider;
 import com.kkicks.backend.entity.Payment.Payment;
 import com.kkicks.backend.entity.Payment.PaymentMethod;
 import com.kkicks.backend.service.OrderService;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

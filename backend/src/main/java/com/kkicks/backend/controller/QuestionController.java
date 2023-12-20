@@ -1,4 +1,4 @@
-package com.kkicks.backend.controler;
+package com.kkicks.backend.controller;
 
 import com.kkicks.backend.entity.Question.Answer;
 import com.kkicks.backend.entity.Question.Question;

@@ -1,4 +1,4 @@
-package com.kkicks.backend.controler;
+package com.kkicks.backend.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kkicks.backend.BackendApplication;

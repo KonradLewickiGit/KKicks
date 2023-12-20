@@ -21,7 +21,6 @@ public class Address {
     @Column(nullable = false)
     private String city;
     @Column(nullable = false)
-    @Size(min = 5,max =6, message = "zip-code should be like xx-xxx")
     @Pattern(regexp = "^\\d{2}-\\d{3}$")
     private String zipCode;
     @Column(nullable = false)

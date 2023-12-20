@@ -1,11 +1,10 @@
-package com.kkicks.backend.controler;
+package com.kkicks.backend.controller;
 
 import com.kkicks.backend.entity.Product.Product;
 import com.kkicks.backend.entity.User.User;
 import com.kkicks.backend.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.method.P;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
