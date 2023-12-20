@@ -6,6 +6,7 @@ import Address from '../../components/organism/Address/AddressList';
 import { ProfileField, ProfileSection, ProfileValue, ButtonContainer, Label} from './Profile.styles';
 import OrderHistory from '../../components/organism/OrderHistory/OrderHistory';
 import SellHistory from '../../components/organism/SellHistory/SellHistory';
+import Preferency from '../../components/molecules/Preferency/Preferency';
 import styled from 'styled-components';
 export const QuarterWidthContainer = styled.div`
   width: 50%;
@@ -56,6 +57,8 @@ const Profile = () => {
           <BigFontText>Adres</BigFontText>
           {user && <Address />}
         </div>
+        <BigFontText>Preferencje</BigFontText>
+        <Preferency />
         <ContentContainer>
         {/* Komponent sprzedaży na 1/4 szerokości */}
         <QuarterWidthContainer>

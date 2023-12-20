@@ -21,6 +21,21 @@ export const fetchAllUsers = async () => {
   }
 };
 
+//preferencje
+export const changeBrowserMode = async (userId: number) => {
+  try {
+    const response = await AxiosApi.post(`/user/changeBrowserMode/${userId}`, {
+      headers: {
+        'Content-Type': `application/json`
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error changing browser mode:', error);
+    throw error;
+  }
+};
+
 
 //uprawnienia
 export const giveAdminRole = async (userId: number) => {

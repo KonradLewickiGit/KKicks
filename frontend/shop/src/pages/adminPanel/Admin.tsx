@@ -12,6 +12,7 @@ const AdminWrapper = styled.div`
 `;
 
 const AdminPanel = styled.div`
+background-color: ${({ theme }) => theme.colors.lightGrey};
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around; // Ustawia elementy równomiernie rozłożone

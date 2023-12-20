@@ -2,7 +2,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-
 const HeaderContainer = styled.header`
 background-color: ${({ theme }) => theme.colors.lightGrey};
   padding: 1rem;
@@ -34,6 +33,7 @@ const StyledLink = styled(Link)`
   }
 `;
 const GuestHeader: React.FC = () => {
+
   return (
     <HeaderContainer>
       <Link to="/" style={{ textDecoration: 'none' }}>

@@ -14,6 +14,7 @@ export const GlobalStyle = createGlobalStyle`
   
   body {
     font-family: 'Veranda', sans-serif;
+    background-color: ${({ theme }) => theme.colors.background};
     overflow-x: hidden;
     /* overflow-y: hidden; */
     max-width: 100vw;

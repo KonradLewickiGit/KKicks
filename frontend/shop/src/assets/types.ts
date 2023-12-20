@@ -11,6 +11,7 @@ export interface User {
     phoneNumber: string
     authorities: Authority[];
     nonExpired: boolean;
+    browserMode: 'LIGHT' | 'DARK';
   }
   export interface UserProfile {
     id: number

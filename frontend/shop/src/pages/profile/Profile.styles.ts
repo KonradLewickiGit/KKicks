@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useUserTheme } from '../../hooks/useTheme';
 
 export const ProfileSection = styled.section`
   background-color: ${({ theme }) => theme.colors.lightGrey};

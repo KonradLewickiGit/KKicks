@@ -14,11 +14,15 @@ interface Props {
 const AppProviders: React.FC<Props> = ({ children }) => {
   return (
     <StoreProvider>
+      
       <Router>
+      <ApiProvider>
         <ThemeAndStylesProvider>
-          <ApiProvider>{children}</ApiProvider>
+          {children}
         </ThemeAndStylesProvider>
+        </ApiProvider>
       </Router>
+      
     </StoreProvider>
   )
 }

@@ -3,18 +3,20 @@ import React, { ReactNode } from 'react'
 import { GlobalStyle } from '../assets/styles/GlobalStyle'
 import { theme } from '../assets/styles/theme'
 import PropTypes from 'prop-types'
- import { ThemeProvider } from 'styled-components'
+import { useUserTheme } from '../hooks/useTheme'
+import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 
 interface Props {
   children: ReactNode
 }
 
 const ThemeAndStylesProvider: React.FC<Props> = ({ children }) => {
+  const theme = useUserTheme();
   return (
-     <ThemeProvider theme={theme}>
-      <GlobalStyle />
-       {children}
-     </ThemeProvider>
+    <StyledThemeProvider theme={theme}>
+    <GlobalStyle />
+    {children}
+  </StyledThemeProvider>
   )
 }
 

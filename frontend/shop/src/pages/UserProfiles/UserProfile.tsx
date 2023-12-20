@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { fetchUserById, fetchAverageUserRating, fetchAllProductsByUser, fetchProductImagesNames, loadProductImage } from '../../api/apiService';
 import { User, Product } from '../../assets/types';
 import { ProductListWrapper, ProductItem } from '../../components/molecules/ProductList/ProductList.styles';
+import { UserProfileWrapper, UserProfileField, UserProfileValue, ProductListContainer, RatingDisplay } from './UserProfiles.styles';
 import { StyledImage } from '../../components/atoms/Image/Image.styled';
 
 const UserProfile: React.FC = () => {
@@ -49,11 +50,19 @@ const UserProfile: React.FC = () => {
   }
 
   return (
-    <div>
-      <h1>Profil Użytkownika</h1>
-      <p>Login: {user.username}</p>
-      <p>Imię: {user.firstName}</p>
-      {averageRating !== null && <p>Średnia ocena: {averageRating.toFixed(2)}</p>}
+    <UserProfileWrapper>
+    <h1>Profil Użytkownika</h1>
+    <UserProfileField>
+      <span>Login:</span> <UserProfileValue>{user.username}</UserProfileValue>
+    </UserProfileField>
+    <UserProfileField>
+      <span>Imię:</span> <UserProfileValue>{user.firstName}</UserProfileValue>
+    </UserProfileField>
+    {averageRating !== null && (
+      <UserProfileField>
+        <span>Średnia ocena:</span> <RatingDisplay>{averageRating.toFixed(2)}</RatingDisplay>
+      </UserProfileField>
+    )}
       <h2>Produkty użytkownika</h2>
       <ProductListWrapper>
         {products.map(product => (
@@ -65,7 +74,7 @@ const UserProfile: React.FC = () => {
           </ProductItem>
         ))}
       </ProductListWrapper>
-    </div>
+      </UserProfileWrapper>
   );
 };
 
