@@ -3,10 +3,7 @@ package com.kkicks.backend.entity.User;
 import com.kkicks.backend.entity.*;
 import com.kkicks.backend.entity.Product.Product;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
@@ -32,13 +29,16 @@ public class User implements UserDetails {
     @Column(nullable = false,unique = true)
     private String username;
     @Column(nullable = false)
+    @Size(min = 8, message = "Password must be at least 8 characters long")
     private String password;
     @Column(nullable = false,unique = true)
     @Email(message = "Email must be valid")
     private String email;
     @Column(nullable = false)
+    @Pattern(regexp = "^[A-Za-z]+$")
     private String firstName;
     @Column(nullable = false)
+    @Pattern(regexp = "^[A-Za-z]+$")
     private String lastName;
     @Size(min = 9, max = 12, message = "phone number must be between 9 and 12 characters")
     private String phoneNumber;

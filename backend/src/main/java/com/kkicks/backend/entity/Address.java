@@ -3,6 +3,7 @@ package com.kkicks.backend.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kkicks.backend.entity.User.User;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -20,7 +21,8 @@ public class Address {
     @Column(nullable = false)
     private String city;
     @Column(nullable = false)
-    @Size(min = 5,max =6, message = "zip-code should be like 20400 or 20-400")
+    @Size(min = 5,max =6, message = "zip-code should be like xx-xxx")
+    @Pattern(regexp = "^\\d{2}-\\d{3}$")
     private String zipCode;
     @Column(nullable = false)
     private String street;
