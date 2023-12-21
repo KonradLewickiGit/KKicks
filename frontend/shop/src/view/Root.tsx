@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { useEffect } from 'react'
 import AuthorizedApp from '../templates/AuthorizedApp/AuthorizedApp'
 import UnauthorizedApp from '../templates/UnauthorizedApp/UnauthorizedApp'
 import AdminApp from '../templates/AdminApp/AdminApp'
@@ -10,6 +10,9 @@ const Root: React.FC = () => {
   const hasRole = (role: string) => {
     return user?.authorities.some(authority => authority.authority === role);
   };
+  useEffect(() => {
+    console.log("Zmiana stanu użytkownika:", user);
+  }, [user]);
 
   console.log("Aktualny stan użytkownika:", user)
   if (user) {

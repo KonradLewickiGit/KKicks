@@ -2,7 +2,6 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { Navigate, Route, Routes } from 'react-router-dom'
 
-import { RootState } from '../../app/store'
 import Profile from '../../pages/profile/Profile'
 import HomePage from '../../pages/home/Home'
 import ProductDetails from '../../pages/ProductDetails/ProductDetails'
@@ -16,11 +15,10 @@ import ObservedProducts from '../../pages/observedProducts/ObservedProducts'
 import ProductsByCategory from '../../components/molecules/ProductsByCategory/ProductsByCategory'
 
 const AuthorizedApp: React.FC = () => {
-  // const { isShowingSearchBar } = useSelector((state: RootState) => state.searchBar)
+
 
   return (
     <>
-      {/* {isShowingSearchBar ? <SearchBar /> : <Header>K&Kicks</Header>} */}
       <LoggedHeader/>
       <Routes>
       <Route path="/" element={<HomePage />} />
@@ -35,7 +33,6 @@ const AuthorizedApp: React.FC = () => {
       <Route path="/categories/:categoryId" element={<ProductsByCategory />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-      {/* <Footer /> */}
     </>
   )
 }
