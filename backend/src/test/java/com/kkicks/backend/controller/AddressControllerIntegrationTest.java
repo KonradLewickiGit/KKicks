@@ -105,10 +105,10 @@ public class AddressControllerIntegrationTest {
         User user = new User();
         user.setId(userId);
         user.setUsername("test");
-        user.setEmail("test");
+        user.setEmail("test@gmail.com");
         user.setLastName("test");
         user.setFirstName("test");
-        user.setPassword("test");
+        user.setPassword("test123123");
         userDao.save(user);
         return user;
     }

@@ -42,7 +42,8 @@ public class QuestionService {
         return questionDao.save(question);
     }
     public Answer answerQuestion(Long questionId, Answer answer){
-        Question question = questionDao.findById(questionId).orElseThrow(() -> new EntityNotFoundException("question not found!"));
+        Question question = questionDao.findById(questionId)
+                .orElseThrow(() -> new EntityNotFoundException("question not found!"));
         Answer answer1 = new Answer();
         answer1.setQuestion(question);
         answer1.setBody(answer.getBody());

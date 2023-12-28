@@ -47,13 +47,12 @@ public class UserRatingService {
         return userRatingDao.save(userRating);
     }
     public double calculateAverageRating(Long userId) {
-        User user = userDao.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found"));
-
+        User user = userDao.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
         List<UserRating> ratings = userRatingDao.findAllByUser(user);
         if (ratings.isEmpty()) {
             return 0.0;
         }
-
         int sum = ratings.stream().mapToInt(UserRating::getStars).sum();
         return (double) sum / ratings.size();
     }

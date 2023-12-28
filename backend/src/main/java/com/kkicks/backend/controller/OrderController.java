@@ -18,7 +18,8 @@ public class OrderController {
     OrderService orderService;
 
     @PostMapping("/create/{buyerId}/{productId}/{provider}")
-    public Order createOrder(@PathVariable Long buyerId, @PathVariable Long productId, @PathVariable String provider, @RequestBody BigDecimal shipPrice){
+    public Order createOrder(@PathVariable Long buyerId, @PathVariable Long productId,
+                             @PathVariable String provider, @RequestBody BigDecimal shipPrice){
         return orderService.createOrder(buyerId,productId, Provider.valueOf(provider),shipPrice);
     }
     @PostMapping("/pay/{orderId}")

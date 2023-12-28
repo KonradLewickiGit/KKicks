@@ -22,14 +22,12 @@ public class ChatController {
     @MessageMapping("/product/{productId}/sendMessage")
     public void sendMessage(@DestinationVariable Long productId, @Payload ChatMessage chatMessage) {
         Chat chat = chatService.getChatByProductId(productId);
-        if (chat != null) {
+        if (chat != null && !chatMessage.getContent().isEmpty()) {
             messagingTemplate.convertAndSend("/topic/product/" + productId + "/chatRoom", chatMessage);
         }
     }
-
     @GetMapping("/getChatByProductId/{productId}")
     public Chat getChatByProductId(@PathVariable Long productId){
         return chatService.getChatByProductId(productId);
     }
-
 }
