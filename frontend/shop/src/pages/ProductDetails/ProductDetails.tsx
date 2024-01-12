@@ -18,7 +18,6 @@ const ProductDetails: React.FC = () => {
   const [isObserved, setIsObserved] = useState(false);
   type ImageName = {
     path: string;
-    // inne właściwości, jeśli istnieją
   };
   useEffect(() => {
     const loadProductDetails = async () => {

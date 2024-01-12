@@ -160,7 +160,7 @@ export const fetchAllProductsByUser = async (userId: number) => {
 };
 export const fetchUserByPostedProductId = async (productId: number) => {
   try {
-    const response = await AxiosApi.get(`/product/findUserByPostedProductId/${productId}`);
+    const response = await AxiosApi.get(`/product/find/UserByPostedProductId/${productId}`);
     return response.data;
   } catch (error) {
     console.error('Error fetching user by posted product ID:', error);

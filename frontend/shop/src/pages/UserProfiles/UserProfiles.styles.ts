@@ -43,4 +43,7 @@ export const ProductListContainer = styled.div`
 export const RatingDisplay = styled.span`
   color: ${({ theme }) => theme.colors.blue};
   font-size: ${({ theme }) => theme.fontSize.m};
+  width: 50%;
+  justify-content: flex-start;
+  padding-left: 10px;
 `;

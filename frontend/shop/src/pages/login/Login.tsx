@@ -48,9 +48,9 @@ const Login: React.FC = () => {
       <Button isbig type="submit">
         Log in
       </Button>
-      <span>You don&apos;t have an account?</span>
+      <span>Nie masz konta?</span>
       <Link to="/register">
-        <b>Sign up</b>
+        <b>Zarejestruj się</b>
       </Link>
     </Wrapper>
   )

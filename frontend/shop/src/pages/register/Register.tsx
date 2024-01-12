@@ -27,7 +27,7 @@ const Register: React.FC = () => {
 
   return (
     <Wrapper action="post" onSubmit={handleFormSubmit(onSubmit)}>
-      <h1>Sign up</h1>
+      <h1>Zarejestruj się</h1>
       <FormField
         id="login"
         labelText="login"
@@ -42,7 +42,7 @@ const Register: React.FC = () => {
         labelText="Password"
         type={'password'}
         {...register('password')}
-        placeholder={'Passwd'}
+        placeholder={'hasło123'}
         error={errors.password?.message}
         required
       />
@@ -50,35 +50,35 @@ const Register: React.FC = () => {
         id="email"
         labelText="E-mail"
         type={'email'}
-        placeholder={'Email'}
+        placeholder={'Email@email.com'}
         {...register('email')}
         error={errors.email?.message}
         required
       />
       <FormField
         id="firstName"
-        labelText="First name"
+        labelText="Imie"
         type={'firstName'}
-        placeholder={'First name'}
+        placeholder={'Marek'}
         {...register('firstName')}
         error={errors.firstName?.message}
         required
       />
       <FormField
         id="lastName"
-        labelText="Last name"
+        labelText="Nazwisko"
         type={'lastName'}
-        placeholder={'Last name'}
+        placeholder={'Kowalski'}
         {...register('lastName')}
         error={errors.lastName?.message}
         required
       />
       <FormField
         id="phoneNumber"
-        labelText="phoneNumber"
+        labelText="Numer telefonu"
         type={'phoneNumber'}
         {...register('phoneNumber')}
-        placeholder={'phoneNumber'}
+        placeholder={'000000000'}
         error={errors.phoneNumber?.message}
         required
       />
@@ -86,9 +86,9 @@ const Register: React.FC = () => {
       <Button isbig type="submit">
         Sign up
       </Button>
-      <span>You have an account?</span>
+      <span>Masz konto?</span>
       <Link to="/login">
-        <b>Log in</b>
+        <b>Zaloguj się</b>
       </Link>
     </Wrapper>
   )

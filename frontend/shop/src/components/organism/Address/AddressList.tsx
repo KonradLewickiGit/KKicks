@@ -9,6 +9,7 @@ import { ProfileSection,
   Label,
   ProfileValue,
   ButtonContainer, } from '../../../pages/profile/Profile.styles';
+import { FieldsContainer } from './AddresList.styles';
 
 
 const Address = () => {
@@ -102,7 +103,7 @@ const Address = () => {
           </ButtonContainer>
         </div>
       ) : isEditing ? (
-        <div>
+        <FieldsContainer>
           <FormField
             id="street"
             labelText="Ulica"
@@ -153,7 +154,7 @@ const Address = () => {
               Zapisz
             </Button>
           </ButtonContainer>
-        </div>
+        </FieldsContainer>
       ) : (
         <div>
           <span>Nie masz zapisanego adresu</span>

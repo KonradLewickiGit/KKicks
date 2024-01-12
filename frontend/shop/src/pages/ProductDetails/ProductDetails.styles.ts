@@ -41,10 +41,12 @@ export const Wrapper = styled.div`
   }
 `;
 export const StyledImage = styled(BaseStyledImage)`
-max-width: calc(50% - 5px); // 50% szerokości kontenera minus odstęp
-height: auto; // Zachowaj proporcje obrazu
-margin: 5px; // Odstęp między obrazami
-border: 1px solid #ccc; // Cieniutka ramka
+max-width: 300px; // Stała maksymalna szerokość
+max-height: 200px; // Stała maksymalna wysokość
+width: auto; // Szerokość auto, aby zachować proporcje obrazu
+height: auto; // Wysokość auto, aby zachować proporcje obrazu
+margin: 5px;
+border: 1px solid #ccc;
 
 @media (max-width: ${({ theme }) => theme.breakPoints.m}) {
   max-width: 100%; // Na mniejszych ekranach pełna szerokość

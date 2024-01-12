@@ -3,6 +3,7 @@ import TextareaField from '../../molecules/textArea/TextareaField';
 import React, { useState, useEffect } from 'react';
 import { fetchAllQuestions, sendAnswer } from '../../../api/apiService';
 import { QuestionWithId } from '../../../assets/types';
+import { ManagementWrapper, Row, StyledButton } from '../../molecules/ManageAdmin/ManageAdmin.styles';
 
 const ManageQuestions: React.FC = () => {
   const [questions, setQuestions] = useState<QuestionWithId[]>([]);
@@ -37,32 +38,29 @@ const ManageQuestions: React.FC = () => {
     }
   };
   return (
-    <div>
-      <h1>Zarządzanie pytaniami</h1>
-      <div>
-        {questions.map(question => (
-          <div key={question.id}>
-            <p>Email: {question.email}</p>
-            <p>Temat: {question.subject}</p>
-            <p>Treść: {question.body}</p>
-            {/* Możesz dodać więcej szczegółów lub akcji dla każdego pytania */}
-            <button onClick={() => setActiveQuestionId(question.id)}>Odpowiedz</button>
-            {activeQuestionId === question.id && (
-              <div>
-                <TextareaField
-                  id={`answer-${question.id}`}
-                  labelText="Twoja odpowiedź"
-                  value={body}
-                  onChange={handleAnswerChange}
-                />
-                <button onClick={() => handleSendAnswer(question.id)}>Wyślij</button>
+    <ManagementWrapper>
+    <h1>Zarządzanie pytaniami</h1>
+    {questions.map(question => (
+      <Row key={question.id}>
+        <p>Email: {question.email}</p>
+        <p>Temat: {question.subject}</p>
+        <p>Treść: {question.body}</p>
+        <StyledButton onClick={() => setActiveQuestionId(question.id)}>Odpowiedz</StyledButton>
+        {activeQuestionId === question.id && (
+          <div>
+            <TextareaField
+              id={`answer-${question.id}`}
+              labelText="Twoja odpowiedź"
+              value={body}
+              onChange={handleAnswerChange}
+            />
+            <StyledButton onClick={() => handleSendAnswer(question.id)}>Wyślij</StyledButton>
           </div>
-           )}
-           </div>
-        ))}
-      </div>
-    </div>
-  );
+        )}
+      </Row>
+    ))}
+  </ManagementWrapper>
+);
 };
 
 export default ManageQuestions;

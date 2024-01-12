@@ -64,29 +64,20 @@ export const ApiProvider: React.FC<Props> = ({ children }) => {
   const signUp = async (formData: LoginData): Promise<void> => {
     try {
       const response = await AxiosApi.post('/api/auth/register', formData);
-      // Zakładając, że token jest zwracany w odpowiedzi
       const token = response.data.token;
       if (token) {
-      localStorage.setItem('token', token);
-      setUser(response.data.user); // Ustawienie stanu użytkownika
-    } else {
-      // Obsługa sytuacji, gdy token nie jest zwracany
-      setError("Rejestracja powiodła się, ale nie otrzymano tokenu.");
-    }
-    } catch (error: any) {
-      if (error.response) {
-        // Obsługa błędów odpowiedzi HTTP
-        setError(error.response.data.message);
-      } else if (error.request) {
-        // Obsługa błędów związanych z brakiem odpowiedzi
-        setError("Brak odpowiedzi od serwera.");
+        localStorage.setItem('token', token);
+        setUser(response.data.user); 
       } else {
-        // Obsługa innych błędów
-        setError("Wystąpił błąd podczas rejestracji.");
+        setError("Rejestracja powiodła się, ale nie otrzymano tokenu.");
       }
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.message || 
+                           error.request ? "Brak odpowiedzi od serwera." : 
+                           "Wystąpił błąd podczas rejestracji.";
+      setError(errorMessage);
     }
   }
-
   return (
     <ApiContext.Provider value={{ user, signIn, signOut, signUp, updateUser, error, }}>
       {children}

@@ -14,7 +14,7 @@ const AddProduct = () => {
   const [selectedManufacturer, setSelectedManufacturer] = useState<number>(0);
   const [productData, setProductData] = useState({
     model: '',
-    price: 0,
+    price: '',
     description: '',
     size: '',
     color: '',
@@ -131,7 +131,7 @@ const AddProduct = () => {
           onChange={handleInputChange} 
           name="color"
         />
-
+      
       </FormWrapper>
       <Button type="submit">Dodaj produkt </Button>
       

@@ -21,13 +21,13 @@ export const Wrapper = styled.div`
     padding-bottom: 10px;
     color: ${({ theme }) => theme.colors.black};
     max-width: 400px;
-    background-color: transparent;
+    background-color: white;
     border: 1px solid ${({ theme }) => theme.colors.darkGrey};
     border-radius: 10px;
   }
 
   & > span {
-    color: ${({ theme }) => theme.colors.negative};
+    color: ${({ theme }) => theme.colors.white};
     padding-left: 8px;
     margin-top: 3px;
   }

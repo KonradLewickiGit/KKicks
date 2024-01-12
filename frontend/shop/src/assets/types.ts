@@ -56,7 +56,7 @@ export interface Product {
   id: number;
   category: Category[];
   manufacturer: Manufacturer[];
-  price: number;
+  price: string;
   size: string;
   posted_by_user_id: number;
   color: string;
@@ -67,7 +67,7 @@ export interface Product {
 }
 export interface ProductData {
   model: string;
-  price: number;
+  price: string;
   description: string;
   size: string;
   color: string;

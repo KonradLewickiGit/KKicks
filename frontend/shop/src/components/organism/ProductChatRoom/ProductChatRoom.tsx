@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
+import { ChatContainer, ChatHeader, MessagesContainer, Message, ChatForm, ChatInput, ChatButton } from './ProductChatRoom.styles';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '../../../hooks/useApi'; // Zaimportuj useAuth z Twojego projektu
 
@@ -75,18 +76,18 @@ const ProductChatRoom: React.FC = () => {
   };
 
   return (
-    <div>
-      <h2>Czat produktu</h2>
-      <div>
-        {messages.map((msg, index) => (
-          <div key={index}>{msg.content} - {msg.sender}</div>
-        ))}
-      </div>
-      <form onSubmit={handleMessageSubmit}>
-        <input type="text" name="message" />
-        <button type="submit">Send</button>
-      </form>
-    </div>
+    <ChatContainer>
+    <ChatHeader>Czat produktu</ChatHeader>
+    <MessagesContainer>
+      {messages.map((msg, index) => (
+        <Message key={index}>{msg.content} - {msg.sender}</Message>
+      ))}
+    </MessagesContainer>
+    <ChatForm onSubmit={handleMessageSubmit}>
+      <ChatInput type="text" name="message" />
+      <ChatButton type="submit">Send</ChatButton>
+    </ChatForm>
+  </ChatContainer>
   );
 };
 
