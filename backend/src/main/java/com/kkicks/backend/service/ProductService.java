@@ -38,7 +38,9 @@ public class ProductService {
     ChatDao chatDao;
 
     private  String imagesPath = "src/main/resources/images/";
-    public Product saveProduct(Long userId, Integer categoryId, Integer manufacturerId, String model, BigDecimal price, String desc, String color, BigDecimal size, List<MultipartFile> files) throws IOException {
+    public Product saveProduct(Long userId, Integer categoryId, Integer manufacturerId, String model,
+                               BigDecimal price, String desc, String color, BigDecimal size, List<MultipartFile> files)
+            throws IOException {
         File directory = new File(imagesPath);
         if (!directory.exists()) {
             directory.mkdirs();
@@ -49,9 +51,12 @@ public class ProductService {
         product.setColor(color);
         product.setDescription(desc);
         product.setPrice(price);
-        product.setManufacturer(manufacturerDao.findById(manufacturerId).orElseThrow(() -> new EntityNotFoundException("manufacturer not found")));
-        product.setCategory(categoryDao.findById(categoryId).orElseThrow(() -> new EntityNotFoundException("category not found")));
-        product.setUser(userDao.findById(userId).orElseThrow(() -> new EntityNotFoundException("user not found")));
+        product.setManufacturer(manufacturerDao.findById(manufacturerId)
+                .orElseThrow(() -> new EntityNotFoundException("manufacturer not found")));
+        product.setCategory(categoryDao.findById(categoryId)
+                .orElseThrow(() -> new EntityNotFoundException("category not found")));
+        product.setUser(userDao.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("user not found")));
         productDao.save(product);
         for (MultipartFile file : files) {
             if (!ProductImageValidation.isFileValid(file)){

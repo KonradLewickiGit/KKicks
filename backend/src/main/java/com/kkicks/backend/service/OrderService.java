@@ -34,10 +34,15 @@ public class OrderService {
     @Autowired
     PaymentDao paymentDao;
     public Order createOrder(Long userId,Long productId, Provider provider, BigDecimal shipPrice){
-        User buyer = userDao.findById(userId).orElseThrow(() -> new EntityNotFoundException("Buyer not found"));
-        Product product = productDao.findById(productId).orElseThrow(() -> new EntityNotFoundException("Product not found"));
-        User seller = userDao.findById(product.getUser().getId()).orElseThrow(() -> new EntityNotFoundException("Seller not found"));
-
+        User buyer = userDao.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("Buyer not found"));
+        Product product = productDao.findById(productId)
+                .orElseThrow(() -> new EntityNotFoundException("Product not found"));
+        User seller = userDao.findById(product.getUser().getId())
+                .orElseThrow(() -> new EntityNotFoundException("Seller not found"));
+        if(buyer.getId().equals(seller.getId())){
+            throw new IllegalCallerException("Product cant be bought by seller");
+        }
         Order order = new Order();
         order.setProduct(product);
         order.setProvider(provider);
@@ -88,7 +93,8 @@ public class OrderService {
 
 
     public Payment processPayment(Long orderId, PaymentMethod paymentMethod){
-        Order order = orderDao.findById(orderId).orElseThrow(() -> new EntityNotFoundException("Order not found"));
+        Order order = orderDao.findById(orderId)
+                .orElseThrow(() -> new EntityNotFoundException("Order not found"));
         Product product = order.getProduct();
         Payment orderPayment = new Payment();
         orderPayment.setPaymentMethod(paymentMethod);

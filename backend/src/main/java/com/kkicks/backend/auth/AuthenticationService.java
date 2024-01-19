@@ -20,9 +20,9 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
     public AuthenticationResponse register(RegisterRequest request) {
         if (userDao.findByEmail(request.getEmail()).isPresent()) {
-            throw new IllegalArgumentException("Adres email jest już w użyciu");
+            throw new IllegalArgumentException("Email already exists");
         } else if (userDao.findByUsername(request.getLogin()).isPresent()){
-            throw new IllegalArgumentException("Login jest już w użyciu");
+            throw new IllegalArgumentException("Login already exists");
         }
 
         User user = new User();
@@ -38,8 +38,10 @@ public class AuthenticationService {
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword()));
-        User user = userDao.findByEmail(request.getEmail()).orElseThrow(() -> new EntityNotFoundException("user not found in auth"));
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword()));
+        User user = userDao.findByEmail(request.getEmail())
+                .orElseThrow(() -> new EntityNotFoundException("user not found in auth"));
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder().token(jwtToken).build();
     }

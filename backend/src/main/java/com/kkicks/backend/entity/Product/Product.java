@@ -57,7 +57,6 @@ public class Product {
     @OneToOne(mappedBy = "product")
     @JsonIgnore
     private Order order;
-
     @OneToMany(mappedBy = "product")
     @JsonIgnore
     private List<ProductImage> productImage;

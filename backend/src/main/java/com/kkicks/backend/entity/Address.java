@@ -5,6 +5,7 @@ import com.kkicks.backend.entity.User.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,7 +28,7 @@ public class Address {
     private String street;
     @Column(nullable = false)
     private String buildingNumber;
-    @Positive
+    @PositiveOrZero
     private int apartmentNumber;
     @OneToOne
     @JoinColumn(name = "user_id")

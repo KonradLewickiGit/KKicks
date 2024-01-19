@@ -9,20 +9,13 @@ public class ProductImageValidation {
         if (file.isEmpty()) {
             return false;
         }
-
-        // Get the original file name
         String originalFileName = file.getOriginalFilename();
-
-        // Get the file extension
         String fileExtension = getFileExtension(originalFileName);
-
-        // Check if the file extension is allowed
         for (String allowedExtension : ALLOWED_FILE_EXTENSIONS) {
             if (fileExtension.equalsIgnoreCase(allowedExtension)) {
                 return true;
             }
         }
-
         return false;
     }
 
